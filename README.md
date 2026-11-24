@@ -29,8 +29,7 @@ python -m pip install -r Explainers/requirements.txt
 
 The verification environment used Python 3.11.14, CPU PyTorch 2.9.1, PyG 2.7.0
 and Gurobi 13.0.0. MILP execution requires a Gurobi license. Enumeration imports
-the shared solver module but does not optimize a Gurobi model. Standard
-sufficiency enumeration uses `pynauty` to group isomorphic masks. A C++ compiler
+the shared solver module but does not optimize a Gurobi model. A C++ compiler
 is optional for the accelerated enumeration helpers in `Main/enumeration/native/`.
 
 ## Run the audit
