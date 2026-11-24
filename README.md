@@ -14,8 +14,8 @@ The audit covers seven benchmarks: BA-House, BA2Grid, BA-HouseANDGrid,
 BA-HouseORGrid, Tree-Cycles, BA-2Motifs and Infection. Each benchmark has five
 3-layer GINs with hidden dimension 5 (the main models) and five each with
 hidden dimensions 20 and 80 (the capacity study). The main audit has 937
-instance/model pairs. Paper sources, rendering and reporting tools, tests and
-diagnostic runs are omitted.
+instance/model pairs. Paper sources, rendering and reporting tools, tests, and
+runs that the manuscript does not use are omitted.
 
 ## Install
 
@@ -71,9 +71,9 @@ model, budget and GT options and without `--max_instances 30`.
 Robust fidelity is searched with a scenario-table MILP. Before solving, it
 computes the model's target-class probability for every relevant edge subset
 in each of the 50 fixed optimization scenarios, and the MILP selects the mask
-with the best scenario average. It does not encode the network, so the
-fixed-SAA optimum it returns is exact. All robust results, including the
-connectivity ablation, use this method.
+with the best scenario average. It does not encode the network, so a search
+that ends optimal returns the exact fixed-SAA optimum. All robust results,
+including the connectivity ablation, use this method.
 
 ```bash
 python Main/audit_robust.py \
@@ -128,11 +128,13 @@ Main/results/<family>/<dataset>/
 
 Each run's `config.json` records its settings (hidden dimension,
 connectivity, time limit, alpha, row numbering) and keeps the original run name
-in `run_name`. Standard runs at hidden dimension 20 and 80 cover the three enumeration
-benchmarks only. BA-HouseANDGrid has no connectivity ablation because its
-references are disconnected. The BA-2Motifs model with hidden dimension 80 and
-seed 4 failed to learn the task (test accuracy 44.0%). Its rows are kept in the
-run files, and the manuscript excludes them.
+in `run_name`. The models are in
+`Main/models/pretrained/GIN/<dataset>_3L_<width>H_seed<seed>/`. Standard runs
+at hidden dimension 20 and 80 cover the three enumeration benchmarks only.
+BA-HouseANDGrid has no connectivity ablation because its references are
+disconnected. The BA-2Motifs model with hidden dimension 80 and seed 4 failed
+to learn the task (test accuracy 44.0%). Its rows are kept in the run files, and
+the manuscript excludes them.
 
 ## How the manuscript reads these files
 
@@ -195,8 +197,10 @@ Saved explainer runs are in `Explainers/results/<method>/<dataset>/hidden5/`.
 New formal runs go to `Explainers/results/<method>/<dataset>/<run-name>/`, and
 existing runs are never overwritten. FlowX uses the pinned upstream sampling
 and refinement with an undirected edge projection and fixed GIN self terms
-during final evaluation. On BA-2Motifs the FlowX results come from an
-explicit-loop completion run.
+during final evaluation. On BA-2Motifs the FlowX results come from a completion
+run. It copied the finished records of an earlier, incomplete run and
+recomputed the records whose input graphs contain self-loops, after a fix to
+how those loops are handled.
 
 The robust explainer scores in the manuscript come from
 `Explainers/results/robust_reevaluations/`. These runs evaluate the saved
@@ -210,7 +214,7 @@ the manuscript does not report.
 
 ## Saved results and interpretation
 
-Each run keeps its original `config.json`, per-seed `instance_fid.csv`,
+Each run keeps its `config.json`, per-seed `instance_fid.csv`,
 selected and GT edge masks, solver records and available machine-readable
 provenance. Rendered figures and per-run Markdown notes are omitted. Paths
 written inside saved artifacts use the original workspace layout (for example
@@ -225,11 +229,10 @@ the current code. No value changed. The names of four MILP options
 were renamed, and the model namespace, its checkpoint paths and its source file
 names now say GIN. Paths inside saved files use the published run directory
 names, while `run_name` keeps the original name. The checkpoint files keep their
-bytes. SHA-256 values
-recorded inside saved artifacts refer to the files as first produced, so they
-do not match the renamed CSV headers, configs and logs. For the same reason,
-`--reuse_successful_run_name` does not accept the saved explainer runs as
-reuse sources.
+bytes. SHA-256 values recorded inside saved artifacts refer to the files as
+first produced, so they do not match the renamed CSV headers, configs and logs.
+For the same reason, `--reuse-successful-run-name` does not accept the saved
+explainer runs as reuse sources.
 
 Raw sufficiency fidelity is smaller-is-better and necessity is larger-is-better.
 The robust protocol uses 50 optimization scenarios and 1,000 independent,
@@ -241,7 +244,8 @@ code hashes and environment records are kept where available. The full formal
 training and optimization were not rerun for this snapshot. Small checks
 reproduced saved rows for standard MILP, standard enumeration, the robust
 scenario-table MILP at hidden dimensions 5 and 80 with unrestricted and
-connected masks, and all five explainers.
+connected masks, and all five explainers. A short training run also wrote GIN
+checkpoints in the expected place.
 
 ## Attribution and licenses
 
