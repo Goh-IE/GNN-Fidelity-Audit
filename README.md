@@ -244,8 +244,8 @@ also list Grad-CAM, which the paper does not report.
 Paths inside the saved files follow the original workspace layout (for example
 `Version5/...`). The code here maps them to this repository. After the runs
 were produced, some names in the saved files were changed to match the current
-code. No values changed, so SHA-256 hashes recorded inside the files refer to
-the original versions.
+code. No values changed. SHA-256 hashes recorded inside the files refer to the
+original versions.
 
 ## License and citation
 
