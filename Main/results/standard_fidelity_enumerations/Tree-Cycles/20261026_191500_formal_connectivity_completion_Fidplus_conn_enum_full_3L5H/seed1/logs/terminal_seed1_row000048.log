@@ -1,0 +1,27 @@
+# Terminal log for Version5 oracle row 48
+
+[row 48] Tree-Cycles seed=1 node=793 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=7.592401
+    candidate_edges=11, gt_edges=6, context_edges=5, connectivity=cut, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    Solver backend: enumeration
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=False
+    Enumeration: subgraphs=35, signatures=34, pruned=1
+    Enumeration cache: status=hit, file=Version5/standard_enumeration_cache/Tree-Cycles/node_necessity/node-000793_k6_mode-eq_conn-cut_e31f2a9bc442bbaf2bfe277e.json
+    Enumeration probability-fidelity score range: min=0.102556, max=0.996137
+    GT probability-fidelity rank: 17/35 (ties=1, direction=descending, scope=instance_feasible_concrete_edge_subsets), objective=0.819051, rank_max=17, rank_min=19
+    GT baseline: removal_rho=-0.1993, kept_margin_raw=-1.513333, necessity_raw=9.105734, Fid+=0.819051, objective_value=0.819051
+    Status: optimal, Edges: 6
+    D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    removal_rho=-0.7498, kept_margin_raw=-5.692839, necessity_raw=13.285240, Fid+=0.996137, objective_value=0.996137
+    removal_rooted_connected=1
+    MIPGap=0.000000, BestBd=N/A, Incumbent=N/A
+    RootLP=N/A, RootLPTime=N/A, RootLPSource=N/A, B&BNodes=0
+    CallbackTime=N/A, CallbackCalls=N/A, CutsMIPNODE=N/A, CutsMIPSOLLazy=N/A, AndersonCutsAdded=N/A, ConnectivityLazyCutsAdded=N/A
+    Time: 0.22s
+    Counterexample: YES, status=counterexample_found, OPT Fid+=0.996137, GT Fid+=0.819051, advantage=0.177087
+    Enum max metrics: size=6, D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    Enum min metrics: size=6, D=0.167, H=0.000, Precision=0.167, Recall=0.167, F1=0.167
+    Enum max edges: Version5/standard_fidelity_enumerations/Tree-Cycles/20261026_191500_formal_connectivity_completion_Fidplus_conn_enum_full_3L5H/seed1/edges/explanations_max/oracle_seed1_row000048.csv
+    Enum min edges: Version5/standard_fidelity_enumerations/Tree-Cycles/20261026_191500_formal_connectivity_completion_Fidplus_conn_enum_full_3L5H/seed1/edges/explanations_min/oracle_seed1_row000048.csv
+    Enum extrema CSV: Version5/standard_fidelity_enumerations/Tree-Cycles/20261026_191500_formal_connectivity_completion_Fidplus_conn_enum_full_3L5H/seed1/edges/enumeration_extrema/extrema_seed1_row000048.csv
+    Padding: policy=random_node_disjoint, status=not_needed, needed=0, added=0, candidates=0, seed=None

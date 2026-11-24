@@ -1,0 +1,57 @@
+# Terminal log for Version5 oracle row 5
+
+[row 5] BA-HouseORGrid seed=2 graph=9014 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=2.672282
+    candidate_edges=43, gt_edges=6, context_edges=37, connectivity=cut, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    graph_necessity_milp=kept_edge_budget=37 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 43 edges
+[MIP-Graph] Full graph: class=1, margin=2.6723
+[MIP-Graph] Graph: 25 nodes, 43 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [2, 10]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 37
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 37
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[ConnectivityCut-Graph] added component_size=2 representative=22
+[ConnectivityCut-Graph] added component_size=2 representative=11
+[ConnectivityCut-Graph] added component_size=5 representative=20
+[ConnectivityCut-Graph] added component_size=2 representative=17
+[ConnectivityCut-Graph] added component_size=5 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=4
+[ConnectivityCut-Graph] added component_size=2 representative=3
+[ConnectivityCut-Graph] added component_size=2 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=4
+[ConnectivityCut-Graph] added component_size=2 representative=4
+[ConnectivityCut-Graph] added component_size=2 representative=13
+[ConnectivityCut-Graph] added component_size=2 representative=5
+[ConnectivityCut-Graph] added component_size=6 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=13
+[ConnectivityCut-Graph] added component_size=2 representative=2
+[ConnectivityCut-Graph] added component_size=2 representative=8
+[ConnectivityCut-Graph] added component_size=2 representative=5
+[ConnectivityCut-Graph] added component_size=2 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=5
+[ConnectivityCut-Graph] added component_size=2 representative=3
+[ConnectivityCut-Graph] added component_size=2 representative=3
+[ConnectivityCut-Graph] added component_size=2 representative=3
+[ConnectivityCut-Graph] added component_size=2 representative=8
+[ConnectivityCut-Graph] added component_size=2 representative=5
+[MIPExplainer] Build time: 0.08s, Opt time: 32.60s
+[MIPExplainer] Status: optimal, Edges: 37
+    GT baseline: removal_rho=-0.2970, kept_margin_raw=-0.793777, necessity_raw=3.466060, Fid+=0.624013, objective_value=1.297041
+    Status: optimal, Edges: 6
+    D=0.833, H=0.000, Precision=0.833, Recall=0.833, F1=0.833
+    removal_rho=-0.0144, kept_margin_raw=-0.038545, necessity_raw=2.710827, Fid+=0.445002, objective_value=1.014424
+    MIPGap=0.000000, BestBd=-0.014424, Incumbent=-0.014424
+    RootLP=-4.085079, RootLPTime=0.4999s, RootLPSource=mipnode_callback, B&BNodes=1284
+    CallbackTime=0.0752s, CallbackCalls=18251, CutsMIPNODE=0, CutsMIPSOLLazy=26, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=26
+    Time: 29.67s
+    Counterexample: NO, status=gt_better, OPT Fid+=0.445002, GT Fid+=0.624013, advantage=-0.179011
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/explanations/oracle_seed2_row000005.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/ground_truth/gt_seed2_row000005.png

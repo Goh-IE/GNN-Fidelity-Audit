@@ -1,0 +1,125 @@
+
+Gurobi 13.0.0 (linux64) logging started Sun Nov 15 01:50:14 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/robust_fidelity_experiments/BA-House/20261114_230238_formal_saa_milp_table_R_Fidminus_alpha0p9_opt50_eval1000_unconstrained_gin_3L20H_seed1to5_n30_tl1200/seed2/logs/saa_mip_seed2_row000021_alpha0p9.log"
+Set parameter Seed to value 353982147
+Set parameter TimeLimit to value 1200
+Set parameter Threads to value 1
+Set parameter Method to value 1
+Set parameter NumericFocus to value 3
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter MIPGap to value 0
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+MIPGap  0
+Method  1
+Symmetry  2
+NumericFocus  3
+Seed  353982147
+Threads  1
+
+Optimize a model with 994 rows, 3825714 columns and 25179971 nonzeros (Max)
+Model fingerprint: 0xa4576d4d
+Model has 3825161 linear objective coefficients
+Variable types: 3825161 continuous, 553 integer (553 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-02, 2e-02]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 6e+00]
+Found heuristic solution: objective 0.9998120
+Presolve removed 0 rows and 363 columns (presolve time = 5s)...
+Presolve removed 0 rows and 363 columns (presolve time = 11s)...
+Presolve removed 0 rows and 363 columns (presolve time = 15s)...
+Presolve removed 0 rows and 363 columns (presolve time = 20s)...
+Presolve removed 0 rows and 363 columns
+Presolve time: 20.81s
+Presolved: 994 rows, 3825351 columns, 24228059 nonzeros
+Variable types: 3825161 continuous, 190 integer (189 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.6498937e+04   2.422682e+07   0.000000e+00     31s
+
+Starting sifting (using dual simplex for sub-problems)...
+
+    Iter     Pivots    Primal Obj      Dual Obj        Time
+       0          0     infinity     -7.6498937e+04     31s
+       1        993   6.0289539e+12  -7.3041135e+03     34s
+       2       2796   6.0133037e+12  -7.0235728e+03     35s
+       3       4588   5.9982187e+12  -6.6872227e+03     36s
+       4       6330   5.9845039e+12  -6.2443220e+03     36s
+       5       8100   5.9659819e+12  -6.1634981e+03     37s
+       6       9837   5.9524579e+12  -5.7063246e+03     37s
+       7      11587   5.9395219e+12  -5.6276160e+03     38s
+       8      13347   5.9169889e+12  -5.5494479e+03     39s
+       9      15108   5.9021804e+12  -5.1070637e+03     39s
+      10      16879   5.8900634e+12  -5.0306846e+03     39s
+      11      18662   5.8694134e+12  -4.9592951e+03     40s
+      12      20433   5.8378277e+12  -4.8872891e+03     41s
+      13      22205   5.8164759e+12  -4.4608275e+03     42s
+      14      23954   5.8025687e+12  -4.3893174e+03     42s
+      15      25721   5.7793689e+12  -4.3244728e+03     42s
+      16      27539   5.7446804e+12  -4.2676226e+03     43s
+      17      29357   5.6968407e+12  -4.2084380e+03     44s
+      18      31124   5.6630674e+12  -3.7994388e+03     45s
+      19      32894   5.6446049e+12  -3.7354289e+03     45s
+      20      34679   5.6149687e+12  -3.6824356e+03     45s
+      21      37347   5.5724664e+12  -3.6405847e+03     46s
+      22      39144   5.5150612e+12  -3.5954141e+03     47s
+      23      40918   5.4726307e+12  -3.1976948e+03     48s
+      24      42708   5.4494449e+12  -3.1402955e+03     49s
+      25      44499   5.4147547e+12  -3.1003035e+03     49s
+      26      46405   5.3664284e+12  -3.0742273e+03     49s
+      27      48359   5.3024029e+12  -3.0626937e+03     50s
+      28      50216   5.2227272e+12  -3.0414099e+03     51s
+      29      51990   5.1657262e+12  -2.6789169e+03     52s
+      30      53783   5.1366989e+12  -2.6354211e+03     53s
+      31      55555   5.0953272e+12  -2.6151253e+03     53s
+      32      57537   5.0382457e+12  -2.6109613e+03     54s
+      33      59341   4.9658377e+12  -2.6236437e+03     54s
+      34      61263   4.8780402e+12  -2.6275567e+03     56s
+      35      63047   4.8102784e+12  -2.2932367e+03     57s
+      36      64852   4.7753379e+12  -2.2586803e+03     57s
+      37      66819   4.7301932e+12  -2.2560123e+03     58s
+      38      68615   4.6694577e+12  -2.2711628e+03     58s
+      39      70434   4.5940589e+12  -2.3033438e+03     59s
+      40      72344   4.5052797e+12  -2.3549066e+03     60s
+      41      74677   4.4015519e+12  -2.4240629e+03     61s
+      42      76491   4.2849932e+12  -2.5116706e+03     62s
+      43      78535   4.1553497e+12  -2.5818049e+03     63s
+      44      80518   4.0528014e+12  -2.3264348e+03     64s
+      45      82318   4.0082464e+12  -2.3010305e+03     65s
+      46      84185   3.9620289e+12  -2.3173375e+03     65s
+      47      86254   3.9042037e+12  -2.3498501e+03     68s
+      48      88109   3.8351574e+12  -2.3971931e+03     68s
+      49      90023   3.7563129e+12  -2.4585403e+03     69s
+
+Sifting complete
+
+   92125    2.6789888e+04   7.951061e+06   0.000000e+00     70s
+   92452    9.9999505e-01   0.000000e+00   0.000000e+00     72s
+
+Root relaxation: objective 9.999950e-01, 92452 iterations, 43.50 seconds (40.79 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.9999950    1.00000  0.00%     -   72s
+     0     0          -    0         1.00000    1.00000  0.00%     -   72s
+
+Explored 1 nodes (92452 simplex iterations) in 72.99 seconds (78.34 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 2: 0.999995 0.999812 
+No other solutions better than 0.999995
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 9.999950480461e-01, best bound 9.999950480461e-01, gap 0.0000%

@@ -1,0 +1,61 @@
+
+Gurobi 13.0.0 (linux64) logging started Mon Nov  9 19:19:42 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed4/logs/gurobi_seed4_row000013.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+
+Optimize a model with 2128 rows, 1151 columns and 6998 nonzeros (Max)
+Model fingerprint: 0x049b2fe8
+Model has 1 linear objective coefficients
+Variable types: 1063 continuous, 88 integer (88 binary)
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [3e-03, 1e+01]
+  RHS range        [4e-03, 1e+01]
+Presolve removed 755 rows and 551 columns
+Presolve time: 0.11s
+Presolved: 1373 rows, 600 columns, 4441 nonzeros
+Variable types: 540 continuous, 60 integer (60 binary)
+
+Root relaxation: objective 1.003013e+00, 727 iterations, 0.02 seconds (0.01 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.00301    0    4          -    1.00301      -     -    0s
+H    0     0                       0.9979155    1.00301  0.51%     -    0s
+     0     0          -    0         0.99792    0.99799  0.01%     -    0s
+
+Cutting planes:
+  Learned: 1
+  RLT: 1
+
+Explored 1 nodes (730 simplex iterations) in 0.23 seconds (0.08 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 1: 0.997915 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.979154745209e-01, best bound 9.979928099170e-01, gap 0.0077%
+
+User-callback calls 1087, time in user-callback 0.01 sec

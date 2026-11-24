@@ -1,0 +1,62 @@
+
+Gurobi 13.0.0 (linux64) logging started Mon Nov  9 19:24:03 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed4/logs/gurobi_seed4_row000027.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+
+Optimize a model with 1886 rows, 1046 columns and 6224 nonzeros (Min)
+Model fingerprint: 0x4d8d40d0
+Model has 1 linear objective coefficients
+Variable types: 958 continuous, 88 integer (88 binary)
+Coefficient statistics:
+  Matrix range     [1e-03, 1e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [4e-03, 1e+01]
+  RHS range        [4e-03, 1e+01]
+Presolve removed 756 rows and 548 columns
+Presolve time: 0.05s
+Presolved: 1130 rows, 498 columns, 3685 nonzeros
+Variable types: 446 continuous, 52 integer (52 binary)
+
+Root relaxation: objective 5.727677e-01, 581 iterations, 0.02 seconds (0.02 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.57277    0    1          -    0.57277      -     -    0s
+H    0     0                       0.6869939    0.57277  16.6%     -    0s
+     0     0     cutoff    0         0.68699    0.68699  0.00%     -    0s
+
+Cutting planes:
+  User: 1
+  Flow cover: 1
+  RLT: 1
+
+Explored 1 nodes (693 simplex iterations) in 0.12 seconds (0.09 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 1: 0.686994 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.869938565394e-01, best bound 6.869938565394e-01, gap 0.0000%
+
+User-callback calls 963, time in user-callback 0.00 sec

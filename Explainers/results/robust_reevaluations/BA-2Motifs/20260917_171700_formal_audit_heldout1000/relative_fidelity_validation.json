@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "ratios_independently_recomputed_with_decimal": 224,
+  "maximum_numeric_error": 1.4210854715202004e-14,
+  "negative_values_preserved": [
+    {
+      "dataset": "PyG-Infection-BA-L3-Split43",
+      "objective": "standard_necessity",
+      "method": "random",
+      "relative_percent": "-0.5205999188830475",
+      "display": "-0.5"
+    },
+    {
+      "dataset": "PyG-Infection-BA-L3-Split43",
+      "objective": "robust_necessity",
+      "method": "random",
+      "relative_percent": "-0.31630626888344443",
+      "display": "-0.3"
+    }
+  ],
+  "original_float_blocks_unchanged": 21,
+  "local_references_resolved": 69,
+  "new_figure": {
+    "fig:relative-fidelity": [
+      "4",
+      "14"
+    ],
+    "tab:absolute-fidelity": [
+      "E13",
+      "45"
+    ],
+    "tab:reference-overlap": [
+      "E14",
+      "46"
+    ]
+  },
+  "python_syntax": "passed",
+  "cli_help": "passed",
+  "missing_citations_preexisting": [
+    "agarwal2022probing",
+    "agarwal2023evaluating",
+    "azzolin2026gnn"
+  ],
+  "pdf_pages": 50,
+  "visual_inspection": {
+    "status": "passed",
+    "pages": [
+      14,
+      45,
+      46
+    ],
+    "findings": "Main heatmap labels and annotations are legible without clipping or overlap. Absolute and overlap tables appear on consecutive appendix pages. Original table formatting retained.",
+    "previews": "/tmp/dmkd_relative_fidelity_wrjygffz/page{14,45,46}.png"
+  },
+  "input_hashes": {
+    "Version5/baseline_robust_reevaluations/BA-2Motifs/20260917_171700_formal_audit_heldout1000/absolute_fidelity_holm_comparison_all_records.csv": "c504d713aa366a563309d15f64eda29b62389516a974b5fd399155b77158746d",
+    "Version5/baseline_robust_reevaluations/BA-2Motifs/20260917_171700_formal_audit_heldout1000/absolute_fidelity_holm_comparison_all_summary.csv": "15883facc480fd086ca77292af315d3d38ce0d4e5509c3bfae857f90daaa084f"
+  },
+  "changed_files": {
+    "Version5/paper_reporting/plot_relative_fidelity.py": "e2f7cf4e0bcf096fd903ac1f48aa99f9ee1e3a4cce17fd1ea064ee59284967fc",
+    "Version5/README.md": "fb89e9107c206a40fb86de2cfea546cb391924c31c27a39d33a2f2222902c1e7",
+    "dmkd2027/sn-article.tex": "a50ed30a71d68360b1ee47e1f89194d903f165917992f070fad0ce548e7b0f5a",
+    "dmkd2027/sn-article.pdf": "097f3797c56ff3b8e976bf777f84a68d25f8de2f6b92ec53d0239d21cd12e9a4",
+    "dmkd2027/figures/relative_fidelity.pdf": "b48f6ebbd5b2c817a5e4c5e22dc6879b6f36a2b3057d5ddb288a1788ac66168d"
+  },
+  "completed_at": "2026-09-17T23:48:59.258288+09:00",
+  "compile_commands": [
+    "pdflatex -interaction=nonstopmode -halt-on-error sn-article.tex (cwd dmkd2027, two passes)"
+  ],
+  "render_history": "Version5/baseline_robust_reevaluations/BA-2Motifs/20260917_171700_formal_audit_heldout1000/relative_fidelity_render_history.jsonl",
+  "comparison_conditions": "Same 1,447 instance/model records and masks as the verified absolute-fidelity table. Ratio of cohort means per benchmark/objective. Existing standard and Holm robust adoption policies retained. No model evaluation or solver rerun."
+}

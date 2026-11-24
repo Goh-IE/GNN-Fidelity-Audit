@@ -1,0 +1,43 @@
+# Version5 standard-fidelity experiment run log
+============================================================
+Version5 Standard-Fidelity Experiment Configuration
+============================================================
+Preset: paper
+Stages: ['gt_size']
+Dataset: BA-2Motifs
+NN seed: 1
+Instance filter: correct
+Target degree filter: none
+Budget multipliers: []
+Time limit: 10800.0s
+Gurobi parameter overrides: Method=1, Threads=1
+Layers: 3, Hidden: 5
+K-hop: auto(num_layers)
+Connectivity: none
+GT-size node edge budget mode: eq
+GT-size solver: enumeration
+Enumeration max subgraphs: 1000000
+Enumeration inference batch size: 1024
+Enumeration cache: True
+Enumeration cache dir: /home/wsgoh2/code/26GNNExplainer/Version5/standard_enumeration_cache
+Oracle objective: max_sufficiency
+Counterexample absolute tolerance: 1e-06
+Enumeration output: probability-fidelity max + min + both GT ranks
+Enumeration rank absolute tolerance: 1e-06
+GT incumbent: False
+Exclude exact GT solution: True
+Acceleration profile: accelerated
+O1: True, cap_mode: global
+O3: True
+O4: False
+O9: False
+Anderson cuts: True
+Save figures: True
+Padding seed: 0
+Verbose/Gurobi console log: True
+Output: /home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_enumerations/BA-2Motifs/20260811_051355_enumeration_Fid^-_standard_paper_gt_size_3L5H_obj-max_sufficiency_gtsize-enumeration_exclude-gt_tl10800s/seed1
+============================================================
+[Version5] Prewarming graph_sufficiency enumeration cache for 100 test graph instances
+[Version5] Enumeration cache prewarm done: hit=100
+[Version5] BA-2Motifs seed=1: 100 graph instances
+[Version5] Wrote rows: 100 -> Version5/standard_fidelity_enumerations/BA-2Motifs/20260811_051355_enumeration_Fid^-_standard_paper_gt_size_3L5H_obj-max_sufficiency_gtsize-enumeration_exclude-gt_tl10800s/seed1

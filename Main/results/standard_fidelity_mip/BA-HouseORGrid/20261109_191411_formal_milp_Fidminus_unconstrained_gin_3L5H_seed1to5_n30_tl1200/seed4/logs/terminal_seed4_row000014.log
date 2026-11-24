@@ -1,0 +1,47 @@
+# Terminal log for Version5 oracle row 14
+
+[row 14] BA-HouseORGrid seed=4 graph=9034 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=6.850671
+    candidate_edges=26, gt_edges=6, context_edges=20, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 26 edges
+[MIP-Graph] Full graph: class=1, margin=6.8507
+[MIP-Graph] Graph: 25 nodes, 26 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 6
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_4 violation=4.449983e-02 y=3.153691e-01 rhs=2.708692e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_2 violation=5.053620e-02 y=5.317274e-01 rhs=4.811912e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_3 violation=5.023919e-02 y=1.201338e+00 rhs=1.151098e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_3_3 violation=3.707692e-02 y=3.939018e-01 rhs=3.568249e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_3_4 violation=1.060577e-01 y=4.015423e-01 rhs=2.954846e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_7_4 violation=5.393360e-03 y=1.886411e-01 rhs=1.832478e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_20_0 violation=1.264345e-02 y=6.430955e-01 rhs=6.304521e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_20_3 violation=5.230526e-02 y=4.133297e-01 rhs=3.610245e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_20_4 violation=8.527658e-02 y=4.227397e-01 rhs=3.374631e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_21_4 violation=6.001241e-02 y=2.903030e-01 rhs=2.302906e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_24_4 violation=2.043633e-02 y=2.461970e-01 rhs=2.257607e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_3 violation=3.230973e-01 y=1.310657e+00 rhs=9.875600e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_3 violation=9.213232e-01 y=3.248777e+00 rhs=2.327453e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_3_3 violation=6.467350e-01 y=1.420011e+00 rhs=7.732756e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_5_3 violation=1.979962e-01 y=7.998868e-01 rhs=6.018905e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_6_3 violation=1.979962e-01 y=7.998868e-01 rhs=6.018905e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_7_3 violation=1.777051e-01 y=7.946733e-01 rhs=6.169682e-01
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=17
+[MIPExplainer] Build time: 0.26s, Opt time: 141.73s
+[MIPExplainer] Status: optimal, Edges: 6
+    GT baseline: rho=-22.6736, sufficiency_raw=-155.329514, Fid-=0.998942, objective_value=-22.673621
+    Status: optimal, Edges: 6
+    D=0.833, H=0.000, Precision=0.833, Recall=0.833, F1=0.833
+    rho_optimal=-22.7136, sufficiency_raw=-155.603503, Fid-=0.998942
+    MIPGap=0.000000, BestBd=-22.713616, Incumbent=-22.713616
+    RootLP=-12.201668, RootLPTime=0.2409s, RootLPSource=mipnode_callback, B&BNodes=12583
+    CallbackTime=0.3913s, CallbackCalls=117557, CutsMIPNODE=17, CutsMIPSOLLazy=0, AndersonCutsAdded=17, ConnectivityLazyCutsAdded=0
+    Time: 130.43s
+    Counterexample: NO, status=exact_tie, OPT Fid-=0.998942, GT Fid-=0.998942, advantage=-0.000000
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed4/figs/explanations/oracle_seed4_row000014.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed4/figs/ground_truth/gt_seed4_row000014.png

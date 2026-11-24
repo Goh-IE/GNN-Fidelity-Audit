@@ -1,0 +1,31 @@
+# Terminal log for Version5 oracle row 17
+
+[row 17] BA-HouseANDGrid seed=3 graph=9030 stage=gt_size K=18 multiplier=None objective=max_necessity pred=1 label=1 margin=3.932649
+    candidate_edges=56, gt_edges=18, context_edges=38, connectivity=none, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    graph_necessity_milp=kept_edge_budget=38 (candidate_edges - removal_budget), removal_edge_budget=18, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 34 nodes, 56 edges
+[MIP-Graph] Full graph: class=1, margin=3.9326
+[MIP-Graph] Graph: 34 nodes, 56 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [2, 8]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 38
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 38
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[MIPExplainer] Build time: 0.20s, Opt time: 1200.23s
+[MIPExplainer] Status: time_limit, Edges: 38
+    GT baseline: removal_rho=-29.8837, kept_margin_raw=-117.522091, necessity_raw=121.454740, Fid+=0.980785, objective_value=30.883696
+    Status: time_limit, Edges: 18
+    D=0.778, H=0.000, Precision=0.778, Recall=0.778, F1=0.778
+    removal_rho=-27.1811, kept_margin_raw=-106.893812, necessity_raw=110.826461, Fid+=0.980785, objective_value=28.181121
+    MIPGap=2.247700, BestBd=-88.276117, Incumbent=-27.181121
+    RootLP=-197.498095, RootLPTime=1.3188s, RootLPSource=mipnode_callback, B&BNodes=10246
+    CallbackTime=1.8913s, CallbackCalls=356145, CutsMIPNODE=0, CutsMIPSOLLazy=0, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=0
+    Time: 1099.49s
+    Counterexample: NO, status=exact_tie, OPT Fid+=0.980785, GT Fid+=0.980785, advantage=0.000000
+    Figure: Version5/standard_fidelity_experiments/BA-HouseANDGrid/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/explanations/oracle_seed3_row000017.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseANDGrid/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/ground_truth/gt_seed3_row000017.png

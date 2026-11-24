@@ -1,0 +1,71 @@
+
+Gurobi 13.0.0 (linux64) logging started Thu Nov 12 01:18:32 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-House/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed1/logs/gurobi_seed1_row000006.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter LazyConstraints to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+LazyConstraints  1
+
+Optimize a model with 4538 rows, 2311 columns and 14591 nonzeros (Min)
+Model fingerprint: 0xcd1409bf
+Model has 1 linear objective coefficients
+Variable types: 2033 continuous, 278 integer (278 binary)
+Coefficient statistics:
+  Matrix range     [2e-03, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [2e-03, 3e+01]
+  RHS range        [2e-03, 2e+01]
+Presolve removed 1276 rows and 837 columns
+Presolve time: 0.23s
+Presolved: 3262 rows, 1474 columns, 10722 nonzeros
+Variable types: 1294 continuous, 180 integer (180 binary)
+
+Root relaxation: objective 4.326470e-01, 2349 iterations, 0.23 seconds (0.21 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.43265    0   38          -    0.43265      -     -    0s
+     0     0    0.57968    0   32          -    0.57968      -     -    0s
+H    0     0                       0.5801843    0.57972  0.08%     -    0s
+     0     0          -    0         0.58018    0.58018  0.00%     -    1s
+
+Cutting planes:
+  Learned: 2
+  Gomory: 3
+  Implied bound: 69
+  MIR: 6
+  Flow cover: 7
+  RLT: 10
+  Relax-and-lift: 50
+  BQP: 1
+
+Explored 1 nodes (3037 simplex iterations) in 1.08 seconds (0.61 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 1: 0.580184 
+
+Optimal solution found (tolerance 1.00e-04)
+Warning: max constraint violation (3.5384e-06) exceeds tolerance
+Best objective 5.801843454281e-01, best bound 5.801769859849e-01, gap 0.0013%
+
+User-callback calls 1124, time in user-callback 0.02 sec

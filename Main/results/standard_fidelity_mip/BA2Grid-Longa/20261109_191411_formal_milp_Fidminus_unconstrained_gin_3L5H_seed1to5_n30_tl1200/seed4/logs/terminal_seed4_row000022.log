@@ -1,0 +1,29 @@
+# Terminal log for Version5 oracle row 22
+
+[row 22] BA2Grid-Longa seed=4 graph=1858 stage=gt_size K=12 multiplier=None objective=max_sufficiency pred=1 label=1 margin=0.486726
+    candidate_edges=28, gt_edges=12, context_edges=16, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 28 edges
+[MIP-Graph] Full graph: class=1, margin=0.4867
+[MIP-Graph] Graph: 25 nodes, 28 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 7]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 12
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[MIPExplainer] Build time: 0.08s, Opt time: 1200.01s
+[MIPExplainer] Status: time_limit, Edges: 12
+    GT baseline: rho=-10.7759, sufficiency_raw=-5.244925, Fid-=0.614088, objective_value=-10.775924
+    Status: time_limit, Edges: 12
+    D=0.417, H=0.000, Precision=0.417, Recall=0.417, F1=0.417
+    rho_optimal=-10.6374, sufficiency_raw=-5.177489, Fid-=0.613724
+    MIPGap=0.016638, BestBd=-10.460392, Incumbent=-10.637373
+    RootLP=-6.096331, RootLPTime=0.4001s, RootLPSource=mipnode_callback, B&BNodes=226884
+    CallbackTime=4.5409s, CallbackCalls=1246647, CutsMIPNODE=0, CutsMIPSOLLazy=0, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=0
+    Time: 1093.88s
+    Counterexample: YES, status=counterexample_found, OPT Fid-=0.613724, GT Fid-=0.614088, advantage=0.000364
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed4/figs/explanations/oracle_seed4_row000022.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed4/figs/ground_truth/gt_seed4_row000022.png

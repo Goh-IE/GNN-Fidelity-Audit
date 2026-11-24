@@ -1,0 +1,96 @@
+
+Gurobi 13.0.0 (linux64) logging started Thu Nov 12 07:45:02 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/logs/gurobi_seed2_row000007.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter LazyConstraints to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+LazyConstraints  1
+
+Optimize a model with 4067 rows, 2171 columns and 12423 nonzeros (Min)
+Model fingerprint: 0x41a3acfc
+Model has 1 linear objective coefficients
+Variable types: 1928 continuous, 243 integer (243 binary)
+Coefficient statistics:
+  Matrix range     [7e-05, 6e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [7e-05, 8e+00]
+  RHS range        [2e-03, 2e+01]
+Presolve removed 1842 rows and 1236 columns
+Presolve time: 0.05s
+Presolved: 2225 rows, 935 columns, 7129 nonzeros
+Variable types: 789 continuous, 146 integer (146 binary)
+
+Root relaxation: objective -9.310503e-01, 1296 iterations, 0.04 seconds (0.06 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   -0.93105    0   87          -   -0.93105      -     -    0s
+     0     0   -0.81650    0   86          -   -0.81650      -     -    0s
+     0     0   -0.81269    0   84          -   -0.81269      -     -    0s
+     0     0   -0.73180    0   96          -   -0.73180      -     -    0s
+     0     0   -0.72183    0  100          -   -0.72183      -     -    0s
+     0     0   -0.66010    0  108          -   -0.66010      -     -    0s
+     0     0   -0.65593    0  106          -   -0.65593      -     -    0s
+     0     0   -0.62869    0   93          -   -0.62869      -     -    0s
+     0     0   -0.62567    0   95          -   -0.62567      -     -    0s
+     0     0   -0.60471    0  103          -   -0.60471      -     -    0s
+     0     0   -0.60399    0  104          -   -0.60399      -     -    0s
+     0     0   -0.60174    0  104          -   -0.60174      -     -    0s
+     0     0   -0.60138    0  104          -   -0.60138      -     -    0s
+     0     0   -0.60129    0  104          -   -0.60129      -     -    0s
+     0     0   -0.59957    0  103          -   -0.59957      -     -    0s
+     0     0   -0.59866    0  104          -   -0.59866      -     -    0s
+     0     0   -0.59804    0  104          -   -0.59804      -     -    0s
+     0     0   -0.59797    0  104          -   -0.59797      -     -    0s
+     0     0   -0.59386    0  102          -   -0.59386      -     -    0s
+     0     0   -0.59334    0  103          -   -0.59334      -     -    0s
+     0     0   -0.59334    0  104          -   -0.59334      -     -    0s
+     0     0   -0.59334    0  103          -   -0.59334      -     -    0s
+     0     0   -0.59285    0  103          -   -0.59285      -     -    0s
+     0     0   -0.58760    0  100          -   -0.58760      -     -    0s
+     0     0   -0.58760    0   97          -   -0.58760      -     -    0s
+     0     2   -0.58758    0   97          -   -0.58758      -     -    1s
+*   23    15              16      -0.1193942   -0.58576   391%  85.7    1s
+
+Cutting planes:
+  Learned: 6
+  Cover: 38
+  Implied bound: 156
+  Clique: 5
+  MIR: 69
+  Flow cover: 87
+  GUB cover: 2
+  RLT: 56
+  Relax-and-lift: 28
+  BQP: 3
+  Lazy constraints: 6
+
+Explored 103 nodes (10947 simplex iterations) in 1.46 seconds (1.35 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 1: -0.119394 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective -1.193941941380e-01, best bound -1.193941941380e-01, gap 0.0000%
+
+User-callback calls 1797, time in user-callback 0.01 sec

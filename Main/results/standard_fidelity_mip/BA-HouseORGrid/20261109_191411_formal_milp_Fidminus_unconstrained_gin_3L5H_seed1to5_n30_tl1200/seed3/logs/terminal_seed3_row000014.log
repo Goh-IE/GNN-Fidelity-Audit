@@ -1,0 +1,33 @@
+# Terminal log for Version5 oracle row 14
+
+[row 14] BA-HouseORGrid seed=3 graph=9034 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=10.365284
+    candidate_edges=26, gt_edges=6, context_edges=20, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 26 edges
+[MIP-Graph] Full graph: class=1, margin=10.3653
+[MIP-Graph] Graph: 25 nodes, 26 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 6
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_20_0 violation=1.324840e-02 y=6.576355e-02 rhs=5.251515e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_2 violation=4.232557e-02 y=1.501515e+00 rhs=1.459190e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_4 violation=1.829331e-01 y=1.497453e+00 rhs=1.314520e+00
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=3
+[MIPExplainer] Build time: 0.07s, Opt time: 138.94s
+[MIPExplainer] Status: optimal, Edges: 6
+    GT baseline: rho=-15.6747, sufficiency_raw=-162.472328, Fid-=0.999969, objective_value=-15.674663
+    Status: optimal, Edges: 6
+    D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500
+    rho_optimal=-15.7300, sufficiency_raw=-163.045793, Fid-=0.999969
+    MIPGap=0.000000, BestBd=-15.729988, Incumbent=-15.729988
+    RootLP=-2.573110, RootLPTime=0.3493s, RootLPSource=mipnode_callback, B&BNodes=9715
+    CallbackTime=0.4279s, CallbackCalls=106233, CutsMIPNODE=3, CutsMIPSOLLazy=0, AndersonCutsAdded=3, ConnectivityLazyCutsAdded=0
+    Time: 129.98s
+    Counterexample: NO, status=exact_tie, OPT Fid-=0.999969, GT Fid-=0.999969, advantage=-0.000000
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/explanations/oracle_seed3_row000014.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/ground_truth/gt_seed3_row000014.png

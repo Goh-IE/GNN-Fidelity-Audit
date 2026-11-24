@@ -1,0 +1,60 @@
+# Terminal log for Version5 oracle row 22
+
+[row 22] BA-HouseORGrid seed=2 graph=9054 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=2.691270
+    candidate_edges=43, gt_edges=6, context_edges=37, connectivity=cut, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    graph_necessity_milp=kept_edge_budget=37 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 43 edges
+[MIP-Graph] Full graph: class=1, margin=2.6913
+[MIP-Graph] Graph: 25 nodes, 43 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [2, 10]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 37
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 37
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[ConnectivityCut-Graph] added component_size=2 representative=4
+[ConnectivityCut-Graph] added component_size=5 representative=20
+[ConnectivityCut-Graph] added component_size=6 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=2
+[ConnectivityCut-Graph] added component_size=2 representative=4
+[ConnectivityCut-Graph] added component_size=4 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=1
+[ConnectivityCut-Graph] added component_size=2 representative=5
+[ConnectivityCut-Graph] added component_size=2 representative=0
+[ConnectivityCut-Graph] added component_size=5 representative=0
+[ConnectivityCut-Graph] added component_size=3 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=1
+[ConnectivityCut-Graph] added component_size=2 representative=3
+[ConnectivityCut-Graph] added component_size=2 representative=3
+[ConnectivityCut-Graph] added component_size=2 representative=2
+[ConnectivityCut-Graph] added component_size=2 representative=0
+[ConnectivityCut-Graph] added component_size=3 representative=2
+[ConnectivityCut-Graph] added component_size=2 representative=9
+[ConnectivityCut-Graph] added component_size=2 representative=16
+[ConnectivityCut-Graph] added component_size=2 representative=7
+[ConnectivityCut-Graph] added component_size=2 representative=10
+[ConnectivityCut-Graph] added component_size=2 representative=4
+[ConnectivityCut-Graph] added component_size=4 representative=21
+[ConnectivityCut-Graph] added component_size=2 representative=4
+[ConnectivityCut-Graph] added component_size=2 representative=4
+[ConnectivityCut-Graph] added component_size=2 representative=4
+[ConnectivityCut-Graph] added component_size=2 representative=5
+[ConnectivityCut-Graph] added component_size=2 representative=5
+[ConnectivityCut-Graph] added component_size=3 representative=4
+[MIPExplainer] Build time: 0.22s, Opt time: 23.28s
+[MIPExplainer] Status: optimal, Edges: 37
+    GT baseline: removal_rho=-0.2879, kept_margin_raw=-0.774788, necessity_raw=3.466059, Fid+=0.621065, objective_value=1.287889
+    Status: optimal, Edges: 6
+    D=0.833, H=0.000, Precision=0.833, Recall=0.833, F1=0.833
+    removal_rho=-0.0073, kept_margin_raw=-0.019541, necessity_raw=2.710811, Fid+=0.441394, objective_value=1.007261
+    MIPGap=0.000000, BestBd=-0.007261, Incumbent=-0.007261
+    RootLP=-3.793165, RootLPTime=0.3622s, RootLPSource=mipnode_callback, B&BNodes=1042
+    CallbackTime=0.0651s, CallbackCalls=14076, CutsMIPNODE=0, CutsMIPSOLLazy=29, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=29
+    Time: 20.33s
+    Counterexample: NO, status=gt_better, OPT Fid+=0.441394, GT Fid+=0.621065, advantage=-0.179671
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/explanations/oracle_seed2_row000022.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/ground_truth/gt_seed2_row000022.png

@@ -1,0 +1,47 @@
+# Version5 standard-fidelity experiment run log
+============================================================
+Version5 Standard-Fidelity Experiment Configuration
+============================================================
+Preset: paper
+Stages: ['gt_size']
+Dataset: BA2Grid-Longa
+NN seed: 3
+Architecture: gin (checkpoint namespace: Vanilla)
+Instance filter: correct
+Target degree filter: none
+Budget multipliers: []
+Time limit: 1200.0s
+MILP time limit scope: Gurobi optimize only (preprocessing, model build and OBBT excluded)
+Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+Gurobi NoRel hybrid: enabled=False, requested_work=10.0, effective_work=0.0, then_continue_same_optimize_to_root_and_B&B=False
+Layers: 3, Hidden: 5
+K-hop: auto(num_layers)
+Connectivity: none
+GT-size node edge budget mode: eq
+GT-size solver: milp
+Enumeration max subgraphs: 1000000
+Enumeration inference batch size: 1024
+Node enumeration inference context: compact candidate-edge support plus root (global cache/artifact edge IDs preserved)
+Enumeration cache: True
+Enumeration cache dir: /home/wsgoh2/code/26GNNExplainer/Version5/standard_enumeration_cache
+Oracle objective: max_necessity
+Counterexample absolute tolerance: 1e-06
+GT incumbent: False
+Exclude exact GT solution: True
+Acceleration profile: accelerated
+O1: True, cap_mode: global
+O3/Gurobi symmetry: True (Symmetry=2, custom hanging-tree O3 disabled)
+O4: False
+O9: False
+Anderson cuts: True
+Graph edge branch priority: 0
+Graph OBBT(u): False, max_layers=None
+Graph OBBT two-pass rebuild: False
+Graph exact degree-table layer 1: False
+Save figures: True
+Padding seed: 0
+Verbose/Gurobi console log: True
+Output: /home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3
+============================================================
+[Version5] BA2Grid-Longa seed=3: 30 graph instances
+[Version5] Wrote rows: 30 -> Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3

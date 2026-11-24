@@ -1,0 +1,38 @@
+# Terminal log for Version5 oracle row 14
+
+[row 14] BA-HouseORGrid seed=1 graph=9034 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=4.553567
+    candidate_edges=26, gt_edges=6, context_edges=20, connectivity=cut, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    graph_necessity_milp=kept_edge_budget=20 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 26 edges
+[MIP-Graph] Full graph: class=1, margin=4.5536
+[MIP-Graph] Graph: 25 nodes, 26 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 11]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 20
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 20
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_1 violation=4.345565e-02 y=1.232162e+00 rhs=1.188707e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_3_1 violation=6.427287e-02 y=1.638622e+00 rhs=1.574350e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_5_1 violation=2.575999e-01 y=5.673560e-01 rhs=3.097561e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_6_1 violation=2.571103e-01 y=5.636701e-01 rhs=3.065598e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_7_1 violation=2.208729e-01 y=5.546250e-01 rhs=3.337521e-01
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=5
+[ConnectivityCut-Graph] added component_size=4 representative=0
+[MIPExplainer] Build time: 0.10s, Opt time: 35.09s
+[MIPExplainer] Status: optimal, Edges: 20
+    GT baseline: removal_rho=-1.6618, kept_margin_raw=-7.567219, necessity_raw=12.120787, Fid+=0.989063, objective_value=2.661822
+    Status: optimal, Edges: 6
+    D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    removal_rho=-2.9301, kept_margin_raw=-13.342301, necessity_raw=17.895869, Fid+=0.989579, objective_value=3.930077
+    MIPGap=0.000000, BestBd=-2.930077, Incumbent=-2.930077
+    RootLP=-18.248020, RootLPTime=0.4126s, RootLPSource=mipnode_callback, B&BNodes=3863
+    CallbackTime=0.1200s, CallbackCalls=28540, CutsMIPNODE=5, CutsMIPSOLLazy=1, AndersonCutsAdded=5, ConnectivityLazyCutsAdded=1
+    Time: 33.44s
+    Counterexample: YES, status=counterexample_found, OPT Fid+=0.989579, GT Fid+=0.989063, advantage=0.000515
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/explanations/oracle_seed1_row000014.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/ground_truth/gt_seed1_row000014.png

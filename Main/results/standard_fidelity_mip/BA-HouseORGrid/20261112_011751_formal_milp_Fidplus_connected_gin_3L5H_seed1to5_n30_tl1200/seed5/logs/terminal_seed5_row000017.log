@@ -1,0 +1,33 @@
+# Terminal log for Version5 oracle row 17
+
+[row 17] BA-HouseORGrid seed=5 graph=9040 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=3.407756
+    candidate_edges=43, gt_edges=6, context_edges=37, connectivity=cut, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    graph_necessity_milp=kept_edge_budget=37 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 43 edges
+[MIP-Graph] Full graph: class=1, margin=3.4078
+[MIP-Graph] Graph: 25 nodes, 43 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 13]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 37
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 37
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[ConnectivityCut-Graph] added component_size=6 representative=0
+[ConnectivityCut-Graph] added component_size=3 representative=1
+[MIPExplainer] Build time: 0.08s, Opt time: 1200.00s
+[MIPExplainer] Status: time_limit, Edges: 37
+    GT baseline: removal_rho=-1.3850, kept_margin_raw=-4.719664, necessity_raw=8.127420, Fid+=0.959107, objective_value=2.384977
+    Status: time_limit, Edges: 6
+    D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    removal_rho=-5.0997, kept_margin_raw=-17.378594, necessity_raw=20.786350, Fid+=0.967946, objective_value=6.099718
+    MIPGap=17.647666, BestBd=-95.097830, Incumbent=-5.099718
+    RootLP=-263.891952, RootLPTime=0.7674s, RootLPSource=mipnode_callback, B&BNodes=7819
+    CallbackTime=0.9863s, CallbackCalls=452644, CutsMIPNODE=0, CutsMIPSOLLazy=2, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=2
+    Time: 1123.73s
+    Counterexample: YES, status=counterexample_found, OPT Fid+=0.967946, GT Fid+=0.959107, advantage=0.008839
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed5/figs/explanations/oracle_seed5_row000017.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed5/figs/ground_truth/gt_seed5_row000017.png

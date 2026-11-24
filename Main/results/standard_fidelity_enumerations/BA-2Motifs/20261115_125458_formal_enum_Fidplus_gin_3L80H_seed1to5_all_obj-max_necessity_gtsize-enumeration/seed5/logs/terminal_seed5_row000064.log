@@ -1,0 +1,28 @@
+# Terminal log for Version5 oracle row 64
+
+[row 64] BA-2Motifs seed=5 graph=963 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=8.872432
+    candidate_edges=26, gt_edges=6, context_edges=20, connectivity=none, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    Solver backend: enumeration
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=False
+    Enumeration: subgraphs=230230, signatures=230229, pruned=1
+    Enumeration cache: status=hit, file=Version5/standard_enumeration_cache/BA-2Motifs/graph_necessity/instance-000963_k6_conn-none_ea0a8c5d281c8b90d7e53286.json
+    Enumeration probability-fidelity score range: min=-0.000140, max=0.999860
+    GT probability-fidelity rank: 169067/230230 (ties=512, direction=descending, scope=instance_feasible_concrete_edge_subsets), objective=0.999773, rank_max=169067, rank_min=60653
+    GT baseline: removal_rho=-1.0537, kept_margin_raw=-9.349135, necessity_raw=18.221567, Fid+=0.999773, objective_value=0.999773
+    Status: optimal, Edges: 6
+    D=0.167, H=0.000, Precision=0.167, Recall=0.167, F1=0.167
+    removal_rho=-1.8976, kept_margin_raw=-16.836700, necessity_raw=25.709132, Fid+=0.999860, objective_value=0.999860
+    MIPGap=0.000000, BestBd=N/A, Incumbent=N/A
+    RootLP=N/A, RootLPTime=N/A, RootLPSource=N/A, B&BNodes=0
+    CallbackTime=N/A, CallbackCalls=N/A, CutsMIPNODE=N/A, CutsMIPSOLLazy=N/A, AndersonCutsAdded=N/A, ConnectivityLazyCutsAdded=N/A
+    Time: 30.90s
+    Counterexample: YES, status=counterexample_found, OPT Fid+=0.999860, GT Fid+=0.999773, advantage=0.000087
+    Enum max metrics: size=6, D=0.167, H=0.000, Precision=0.167, Recall=0.167, F1=0.167
+    Enum min metrics: size=6, D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    GT figure: Version5/standard_fidelity_enumerations/BA-2Motifs/20261115_125458_formal_enum_Fidplus_gin_3L80H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed5/figs/ground_truth/gt_seed5_row000064.png
+    Enum max edges: Version5/standard_fidelity_enumerations/BA-2Motifs/20261115_125458_formal_enum_Fidplus_gin_3L80H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed5/edges/explanations_max/oracle_seed5_row000064.csv
+    Enum min edges: Version5/standard_fidelity_enumerations/BA-2Motifs/20261115_125458_formal_enum_Fidplus_gin_3L80H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed5/edges/explanations_min/oracle_seed5_row000064.csv
+    Enum extrema CSV: Version5/standard_fidelity_enumerations/BA-2Motifs/20261115_125458_formal_enum_Fidplus_gin_3L80H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed5/edges/enumeration_extrema/extrema_seed5_row000064.csv
+    Enum max figure: Version5/standard_fidelity_enumerations/BA-2Motifs/20261115_125458_formal_enum_Fidplus_gin_3L80H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed5/figs/explanations_max/oracle_seed5_row000064.png
+    Enum min figure: Version5/standard_fidelity_enumerations/BA-2Motifs/20261115_125458_formal_enum_Fidplus_gin_3L80H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed5/figs/explanations_min/oracle_seed5_row000064.png

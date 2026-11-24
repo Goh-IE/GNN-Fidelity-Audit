@@ -1,0 +1,31 @@
+# Terminal log for Version5 oracle row 21
+
+[row 21] BA2Grid-Longa seed=2 graph=1852 stage=gt_size K=12 multiplier=None objective=max_sufficiency pred=1 label=1 margin=7.200924
+    candidate_edges=29, gt_edges=12, context_edges=17, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 26 nodes, 29 edges
+[MIP-Graph] Full graph: class=1, margin=7.2009
+[MIP-Graph] Graph: 26 nodes, 29 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 12
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_5_2 violation=3.397204e-02 y=1.345061e-01 rhs=1.005340e-01
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=1
+[MIPExplainer] Build time: 0.09s, Opt time: 21.14s
+[MIPExplainer] Status: optimal, Edges: 12
+    GT baseline: rho=-6.0495, sufficiency_raw=-43.561790, Fid-=0.999255, objective_value=-6.049472
+    Status: optimal, Edges: 12
+    D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    rho_optimal=-5.8652, sufficiency_raw=-42.234885, Fid-=0.999255
+    MIPGap=0.000094, BestBd=-5.864652, Incumbent=-5.865204
+    RootLP=-4.327857, RootLPTime=0.4426s, RootLPSource=mipnode_callback, B&BNodes=1750
+    CallbackTime=0.0619s, CallbackCalls=15347, CutsMIPNODE=1, CutsMIPSOLLazy=0, AndersonCutsAdded=1, ConnectivityLazyCutsAdded=0
+    Time: 20.22s
+    Counterexample: NO, status=exact_tie, OPT Fid-=0.999255, GT Fid-=0.999255, advantage=-0.000000
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/explanations/oracle_seed2_row000021.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/ground_truth/gt_seed2_row000021.png

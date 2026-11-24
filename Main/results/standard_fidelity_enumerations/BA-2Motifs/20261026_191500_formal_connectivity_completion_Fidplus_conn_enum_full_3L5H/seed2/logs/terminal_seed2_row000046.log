@@ -1,0 +1,25 @@
+# Terminal log for Version5 oracle row 46
+
+[row 46] BA-2Motifs seed=2 graph=945 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=6.244105
+    candidate_edges=26, gt_edges=6, context_edges=20, connectivity=cut, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    Solver backend: enumeration
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=False
+    Enumeration: subgraphs=4068, signatures=4067, pruned=1
+    Enumeration cache: status=hit, file=Version5/standard_enumeration_cache/BA-2Motifs/graph_necessity/instance-000945_k6_conn-cut_4c5864883146fcb4b5a7c620.json
+    Enumeration probability-fidelity score range: min=0.997368, max=0.998062
+    GT probability-fidelity rank: 1/4068 (ties=4020, direction=descending, scope=instance_feasible_concrete_edge_subsets), objective=0.998062, rank_max=1, rank_min=49
+    GT baseline: removal_rho=-2.9198, kept_margin_raw=-18.231606, necessity_raw=24.475710, Fid+=0.998062, objective_value=0.998062
+    Status: optimal, Edges: 6
+    D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    removal_rho=-6.2806, kept_margin_raw=-39.216431, necessity_raw=45.460535, Fid+=0.998062, objective_value=0.998062
+    MIPGap=0.000000, BestBd=N/A, Incumbent=N/A
+    RootLP=N/A, RootLPTime=N/A, RootLPSource=N/A, B&BNodes=0
+    CallbackTime=N/A, CallbackCalls=N/A, CutsMIPNODE=N/A, CutsMIPSOLLazy=N/A, AndersonCutsAdded=N/A, ConnectivityLazyCutsAdded=N/A
+    Time: 0.23s
+    Counterexample: NO, status=exact_tie, OPT Fid+=0.998062, GT Fid+=0.998062, advantage=0.000000
+    Enum max metrics: size=6, D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    Enum min metrics: size=6, D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    Enum max edges: Version5/standard_fidelity_enumerations/BA-2Motifs/20261026_191500_formal_connectivity_completion_Fidplus_conn_enum_full_3L5H/seed2/edges/explanations_max/oracle_seed2_row000046.csv
+    Enum min edges: Version5/standard_fidelity_enumerations/BA-2Motifs/20261026_191500_formal_connectivity_completion_Fidplus_conn_enum_full_3L5H/seed2/edges/explanations_min/oracle_seed2_row000046.csv
+    Enum extrema CSV: Version5/standard_fidelity_enumerations/BA-2Motifs/20261026_191500_formal_connectivity_completion_Fidplus_conn_enum_full_3L5H/seed2/edges/enumeration_extrema/extrema_seed2_row000046.csv

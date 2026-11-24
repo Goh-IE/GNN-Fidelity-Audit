@@ -1,0 +1,43 @@
+# Terminal log for Version5 oracle row 18
+
+[row 18] BA2Grid-Longa seed=5 graph=1845 stage=gt_size K=12 multiplier=None objective=max_necessity pred=1 label=1 margin=5.335844
+    candidate_edges=30, gt_edges=12, context_edges=18, connectivity=cut, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    graph_necessity_milp=kept_edge_budget=18 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 27 nodes, 30 edges
+[MIP-Graph] Full graph: class=1, margin=5.3358
+[MIP-Graph] Graph: 27 nodes, 30 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 4]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 18
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 18
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_22_1 violation=3.244441e-03 y=1.341386e-01 rhs=1.308942e-01
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=1
+[ConnectivityCut-Graph] added component_size=6 representative=19
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=5 representative=0
+[ConnectivityCut-Graph] added component_size=7 representative=9
+[ConnectivityCut-Graph] added component_size=8 representative=0
+[ConnectivityCut-Graph] added component_size=6 representative=0
+[ConnectivityCut-Graph] added component_size=6 representative=0
+[ConnectivityCut-Graph] added component_size=2 representative=7
+[ConnectivityCut-Graph] added component_size=3 representative=7
+[ConnectivityCut-Graph] added component_size=7 representative=9
+[MIPExplainer] Build time: 0.07s, Opt time: 1200.00s
+[MIPExplainer] Status: time_limit, Edges: 18
+    GT baseline: removal_rho=-5.1086, kept_margin_raw=-27.258677, necessity_raw=32.594521, Fid+=0.995207, objective_value=6.108597
+    Status: time_limit, Edges: 12
+    D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500
+    removal_rho=-6.2384, kept_margin_raw=-33.287203, necessity_raw=38.623047, Fid+=0.995207, objective_value=7.238414
+    MIPGap=0.091888, BestBd=-6.811647, Incumbent=-6.238414
+    RootLP=-15.386690, RootLPTime=0.5435s, RootLPSource=mipnode_callback, B&BNodes=73499
+    CallbackTime=1.7075s, CallbackCalls=801668, CutsMIPNODE=1, CutsMIPSOLLazy=10, AndersonCutsAdded=1, ConnectivityLazyCutsAdded=10
+    Time: 1159.85s
+    Counterexample: NO, status=exact_tie, OPT Fid+=0.995207, GT Fid+=0.995207, advantage=0.000000
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed5/figs/explanations/oracle_seed5_row000018.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed5/figs/ground_truth/gt_seed5_row000018.png

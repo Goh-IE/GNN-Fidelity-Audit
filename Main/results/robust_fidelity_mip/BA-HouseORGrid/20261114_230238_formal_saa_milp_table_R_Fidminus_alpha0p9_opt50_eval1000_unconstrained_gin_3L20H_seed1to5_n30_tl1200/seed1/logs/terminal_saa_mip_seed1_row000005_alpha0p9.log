@@ -1,0 +1,9 @@
+# Version5 fidelity-alpha SAA-MILP standard_endpoint_pwl=False
+dataset=BA-HouseORGrid seed=1 row_id=5 metric=sufficiency alpha=0.9 connectivity=none O1=False O4=False O9=False opt_samples=50 eval_samples=1000 objective_type=prob_table pwl_points=None pwl_tail_eps=None pwl_core_bound=None pwl_tail_mode=None gt_incumbent=False exclude_gt_solution=True gurobi_time_limit_s=1200.0 gurobi_symmetry=2 edge_branch_priority=0 mip_focus=None norel_hybrid=False norel_requested_work=10.0 norel_effective_work=0.0 norel_then_continue_same_optimize_to_root_and_bnb=False
+GT opt: score_alpha=-0.0003503, fid_alpha=-0.0003503, nec_alpha=NA, avg_p=0.9992, samples=50, seed=1087131006
+GT eval: score_alpha=-0.0004837, fid_alpha=-0.0004837, nec_alpha=NA, avg_p=0.9993, samples=1000, seed=3849228589
+SAA-Table task=graph metric=sufficiency alpha=0.9 scenarios=50 budget=6 mode=eq candidate_edges=43 inert_edges=0 inert_reduction=True table_entries=1494 max_switches=8 mean_switches=3.56 build_time_s=0.061 mip_gap=0.0 connectivity=none O4=False O9=False exclude_gt_solution=True gt_no_good_cut_added=True objective_type=prob_table
+SAA-MILP status=optimal objective=0.9992757165431976 bound=0.9992757165431977 gap=0.0 nodes=1.0 root_lp=None root_lp_time=None model_size=6368.0 anderson_cuts=0 connectivity_cuts=0 time_s=0.015 objective_type=prob_table
+SAA-MILP paired-CI: advantage=-0.0001026 95%_CI=[-0.0002061,8.718e-07] status=inconclusive paired_scenarios=1000 definition=GT_FidMinus_minus_OPT_FidMinus
+SAA-MILP opt: score_alpha=-0.0004264, fid_alpha=-0.0004264, nec_alpha=NA, avg_p=0.9993, samples=50, seed=1087131006
+SAA-MILP eval: score_alpha=-0.0003811, fid_alpha=-0.0003811, nec_alpha=NA, avg_p=0.9992, samples=1000, seed=3849228589

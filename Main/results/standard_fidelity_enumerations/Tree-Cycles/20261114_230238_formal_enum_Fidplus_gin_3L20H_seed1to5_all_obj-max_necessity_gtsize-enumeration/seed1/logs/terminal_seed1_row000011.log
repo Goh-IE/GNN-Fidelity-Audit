@@ -1,0 +1,30 @@
+# Terminal log for Version5 oracle row 11
+
+[row 11] Tree-Cycles seed=1 node=571 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=2.772477
+    candidate_edges=24, gt_edges=6, context_edges=18, connectivity=none, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    Solver backend: enumeration
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=False
+    Enumeration: subgraphs=134596, signatures=134595, pruned=1
+    Enumeration cache: status=hit, file=Version5/standard_enumeration_cache/Tree-Cycles/node_necessity/node-000571_k6_mode-eq_conn-none_ac902a0b7c7b40afc5dd3903.json
+    Enumeration probability-fidelity score range: min=-0.058816, max=0.941170
+    GT probability-fidelity rank: 56180/134596 (ties=5, direction=descending, scope=instance_feasible_concrete_edge_subsets), objective=0.581159, rank_max=56180, rank_min=78413
+    GT baseline: removal_rho=-0.2075, kept_margin_raw=-0.575315, necessity_raw=3.347791, Fid+=0.581158, objective_value=0.581159
+    Status: optimal, Edges: 6
+    D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    removal_rho=-5.5258, kept_margin_raw=-15.320030, necessity_raw=18.092507, Fid+=0.941170, objective_value=0.941170
+    removal_rooted_connected=0
+    MIPGap=0.000000, BestBd=N/A, Incumbent=N/A
+    RootLP=N/A, RootLPTime=N/A, RootLPSource=N/A, B&BNodes=0
+    CallbackTime=N/A, CallbackCalls=N/A, CutsMIPNODE=N/A, CutsMIPSOLLazy=N/A, AndersonCutsAdded=N/A, ConnectivityLazyCutsAdded=N/A
+    Time: 11.69s
+    Counterexample: YES, status=counterexample_found, OPT Fid+=0.941170, GT Fid+=0.581158, advantage=0.360012
+    Enum max metrics: size=6, D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    Enum min metrics: size=6, D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    GT figure: Version5/standard_fidelity_enumerations/Tree-Cycles/20261114_230238_formal_enum_Fidplus_gin_3L20H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed1/figs/ground_truth/gt_seed1_row000011.png
+    Enum max edges: Version5/standard_fidelity_enumerations/Tree-Cycles/20261114_230238_formal_enum_Fidplus_gin_3L20H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed1/edges/explanations_max/oracle_seed1_row000011.csv
+    Enum min edges: Version5/standard_fidelity_enumerations/Tree-Cycles/20261114_230238_formal_enum_Fidplus_gin_3L20H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed1/edges/explanations_min/oracle_seed1_row000011.csv
+    Enum extrema CSV: Version5/standard_fidelity_enumerations/Tree-Cycles/20261114_230238_formal_enum_Fidplus_gin_3L20H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed1/edges/enumeration_extrema/extrema_seed1_row000011.csv
+    Enum max figure: Version5/standard_fidelity_enumerations/Tree-Cycles/20261114_230238_formal_enum_Fidplus_gin_3L20H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed1/figs/explanations_max/oracle_seed1_row000011.png
+    Enum min figure: Version5/standard_fidelity_enumerations/Tree-Cycles/20261114_230238_formal_enum_Fidplus_gin_3L20H_seed1to5_all_obj-max_necessity_gtsize-enumeration/seed1/figs/explanations_min/oracle_seed1_row000011.png
+    Padding: policy=random_node_disjoint, status=not_needed, needed=0, added=0, candidates=0, seed=None

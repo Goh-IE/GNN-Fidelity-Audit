@@ -1,0 +1,24 @@
+# Terminal log for Version5 oracle row 41
+
+[row 41] BA-2Motifs seed=3 graph=940 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=4.359749
+    candidate_edges=26, gt_edges=6, context_edges=20, connectivity=cut, edge_budget_mode=eq
+    Solver backend: enumeration
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=False
+    Enumeration: subgraphs=30, signatures=20, pruned=10
+    Enumeration cache: status=hit, file=Version5/standard_enumeration_cache/BA-2Motifs/graph_sufficiency/instance-000940_k6_conn-cut_1d88add1d406da27fcabc76a.json
+    Enumeration probability-fidelity score range: min=-0.986767, max=0.003561
+    GT probability-fidelity rank: 17/21 (ties=1, direction=descending, scope=instance_feasible_colored_topology_representatives), objective=-0.896972, rank_max=17, rank_min=5
+    GT baseline: rho=-0.5295, sufficiency_raw=-2.308668, Fid-=0.896972, objective_value=-0.896972
+    Status: optimal, Edges: 6
+    D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    rho_optimal=1.0769, sufficiency_raw=4.694808, Fid-=-0.003561
+    MIPGap=0.000000, BestBd=N/A, Incumbent=N/A
+    RootLP=N/A, RootLPTime=N/A, RootLPSource=N/A, B&BNodes=0
+    CallbackTime=N/A, CallbackCalls=N/A, CutsMIPNODE=N/A, CutsMIPSOLLazy=N/A, AndersonCutsAdded=N/A, ConnectivityLazyCutsAdded=N/A
+    Time: 0.01s
+    Counterexample: YES, status=counterexample_found, OPT Fid-=-0.003561, GT Fid-=0.896972, advantage=0.900533
+    Enum max metrics: size=6, D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    Enum min metrics: size=6, D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    Enum max edges: Version5/standard_fidelity_enumerations/BA-2Motifs/20261026_191500_formal_connectivity_completion_Fidminus_conn_enum_full_3L5H/seed3/edges/explanations_max/oracle_seed3_row000041.csv
+    Enum min edges: Version5/standard_fidelity_enumerations/BA-2Motifs/20261026_191500_formal_connectivity_completion_Fidminus_conn_enum_full_3L5H/seed3/edges/explanations_min/oracle_seed3_row000041.csv
+    Enum extrema CSV: Version5/standard_fidelity_enumerations/BA-2Motifs/20261026_191500_formal_connectivity_completion_Fidminus_conn_enum_full_3L5H/seed3/edges/enumeration_extrema/extrema_seed3_row000041.csv

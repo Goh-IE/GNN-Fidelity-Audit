@@ -1,0 +1,47 @@
+# Terminal log for Version5 oracle row 27
+
+[row 27] BA2Grid-Longa seed=1 graph=1876 stage=gt_size K=12 multiplier=None objective=max_sufficiency pred=1 label=1 margin=4.870579
+    candidate_edges=25, gt_edges=12, context_edges=13, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 22 nodes, 25 edges
+[MIP-Graph] Full graph: class=1, margin=4.8706
+[MIP-Graph] Graph: 22 nodes, 25 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 9]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 12
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_2 violation=2.626405e-01 y=3.959840e+00 rhs=3.697199e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_3 violation=3.736571e-01 y=1.940336e+00 rhs=1.566679e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_2 violation=1.548823e-01 y=1.784442e+00 rhs=1.629559e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_3 violation=1.072042e-01 y=9.643850e-01 rhs=8.571807e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_4_2 violation=2.467891e-02 y=1.369118e+00 rhs=1.344439e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_6_2 violation=2.469601e-02 y=1.369129e+00 rhs=1.344433e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_14_1 violation=1.806497e-01 y=4.336020e-01 rhs=2.529523e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_16_1 violation=2.583593e-01 y=5.145008e-01 rhs=2.561415e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_17_1 violation=4.973637e-01 y=6.869133e-01 rhs=1.895496e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_17_2 violation=1.146972e-01 y=2.523109e+00 rhs=2.408412e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_17_3 violation=5.135087e-01 y=8.581103e-01 rhs=3.446017e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_17_4 violation=1.322244e-02 y=2.408529e+00 rhs=2.395307e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_18_1 violation=1.817516e-01 y=4.346400e-01 rhs=2.528885e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_19_1 violation=4.998834e-01 y=8.918823e-01 rhs=3.919989e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_19_2 violation=1.077626e-01 y=2.482872e+00 rhs=2.375109e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_19_3 violation=1.190542e-01 y=1.027656e+00 rhs=9.086019e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_20_1 violation=2.611968e-01 y=5.172983e-01 rhs=2.561015e-01
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=17
+[MIPExplainer] Build time: 0.13s, Opt time: 172.92s
+[MIPExplainer] Status: optimal, Edges: 12
+    GT baseline: rho=-1.7175, sufficiency_raw=-8.365123, Fid-=0.992157, objective_value=-1.717480
+    Status: optimal, Edges: 12
+    D=0.917, H=0.000, Precision=0.917, Recall=0.917, F1=0.917
+    rho_optimal=-1.8905, sufficiency_raw=-9.207618, Fid-=0.992289
+    MIPGap=0.000000, BestBd=-1.890457, Incumbent=-1.890457
+    RootLP=3.472209, RootLPTime=0.4566s, RootLPSource=mipnode_callback, B&BNodes=9925
+    CallbackTime=0.4727s, CallbackCalls=123330, CutsMIPNODE=17, CutsMIPSOLLazy=0, AndersonCutsAdded=17, ConnectivityLazyCutsAdded=0
+    Time: 169.20s
+    Counterexample: NO, status=gt_better, OPT Fid-=0.992289, GT Fid-=0.992157, advantage=-0.000133
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/explanations/oracle_seed1_row000027.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/ground_truth/gt_seed1_row000027.png

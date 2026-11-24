@@ -1,0 +1,31 @@
+# Terminal log for Version5 oracle row 7
+
+[row 7] BA-HouseORGrid seed=3 graph=9016 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=12.485802
+    candidate_edges=26, gt_edges=6, context_edges=20, connectivity=none, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    graph_necessity_milp=kept_edge_budget=20 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 26 edges
+[MIP-Graph] Full graph: class=1, margin=12.4858
+[MIP-Graph] Graph: 25 nodes, 26 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 7]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 20
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 20
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[MIPExplainer] Build time: 0.09s, Opt time: 1200.00s
+[MIPExplainer] Status: time_limit, Edges: 20
+    GT baseline: removal_rho=-3.1890, kept_margin_raw=-39.817781, necessity_raw=52.303584, Fid+=0.999996, objective_value=4.189045
+    Status: time_limit, Edges: 6
+    D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    removal_rho=-3.9256, kept_margin_raw=-49.013767, necessity_raw=61.499569, Fid+=0.999996, objective_value=4.925560
+    MIPGap=0.221456, BestBd=-4.794900, Incumbent=-3.925560
+    RootLP=-22.420055, RootLPTime=0.4378s, RootLPSource=mipnode_callback, B&BNodes=79358
+    CallbackTime=3.5197s, CallbackCalls=750382, CutsMIPNODE=0, CutsMIPSOLLazy=0, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=0
+    Time: 1127.13s
+    Counterexample: NO, status=exact_tie, OPT Fid+=0.999996, GT Fid+=0.999996, advantage=0.000000
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/explanations/oracle_seed3_row000007.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/ground_truth/gt_seed3_row000007.png

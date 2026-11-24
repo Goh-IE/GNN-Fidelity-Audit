@@ -1,0 +1,28 @@
+# Terminal log for Version5 oracle row 3
+
+[row 3] PyG-Infection-ER-L3-Split43 seed=3 node=307 stage=gt_size K=3 multiplier=None objective=max_sufficiency pred=3 label=3 margin=9.222897
+    candidate_edges=29, gt_edges=3, context_edges=26, connectivity=none, edge_budget_mode=eq
+    Solver backend: enumeration
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=False
+    Enumeration: subgraphs=49, signatures=8, pruned=41
+    Enumeration cache: status=hit, file=Version5/standard_enumeration_cache/PyG-Infection-ER-L3-Split43/node_sufficiency/node-000307_k3_mode-eq_conn-none_6ad452b507ef1e486603d2e7.json
+    Enumeration probability-fidelity score range: min=-0.999891, max=-0.995531
+    GT probability-fidelity rank: 1/9 (ties=1, direction=descending, scope=instance_feasible_exact_rooted_colored_component_representatives), objective=0.000066, rank_max=1, rank_min=9
+    GT baseline: rho=1.1207, sufficiency_raw=10.336245, Fid-=-0.000066, objective_value=0.000066
+    Status: optimal, Edges: 3
+    D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    rho_optimal=-0.5886, sufficiency_raw=-5.428610, Fid-=0.995531
+    MIPGap=0.000000, BestBd=N/A, Incumbent=N/A
+    RootLP=N/A, RootLPTime=N/A, RootLPSource=N/A, B&BNodes=0
+    CallbackTime=N/A, CallbackCalls=N/A, CutsMIPNODE=N/A, CutsMIPSOLLazy=N/A, AndersonCutsAdded=N/A, ConnectivityLazyCutsAdded=N/A
+    Time: 0.03s
+    Counterexample: NO, status=gt_better, OPT Fid-=0.995531, GT Fid-=-0.000066, advantage=-0.995597
+    Enum max metrics: size=3, D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    Enum min metrics: size=3, D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    GT figure: Version5/standard_fidelity_enumerations/PyG-Infection-ER-L3-Split43/20260825_213900_enumeration_Fidminus_3L5H_seed1to5_split43/seed3/figs/ground_truth/gt_seed3_row000003.png
+    Enum max edges: Version5/standard_fidelity_enumerations/PyG-Infection-ER-L3-Split43/20260825_213900_enumeration_Fidminus_3L5H_seed1to5_split43/seed3/edges/explanations_max/oracle_seed3_row000003.csv
+    Enum min edges: Version5/standard_fidelity_enumerations/PyG-Infection-ER-L3-Split43/20260825_213900_enumeration_Fidminus_3L5H_seed1to5_split43/seed3/edges/explanations_min/oracle_seed3_row000003.csv
+    Enum extrema CSV: Version5/standard_fidelity_enumerations/PyG-Infection-ER-L3-Split43/20260825_213900_enumeration_Fidminus_3L5H_seed1to5_split43/seed3/edges/enumeration_extrema/extrema_seed3_row000003.csv
+    Enum max figure: Version5/standard_fidelity_enumerations/PyG-Infection-ER-L3-Split43/20260825_213900_enumeration_Fidminus_3L5H_seed1to5_split43/seed3/figs/explanations_max/oracle_seed3_row000003.png
+    Enum min figure: Version5/standard_fidelity_enumerations/PyG-Infection-ER-L3-Split43/20260825_213900_enumeration_Fidminus_3L5H_seed1to5_split43/seed3/figs/explanations_min/oracle_seed3_row000003.png
+    Padding: policy=random_node_disjoint, status=not_needed, needed=0, added=0, candidates=0, seed=None

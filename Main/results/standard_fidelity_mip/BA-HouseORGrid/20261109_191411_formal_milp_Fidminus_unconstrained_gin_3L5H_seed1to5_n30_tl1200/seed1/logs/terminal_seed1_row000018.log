@@ -1,0 +1,81 @@
+# Terminal log for Version5 oracle row 18
+
+[row 18] BA-HouseORGrid seed=1 graph=9041 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=0.416605
+    candidate_edges=43, gt_edges=6, context_edges=37, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 43 edges
+[MIP-Graph] Full graph: class=1, margin=0.4166
+[MIP-Graph] Graph: 25 nodes, 43 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 6
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_2 violation=2.796806e-01 y=7.109069e-01 rhs=4.312263e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_4 violation=1.585357e-01 y=1.077047e+00 rhs=9.185110e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_0 violation=5.957605e-02 y=4.134927e-01 rhs=3.539166e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_1 violation=3.722457e-02 y=2.696959e-01 rhs=2.324713e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_2 violation=9.319798e-02 y=5.427418e-01 rhs=4.495439e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_4 violation=2.031254e-01 y=1.488876e+00 rhs=1.285750e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_3_1 violation=1.565288e-02 y=2.237163e-01 rhs=2.080634e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_3_2 violation=4.373731e-01 y=9.475815e-01 rhs=5.102084e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_3_4 violation=1.698324e-01 y=1.324203e+00 rhs=1.154371e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_4_2 violation=3.450732e-01 y=8.255580e-01 rhs=4.804848e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_4_4 violation=1.277874e-01 y=1.188335e+00 rhs=1.060547e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_5_2 violation=1.444634e-01 y=5.199681e-01 rhs=3.755047e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_5_4 violation=7.629441e-02 y=9.402462e-01 rhs=8.639518e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_6_2 violation=2.363957e-01 y=6.697071e-01 rhs=4.333114e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_6_4 violation=9.927901e-02 y=1.079982e+00 rhs=9.807034e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_7_2 violation=3.363038e-01 y=7.034259e-01 rhs=3.671220e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_7_4 violation=2.751614e-02 y=8.393116e-01 rhs=8.117955e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_8_2 violation=1.369175e-01 y=4.772789e-01 rhs=3.403614e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_8_4 violation=3.727706e-02 y=8.220646e-01 rhs=7.847875e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_13_2 violation=7.111622e-02 y=3.111036e-01 rhs=2.399873e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_2 violation=2.352655e-01 y=3.341594e+00 rhs=3.106329e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_3 violation=1.486663e-01 y=3.763903e+00 rhs=3.615236e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_4 violation=2.582267e-01 y=3.233986e+00 rhs=2.975759e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_3_2 violation=1.716858e-02 y=3.185578e+00 rhs=3.168409e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_3_4 violation=2.357905e-02 y=2.989355e+00 rhs=2.965776e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_7_3 violation=1.940584e-01 y=2.621000e+00 rhs=2.426942e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_9_2 violation=1.448446e-01 y=4.118592e-01 rhs=2.670146e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_9_3 violation=1.863594e-01 y=8.027887e-01 rhs=6.164293e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_11_3 violation=5.556897e-02 y=1.562618e+00 rhs=1.507049e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_12_2 violation=9.907760e-02 y=2.863968e-01 rhs=1.873192e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_12_3 violation=1.459534e-01 y=6.627194e-01 rhs=5.167659e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_13_3 violation=2.903604e-02 y=1.798793e+00 rhs=1.769757e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_14_2 violation=4.002029e-02 y=1.330187e-01 rhs=9.299841e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_14_3 violation=8.124253e-02 y=4.887242e-01 rhs=4.074817e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_14_4 violation=8.292463e-02 y=4.352733e-01 rhs=3.523487e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_16_2 violation=1.311245e-01 y=3.660188e-01 rhs=2.348944e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_16_3 violation=1.688094e-01 y=7.107870e-01 rhs=5.419776e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_17_2 violation=3.806695e-02 y=1.191344e-01 rhs=8.106744e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_17_3 violation=8.193426e-02 y=4.515003e-01 rhs=3.695661e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_19_2 violation=8.629104e-02 y=2.432289e-01 rhs=1.569378e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_19_3 violation=1.288844e-01 y=5.664601e-01 rhs=4.375757e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_20_2 violation=1.010290e-01 y=3.027060e-01 rhs=2.016770e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_20_3 violation=3.391150e-01 y=7.382522e-01 rhs=3.991372e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_21_2 violation=6.748557e-02 y=1.451690e-01 rhs=7.768342e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_21_3 violation=2.274599e-01 y=3.951170e-01 rhs=1.676571e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_22_2 violation=5.440917e-02 y=6.211561e-02 rhs=7.706437e-03
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_22_3 violation=1.068505e-01 y=1.581150e-01 rhs=5.126453e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_23_2 violation=2.272150e-02 y=6.299945e-02 rhs=4.027795e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_23_3 violation=1.107421e-01 y=2.352446e-01 rhs=1.245025e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_24_2 violation=2.867658e-02 y=8.793788e-02 rhs=5.926130e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_24_3 violation=1.009030e-01 y=2.560698e-01 rhs=1.551667e-01
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=51
+[MIPExplainer] Build time: 0.34s, Opt time: 1200.01s
+[MIPExplainer] Status: time_limit, Edges: 6
+    GT baseline: rho=-70.0588, sufficiency_raw=-29.186850, Fid-=0.602671, objective_value=-70.058808
+    Status: time_limit, Edges: 6
+    D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    rho_optimal=-69.4068, sufficiency_raw=-28.915226, Fid-=0.602671
+    MIPGap=0.132216, BestBd=-60.230138, Incumbent=-69.406815
+    RootLP=111.639894, RootLPTime=0.9384s, RootLPSource=mipnode_callback, B&BNodes=61052
+    CallbackTime=2.9683s, CallbackCalls=653775, CutsMIPNODE=51, CutsMIPSOLLazy=0, AndersonCutsAdded=51, ConnectivityLazyCutsAdded=0
+    Time: 1156.94s
+    Counterexample: NO, status=exact_tie, OPT Fid-=0.602671, GT Fid-=0.602671, advantage=0.000000
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/explanations/oracle_seed1_row000018.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/ground_truth/gt_seed1_row000018.png

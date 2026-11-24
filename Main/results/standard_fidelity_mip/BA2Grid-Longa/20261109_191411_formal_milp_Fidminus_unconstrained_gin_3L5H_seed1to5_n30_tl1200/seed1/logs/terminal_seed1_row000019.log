@@ -1,0 +1,47 @@
+# Terminal log for Version5 oracle row 19
+
+[row 19] BA2Grid-Longa seed=1 graph=1848 stage=gt_size K=12 multiplier=None objective=max_sufficiency pred=1 label=1 margin=5.789595
+    candidate_edges=22, gt_edges=12, context_edges=10, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 19 nodes, 22 edges
+[MIP-Graph] Full graph: class=1, margin=5.7896
+[MIP-Graph] Graph: 19 nodes, 22 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 5]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 12
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_1 violation=3.312092e-01 y=6.818193e-01 rhs=3.506102e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_2 violation=8.659348e-02 y=1.880781e+00 rhs=1.794188e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_3 violation=3.235183e-01 y=7.991395e-01 rhs=4.756213e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_6_1 violation=3.254356e-01 y=6.664105e-01 rhs=3.409749e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_6_2 violation=1.064223e-01 y=1.826355e+00 rhs=1.719933e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_6_3 violation=8.889874e-02 y=7.769136e-01 rhs=6.880148e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_11_1 violation=1.819173e-01 y=4.250099e-01 rhs=2.430926e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_12_1 violation=1.254107e-01 y=3.303227e-01 rhs=2.049120e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_13_1 violation=1.834995e-01 y=4.238607e-01 rhs=2.403612e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_14_1 violation=4.663127e-01 y=7.784301e-01 rhs=3.121174e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_14_2 violation=1.488523e-01 y=2.489850e+00 rhs=2.340998e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_14_3 violation=1.277686e-01 y=9.625874e-01 rhs=8.348188e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_14_4 violation=3.780047e-02 y=2.371597e+00 rhs=2.333797e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_15_2 violation=4.092276e-02 y=2.261721e+00 rhs=2.220798e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_15_3 violation=6.054617e-02 y=9.112682e-01 rhs=8.507220e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_17_1 violation=1.825453e-01 y=4.260177e-01 rhs=2.434723e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_18_1 violation=1.255365e-01 y=3.305251e-01 rhs=2.049886e-01
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=17
+[MIPExplainer] Build time: 0.07s, Opt time: 63.35s
+[MIPExplainer] Status: optimal, Edges: 12
+    GT baseline: rho=-0.8241, sufficiency_raw=-4.771218, Fid-=0.988551, objective_value=-0.824102
+    Status: optimal, Edges: 12
+    D=0.917, H=0.000, Precision=0.917, Recall=0.917, F1=0.917
+    rho_optimal=-0.9630, sufficiency_raw=-5.575253, Fid-=0.993174
+    MIPGap=0.000000, BestBd=-0.962978, Incumbent=-0.962978
+    RootLP=2.153533, RootLPTime=0.3739s, RootLPSource=mipnode_callback, B&BNodes=3794
+    CallbackTime=0.1803s, CallbackCalls=47744, CutsMIPNODE=17, CutsMIPSOLLazy=0, AndersonCutsAdded=17, ConnectivityLazyCutsAdded=0
+    Time: 62.14s
+    Counterexample: NO, status=gt_better, OPT Fid-=0.993174, GT Fid-=0.988551, advantage=-0.004623
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/explanations/oracle_seed1_row000019.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/ground_truth/gt_seed1_row000019.png

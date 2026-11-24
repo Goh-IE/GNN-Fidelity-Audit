@@ -1,0 +1,31 @@
+# Terminal log for Version5 oracle row 16
+
+[row 16] BA2Grid-Longa seed=3 graph=1842 stage=gt_size K=12 multiplier=None objective=max_necessity pred=1 label=1 margin=4.327288
+    candidate_edges=27, gt_edges=12, context_edges=15, connectivity=none, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    graph_necessity_milp=kept_edge_budget=15 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 24 nodes, 27 edges
+[MIP-Graph] Full graph: class=1, margin=4.3273
+[MIP-Graph] Graph: 24 nodes, 27 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 7]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 15
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 15
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[MIPExplainer] Build time: 0.10s, Opt time: 860.44s
+[MIPExplainer] Status: optimal, Edges: 15
+    GT baseline: removal_rho=-1.7837, kept_margin_raw=-7.718532, necessity_raw=12.045819, Fid+=0.986525, objective_value=2.783688
+    Status: optimal, Edges: 12
+    D=0.417, H=0.000, Precision=0.417, Recall=0.417, F1=0.417
+    removal_rho=-1.9309, kept_margin_raw=-8.355647, necessity_raw=12.682935, Fid+=0.986734, objective_value=2.930920
+    MIPGap=0.000016, BestBd=-1.930950, Incumbent=-1.930920
+    RootLP=-6.081783, RootLPTime=0.4107s, RootLPSource=mipnode_callback, B&BNodes=68826
+    CallbackTime=2.3715s, CallbackCalls=595663, CutsMIPNODE=0, CutsMIPSOLLazy=0, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=0
+    Time: 805.26s
+    Counterexample: YES, status=counterexample_found, OPT Fid+=0.986734, GT Fid+=0.986525, advantage=0.000209
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/explanations/oracle_seed3_row000016.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/ground_truth/gt_seed3_row000016.png

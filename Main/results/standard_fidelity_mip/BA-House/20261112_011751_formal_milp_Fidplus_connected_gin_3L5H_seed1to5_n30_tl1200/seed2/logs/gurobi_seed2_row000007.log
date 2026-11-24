@@ -1,0 +1,90 @@
+
+Gurobi 13.0.0 (linux64) logging started Thu Nov 12 01:59:57 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-House/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/logs/gurobi_seed2_row000007.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter LazyConstraints to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+LazyConstraints  1
+
+Optimize a model with 6401 rows, 3111 columns and 20439 nonzeros (Min)
+Model fingerprint: 0x750331d8
+Model has 1 linear objective coefficients
+Variable types: 2723 continuous, 388 integer (388 binary)
+Coefficient statistics:
+  Matrix range     [2e-04, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [3e-03, 2e+01]
+  RHS range        [6e-03, 4e+01]
+Presolve removed 1289 rows and 890 columns
+Presolve time: 0.13s
+Presolved: 5112 rows, 2221 columns, 16004 nonzeros
+Variable types: 1928 continuous, 293 integer (293 binary)
+
+Root relaxation: objective 4.969019e-01, 3723 iterations, 0.29 seconds (0.30 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.49690    0   34          -    0.49690      -     -    0s
+     0     0    0.49694    0   34          -    0.49694      -     -    0s
+     0     0    0.58157    0   24          -    0.58157      -     -    0s
+H    0     0                       0.7397433    0.58189  21.3%     -    0s
+     0     0    0.58189    0   23    0.73974    0.58189  21.3%     -    1s
+     0     0    0.58696    0   24    0.73974    0.58696  20.7%     -    1s
+     0     0    0.58696    0   24    0.73974    0.58696  20.7%     -    1s
+     0     0    0.58918    0   22    0.73974    0.58918  20.4%     -    1s
+     0     0    0.59062    0   29    0.73974    0.59062  20.2%     -    1s
+     0     0    0.59212    0   38    0.73974    0.59212  20.0%     -    1s
+     0     0    0.59227    0   37    0.73974    0.59227  19.9%     -    1s
+     0     0    0.59241    0   30    0.73974    0.59241  19.9%     -    1s
+     0     0    0.59241    0   31    0.73974    0.59241  19.9%     -    1s
+     0     0    0.59241    0   31    0.73974    0.59241  19.9%     -    1s
+     0     0    0.59241    0   31    0.73974    0.59241  19.9%     -    1s
+     0     0    0.59241    0   31    0.73974    0.59241  19.9%     -    1s
+     0     0    0.59241    0   37    0.73974    0.59241  19.9%     -    1s
+     0     0    0.59241    0   37    0.73974    0.59241  19.9%     -    1s
+     0     0    0.59241    0   37    0.73974    0.59241  19.9%     -    1s
+     0     0    0.59241    0   37    0.73974    0.59241  19.9%     -    2s
+     0     0    0.59241    0   21    0.73974    0.59241  19.9%     -    2s
+     0     2    0.59503    0   21    0.73974    0.59503  19.6%     -    2s
+H    3     1                       0.6392316    0.63418  0.79%   577    2s
+
+Cutting planes:
+  Learned: 12
+  Gomory: 9
+  Cover: 10
+  Implied bound: 124
+  MIR: 28
+  Flow cover: 20
+  RLT: 55
+  Relax-and-lift: 17
+  BQP: 2
+
+Explored 28 nodes (13731 simplex iterations) in 3.10 seconds (2.08 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 2: 0.639232 0.739743 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.392315512196e-01, best bound 6.392315512196e-01, gap 0.0000%
+
+User-callback calls 1569, time in user-callback 0.03 sec

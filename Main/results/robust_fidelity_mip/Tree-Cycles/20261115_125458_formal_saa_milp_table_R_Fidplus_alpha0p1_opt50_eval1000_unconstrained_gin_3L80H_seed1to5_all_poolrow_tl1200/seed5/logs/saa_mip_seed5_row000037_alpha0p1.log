@@ -1,0 +1,56 @@
+
+Gurobi 13.0.0 (linux64) logging started Sun Nov 15 13:57:25 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/robust_fidelity_experiments/Tree-Cycles/20261115_125458_formal_saa_milp_table_R_Fidplus_alpha0p1_opt50_eval1000_unconstrained_gin_3L80H_seed1to5_all_poolrow_tl1200/seed5/logs/saa_mip_seed5_row000037_alpha0p1.log"
+Set parameter Seed to value 1452673038
+Set parameter TimeLimit to value 1200
+Set parameter Threads to value 1
+Set parameter Method to value 1
+Set parameter NumericFocus to value 3
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter MIPGap to value 0
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+MIPGap  0
+Method  1
+Symmetry  2
+NumericFocus  3
+Seed  1452673038
+Threads  1
+
+Optimize a model with 116 rows, 197 columns and 506 nonzeros (Min)
+Model fingerprint: 0xafad0332
+Model has 184 linear objective coefficients
+Variable types: 184 continuous, 13 integer (13 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-07, 2e-02]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 6e+00]
+Presolve removed 48 rows and 72 columns
+Presolve time: 0.00s
+Presolved: 68 rows, 125 columns, 385 nonzeros
+Variable types: 112 continuous, 13 integer (13 binary)
+Found heuristic solution: objective 0.9082550
+
+Root relaxation: objective 8.311698e-01, 12 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.8311698    0.83117  0.00%     -    0s
+     0     0          -    0         0.83117    0.83117  0.00%     -    0s
+
+Explored 1 nodes (12 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 2: 0.83117 0.908255 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 8.311697951939e-01, best bound 8.311697951939e-01, gap 0.0000%

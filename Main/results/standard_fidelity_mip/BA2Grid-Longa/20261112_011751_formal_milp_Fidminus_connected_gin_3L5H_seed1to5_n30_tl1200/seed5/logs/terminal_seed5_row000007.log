@@ -1,0 +1,89 @@
+# Terminal log for Version5 oracle row 7
+
+[row 7] BA2Grid-Longa seed=5 graph=1816 stage=gt_size K=12 multiplier=None objective=max_sufficiency pred=1 label=1 margin=5.116873
+    candidate_edges=28, gt_edges=12, context_edges=16, connectivity=cut, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 28 edges
+[MIP-Graph] Full graph: class=1, margin=5.1169
+[MIP-Graph] Graph: 25 nodes, 28 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 7]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 12
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[ConnectivityCut-Graph] added component_size=5 representative=1
+[ConnectivityCut-Graph] added component_size=7 representative=17
+[ConnectivityCut-Graph] added component_size=5 representative=16
+[ConnectivityCut-Graph] added component_size=12 representative=1
+[ConnectivityCut-Graph] added component_size=2 representative=18
+[ConnectivityCut-Graph] added component_size=12 representative=0
+[ConnectivityCut-Graph] added component_size=8 representative=0
+[ConnectivityCut-Graph] added component_size=12 representative=1
+[ConnectivityCut-Graph] added component_size=7 representative=1
+[ConnectivityCut-Graph] added component_size=7 representative=16
+[ConnectivityCut-Graph] added component_size=7 representative=1
+[ConnectivityCut-Graph] added component_size=7 representative=16
+[ConnectivityCut-Graph] added component_size=8 representative=1
+[ConnectivityCut-Graph] added component_size=8 representative=1
+[ConnectivityCut-Graph] added component_size=6 representative=16
+[ConnectivityCut-Graph] added component_size=7 representative=16
+[ConnectivityCut-Graph] added component_size=7 representative=16
+[ConnectivityCut-Graph] added component_size=7 representative=16
+[ConnectivityCut-Graph] added component_size=12 representative=1
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=8 representative=0
+[ConnectivityCut-Graph] added component_size=8 representative=0
+[ConnectivityCut-Graph] added component_size=8 representative=0
+[ConnectivityCut-Graph] added component_size=8 representative=0
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=6 representative=17
+[ConnectivityCut-Graph] added component_size=6 representative=17
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=12 representative=0
+[ConnectivityCut-Graph] added component_size=12 representative=0
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=6 representative=16
+[ConnectivityCut-Graph] added component_size=6 representative=3
+[ConnectivityCut-Graph] added component_size=6 representative=18
+[ConnectivityCut-Graph] added component_size=6 representative=17
+[ConnectivityCut-Graph] added component_size=6 representative=17
+[ConnectivityCut-Graph] added component_size=6 representative=3
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=12 representative=0
+[ConnectivityCut-Graph] added component_size=6 representative=16
+[ConnectivityCut-Graph] added component_size=6 representative=17
+[ConnectivityCut-Graph] added component_size=6 representative=17
+[ConnectivityCut-Graph] added component_size=6 representative=16
+[ConnectivityCut-Graph] added component_size=12 representative=0
+[ConnectivityCut-Graph] added component_size=7 representative=1
+[ConnectivityCut-Graph] added component_size=6 representative=19
+[ConnectivityCut-Graph] added component_size=7 representative=0
+[ConnectivityCut-Graph] added component_size=6 representative=3
+[ConnectivityCut-Graph] added component_size=6 representative=17
+[ConnectivityCut-Graph] added component_size=6 representative=18
+[ConnectivityCut-Graph] added component_size=6 representative=18
+[ConnectivityCut-Graph] added component_size=6 representative=3
+[ConnectivityCut-Graph] added component_size=6 representative=3
+[ConnectivityCut-Graph] added component_size=6 representative=3
+[ConnectivityCut-Graph] added component_size=6 representative=3
+[ConnectivityCut-Graph] added component_size=6 representative=3
+[MIPExplainer] Build time: 0.06s, Opt time: 132.32s
+[MIPExplainer] Status: optimal, Edges: 12
+    GT baseline: rho=-7.3878, sufficiency_raw=-37.802450, Fid-=0.994041, objective_value=-7.387803
+    Status: optimal, Edges: 12
+    D=0.417, H=0.000, Precision=0.417, Recall=0.417, F1=0.417
+    rho_optimal=-6.7748, sufficiency_raw=-34.665906, Fid-=0.994041
+    MIPGap=0.000000, BestBd=-6.774822, Incumbent=-6.774822
+    RootLP=-3.210944, RootLPTime=0.4224s, RootLPSource=mipnode_callback, B&BNodes=13043
+    CallbackTime=0.3367s, CallbackCalls=100330, CutsMIPNODE=0, CutsMIPSOLLazy=60, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=60
+    Time: 130.26s
+    Counterexample: NO, status=exact_tie, OPT Fid-=0.994041, GT Fid-=0.994041, advantage=0.000000
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261112_011751_formal_milp_Fidminus_connected_gin_3L5H_seed1to5_n30_tl1200/seed5/figs/explanations/oracle_seed5_row000007.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261112_011751_formal_milp_Fidminus_connected_gin_3L5H_seed1to5_n30_tl1200/seed5/figs/ground_truth/gt_seed5_row000007.png

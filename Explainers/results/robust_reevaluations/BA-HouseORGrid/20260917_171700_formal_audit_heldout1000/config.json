@@ -1,0 +1,153 @@
+{
+  "dataset": "BA-HouseORGrid",
+  "phase": "formal",
+  "kind": "derived_frozen_mask_evaluation",
+  "methods": [
+    "random",
+    "gradcam",
+    "gnnexplainer",
+    "pgexplainer",
+    "flowx_suf",
+    "flowx_nec"
+  ],
+  "nn_seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "expected_records_per_method": 150,
+  "source_manifest": "/home/wsgoh2/code/26GNNExplainer/Version5/flowx_suf_experiments/BA-2Motifs/20260917_152207_formal_flowx_explicit_loop_completion/comparison_manifest.json",
+  "source_manifest_sha256": "7e82420201ceb20073e121a87459a2607a358477c0360e4b2ebe43206ee2206a",
+  "source_runs": {
+    "random": "/home/wsgoh2/code/26GNNExplainer/Version5/random_experiments/BA-HouseORGrid/20260917_020550_formal_dig_baselines_3L5H_seed1to5",
+    "gradcam": "/home/wsgoh2/code/26GNNExplainer/Version5/gradcam_experiments/BA-HouseORGrid/20260917_020550_formal_dig_baselines_3L5H_seed1to5",
+    "gnnexplainer": "/home/wsgoh2/code/26GNNExplainer/Version5/gnnexplainer_experiments/BA-HouseORGrid/20260917_020550_formal_dig_baselines_3L5H_seed1to5",
+    "pgexplainer": "/home/wsgoh2/code/26GNNExplainer/Version5/pgexplainer_experiments/BA-HouseORGrid/20260917_020550_formal_dig_baselines_3L5H_seed1to5",
+    "flowx_suf": "/home/wsgoh2/code/26GNNExplainer/Version5/flowx_suf_experiments/BA-HouseORGrid/20260917_124247_formal_flowx_undirected_3L5H",
+    "flowx_nec": "/home/wsgoh2/code/26GNNExplainer/Version5/flowx_nec_experiments/BA-HouseORGrid/20260917_124247_formal_flowx_undirected_3L5H"
+  },
+  "audit_runs": {
+    "robust_sufficiency": "/home/wsgoh2/code/26GNNExplainer/Version5/robust_fidelity_experiments/BA-HouseORGrid/20260825_170142_milp_Fid^-_alpha0.9_opt50_eval1000_n30_seed1to5_tl600s_bnb",
+    "robust_necessity": "/home/wsgoh2/code/26GNNExplainer/Version5/robust_fidelity_experiments/BA-HouseORGrid/20260825_170142_milp_Fid^+_alpha0.1_opt50_eval1000_n30_seed1to5_tl600s_bnb"
+  },
+  "source_config": {
+    "preset": "paper",
+    "datasets": [
+      "BA-HouseORGrid"
+    ],
+    "nn_seeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "instance_filter": "correct",
+    "budget_multipliers": [],
+    "stages": [
+      "gt_size"
+    ],
+    "max_instances": 30,
+    "min_target_degree": null,
+    "time_limit_s": 600.0,
+    "output_dir": "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-HouseORGrid",
+    "run_name": "20260825_170142_milp_Fid^-_standard_n30_seed1to5_tl600s_bnb",
+    "num_layers": 3,
+    "hidden_dim": 5,
+    "use_jk_concat": false,
+    "normalize_features": true,
+    "readout": "sum",
+    "k_hop": null,
+    "connectivity": "none",
+    "node_edge_budget_mode": "eq",
+    "gt_size_solver": "milp",
+    "enumeration_max_subgraphs": 1000000,
+    "enumeration_batch_size": 1024,
+    "use_enumeration_cache": true,
+    "enumeration_cache_dir": "/home/wsgoh2/code/26GNNExplainer/Version5/standard_enumeration_cache",
+    "oracle_objective": "max_sufficiency",
+    "gt_incumbent": false,
+    "exclude_gt_solution": true,
+    "acceleration_profile": "accelerated",
+    "use_o1_tightening": true,
+    "cap_mode": "global",
+    "use_o3_symmetry_breaking": true,
+    "use_o4_star_constraints": false,
+    "use_o9_connectivity_lb": false,
+    "use_anderson_cuts": true,
+    "anderson_max_node_count": 0,
+    "anderson_max_cuts": 300,
+    "edge_branch_priority": 0,
+    "use_obbt_u": false,
+    "max_obbt_u_layers": null,
+    "obbt_rebuild": false,
+    "max_root_sep_rounds": 5,
+    "cut_set_scope": "lazy_only",
+    "save_figures": true,
+    "padding_seed": 0,
+    "metric": null,
+    "opt_samples": null,
+    "eval_samples": null,
+    "gurobi_method": 1,
+    "gurobi_threads": 1,
+    "gurobi_norel_hybrid": false,
+    "gurobi_norel_heur_work": 10.0,
+    "gurobi_mem_limit": null,
+    "verbose": true,
+    "gurobi_effective_norel_heur_work": 0.0,
+    "gurobi_norel_hybrid_time_scope": "NoRel and subsequent root/B&B share the existing single Gurobi time limit; no model restart",
+    "counterexample_absolute_tolerance": 1e-06,
+    "enumeration_rank_absolute_tolerance": 1e-06,
+    "enumeration_objective_scale": "oriented_probability_fidelity",
+    "seed_dir_pattern": "seed{nn_seed}",
+    "seed_directories": [
+      "seed1",
+      "seed2",
+      "seed3",
+      "seed4",
+      "seed5"
+    ]
+  },
+  "environment": {
+    "interpreter": "/home/wsgoh2/miniconda3/envs/26GNN/bin/python",
+    "python": "3.11.14 (main, Oct 21 2025, 18:31:21) [GCC 11.2.0]",
+    "versions": {
+      "torch": "2.9.1+cpu",
+      "torch-geometric": "2.7.0",
+      "captum": "0.2.0",
+      "numpy": "2.2.6",
+      "scipy": "1.16.3",
+      "matplotlib": "3.10.8",
+      "gurobipy": "13.0.0",
+      "networkx": "3.6.1"
+    },
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "processor": "x86_64",
+    "device": "cpu",
+    "torch_threads": 1
+  },
+  "evaluation_samples": 1000,
+  "tau": 0.0001,
+  "scenarios": "historical_audit_heldout",
+  "zero_variance_test": "p=1",
+  "code_hashes": {
+    "/home/wsgoh2/code/26GNNExplainer/Version5/reevaluate_baselines_on_audit.py": "71d7bd7bcba7904025062382ab4615e469e59a5c4749bbb8e9e601d0640cf91f",
+    "/home/wsgoh2/code/26GNNExplainer/Version5/run_baseline_experiment.py": "c318144ac35443ade15b93b9387a11a665d5d04c4b3a1bd8a1ff3fe5e5ca8810",
+    "/home/wsgoh2/code/26GNNExplainer/Version5/run_robust_fidelity_experiment.py": "78725eccfb918d271a99526d33c0df91f0f233af6fa06f2d213c69e0ebc4199c"
+  },
+  "git_commit": "de90a28780f361746d00bf2e31270db03cf7d654",
+  "dirty_state": " M Version5/260700-acceleration.md\n M Version5/260700-cli.md\n M Version5/ExplanationEvaluation/explainers/MIPExplainer.py\n M Version5/ExplanationEvaluation/explainers/mip_gnn_vanilla.py\n D Version5/build_paper_tables.py\n D Version5/make_paper_figures.py\n M Version5/run_standard_fidelity_experiment.py\n?? Version5/260700-datasets.md\n?? Version5/260815-dataset-selection.md\n?? Version5/ExplanationEvaluation/__init__.py\n?? Version5/ExplanationEvaluation/__pycache__/\n?? Version5/ExplanationEvaluation/configs/\n?? Version5/ExplanationEvaluation/datasets/\n?? Version5/ExplanationEvaluation/evaluation/\n?? Version5/ExplanationEvaluation/explainers/BaseExplainer.py\n?? Version5/ExplanationEvaluation/explainers/MIPNodeExplainer.py\n?? Version5/ExplanationEvaluation/explainers/__init__.py\n?? Version5/ExplanationEvaluation/explainers/__pycache__/\n?? Version5/ExplanationEvaluation/explainers/mip_node_gnn_vanilla.py\n?? Version5/ExplanationEvaluation/models/\n?? Version5/ExplanationEvaluation/tasks/\n?? Version5/ExplanationEvaluation/utils/\n?? Version5/README.md\n?? Version5/TrialData/\n?? Version5/__pycache__/\n?? Version5/_archive/\n?? Version5/baseline_dig.py\n?? Version5/baseline_figures.py\n?? Version5/baseline_flowx.py\n?? Version5/baseline_robust_reevaluations/\n?? Version5/connected_enumeration_robust_plan_20260907.md\n?? Version5/connected_enumeration_smoke_plan_20260907.md\n?? Version5/connected_enumeration_standard_plan_20260907.md\n?? Version5/cpp/\n?? Version5/paper_reporting/\n?? Version5/preflight_baseline_cohorts.py\n?? Version5/prepare_flowx_suite.py\n?? Version5/reevaluate_baselines_on_audit.py\n?? Version5/robust_enumeration_cache/\n?? Version5/robust_fidelity_enumerations/\n?? Version5/run_audit_scenario_reevaluation_suite.py\n?? Version5/run_baseline_experiment.py\n?? Version5/run_baseline_suite.py\n?? Version5/run_flowx_batch.py\n?? Version5/run_robust_fidelity_experiment.py\n?? Version5/standard_enumeration_cache/\n?? Version5/standard_fidelity_enumerations/\n?? Version5/summarize_baseline_suite.py\n?? Version5/systematic_mip_experiment.py\n?? Version5/systematic_training.py\n?? Version5/tests/\n?? Version5/third_party/\n?? Version5/validate_audit_scenario_reevaluation.py\n?? Version5/validate_baseline_artifacts.py\n",
+  "command": [
+    "/home/wsgoh2/code/26GNNExplainer/Version5/reevaluate_baselines_on_audit.py",
+    "Version5/flowx_suf_experiments/BA-2Motifs/20260917_152207_formal_flowx_explicit_loop_completion/comparison_manifest.json",
+    "--dataset",
+    "BA-HouseORGrid",
+    "--run-name",
+    "20260917_171700_formal_audit_heldout1000",
+    "--phase",
+    "formal"
+  ],
+  "started_at": "2026-09-17T17:21:36.124051+09:00"
+}

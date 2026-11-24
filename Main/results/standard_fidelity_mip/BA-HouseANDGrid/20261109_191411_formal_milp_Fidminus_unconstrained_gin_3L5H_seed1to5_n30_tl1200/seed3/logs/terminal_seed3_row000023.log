@@ -1,0 +1,31 @@
+# Terminal log for Version5 oracle row 23
+
+[row 23] BA-HouseANDGrid seed=3 graph=9041 stage=gt_size K=18 multiplier=None objective=max_sufficiency pred=1 label=1 margin=7.603212
+    candidate_edges=39, gt_edges=18, context_edges=21, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 34 nodes, 39 edges
+[MIP-Graph] Full graph: class=1, margin=7.6032
+[MIP-Graph] Graph: 34 nodes, 39 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 8]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 18
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 18
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_4 violation=3.448700e-02 y=1.099530e+00 rhs=1.065043e+00
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=1
+[MIPExplainer] Build time: 0.12s, Opt time: 1200.01s
+[MIPExplainer] Status: time_limit, Edges: 18
+    GT baseline: rho=-18.4667, sufficiency_raw=-140.406483, Fid-=0.999501, objective_value=-18.466733
+    Status: time_limit, Edges: 18
+    D=0.722, H=0.000, Precision=0.722, Recall=0.722, F1=0.722
+    rho_optimal=-17.3855, sufficiency_raw=-132.185741, Fid-=0.999501
+    MIPGap=0.134462, BestBd=-15.047831, Incumbent=-17.385513
+    RootLP=12.166829, RootLPTime=0.7172s, RootLPSource=mipnode_callback, B&BNodes=42612
+    CallbackTime=2.9058s, CallbackCalls=720089, CutsMIPNODE=1, CutsMIPSOLLazy=0, AndersonCutsAdded=1, ConnectivityLazyCutsAdded=0
+    Time: 1087.34s
+    Counterexample: NO, status=exact_tie, OPT Fid-=0.999501, GT Fid-=0.999501, advantage=-0.000000
+    Figure: Version5/standard_fidelity_experiments/BA-HouseANDGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/explanations/oracle_seed3_row000023.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseANDGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/ground_truth/gt_seed3_row000023.png

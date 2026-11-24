@@ -1,0 +1,29 @@
+# Terminal log for Version5 oracle row 9
+
+[row 9] BA2Grid-Longa seed=2 graph=1824 stage=gt_size K=12 multiplier=None objective=max_sufficiency pred=1 label=1 margin=8.889083
+    candidate_edges=27, gt_edges=12, context_edges=15, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 24 nodes, 27 edges
+[MIP-Graph] Full graph: class=1, margin=8.8891
+[MIP-Graph] Graph: 24 nodes, 27 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 12
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[MIPExplainer] Build time: 0.06s, Opt time: 23.43s
+[MIPExplainer] Status: optimal, Edges: 12
+    GT baseline: rho=-4.2142, sufficiency_raw=-37.460702, Fid-=0.999862, objective_value=-4.214237
+    Status: optimal, Edges: 12
+    D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    rho_optimal=-3.9870, sufficiency_raw=-35.440965, Fid-=0.999862
+    MIPGap=0.000000, BestBd=-3.987022, Incumbent=-3.987022
+    RootLP=-2.597038, RootLPTime=0.2826s, RootLPSource=mipnode_callback, B&BNodes=2792
+    CallbackTime=0.0712s, CallbackCalls=19141, CutsMIPNODE=0, CutsMIPSOLLazy=0, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=0
+    Time: 22.50s
+    Counterexample: NO, status=exact_tie, OPT Fid-=0.999862, GT Fid-=0.999862, advantage=0.000000
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/explanations/oracle_seed2_row000009.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/ground_truth/gt_seed2_row000009.png

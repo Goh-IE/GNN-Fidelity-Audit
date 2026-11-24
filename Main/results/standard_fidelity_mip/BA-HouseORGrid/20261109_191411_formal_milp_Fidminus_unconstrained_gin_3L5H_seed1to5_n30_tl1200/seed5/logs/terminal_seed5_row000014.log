@@ -1,0 +1,33 @@
+# Terminal log for Version5 oracle row 14
+
+[row 14] BA-HouseORGrid seed=5 graph=9034 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=7.888014
+    candidate_edges=26, gt_edges=6, context_edges=20, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 26 edges
+[MIP-Graph] Full graph: class=1, margin=7.8880
+[MIP-Graph] Graph: 25 nodes, 26 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 6
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_0 violation=4.768243e+00 y=1.349178e+01 rhs=8.723536e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_2 violation=3.682173e+00 y=1.075502e+01 rhs=7.072851e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_3_2 violation=4.407853e-02 y=5.061502e+00 rhs=5.017423e+00
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=3
+[MIPExplainer] Build time: 0.06s, Opt time: 1200.00s
+[MIPExplainer] Status: time_limit, Edges: 6
+    GT baseline: rho=2.0857, sufficiency_raw=16.452263, Fid-=-0.000375, objective_value=2.085729
+    Status: time_limit, Edges: 6
+    D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333
+    rho_optimal=0.9219, sufficiency_raw=7.271859, Fid-=0.000319
+    MIPGap=2.795914, BestBd=3.499404, Incumbent=0.921887
+    RootLP=48.820278, RootLPTime=0.3593s, RootLPSource=mipnode_callback, B&BNodes=42074
+    CallbackTime=2.6804s, CallbackCalls=691452, CutsMIPNODE=3, CutsMIPSOLLazy=0, AndersonCutsAdded=3, ConnectivityLazyCutsAdded=0
+    Time: 1150.80s
+    Counterexample: NO, status=gt_better, OPT Fid-=0.000319, GT Fid-=-0.000375, advantage=-0.000694
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed5/figs/explanations/oracle_seed5_row000014.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed5/figs/ground_truth/gt_seed5_row000014.png

@@ -1,0 +1,32 @@
+% BEGIN GENERATED REFERENCE OVERLAP FIGURES
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=\textwidth]{figures/reference_overlap_milp.pdf}
+    \caption{Reference overlap on the complete cohorts of the four MILP
+    benchmarks, using the masks reported in Table~\ref{tab:absolute-fidelity}.
+    The four Search rows correspond to standard and robust sufficiency
+    and necessity. Each baseline uses one fixed mask across objectives.
+    Boxes pool all $n$ instance-seed pairs and show quartiles and medians,
+    with whiskers extending to the most extreme observations within $1.5$
+    interquartile ranges. Open circles mark outliers. Colored markers show
+    the five seed means, with vertical offsets for visibility.
+    The right column gives the percentage of Search records that use GT
+    instead of the audit candidate. These records have overlap one by
+    construction. The distributions are descriptive because records can
+    share instances, graphs, and trained models.}
+    \label{fig:reference-overlap-milp}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \includegraphics[width=\textwidth]{figures/reference_overlap_enum.pdf}
+    \caption{Reference overlap on the complete cohorts of the four enumerated
+    benchmarks, with the same conventions as
+    Figure~\ref{fig:reference-overlap-milp}.
+    All methods use the listed $n$ instance-seed pairs.
+    Boxes summarize individual records, and colored markers show the five
+    seed means. GT fallback percentages describe the Search selection
+    rule and do not measure recovery of GT by the search.}
+    \label{fig:reference-overlap-enum}
+\end{figure}
+% END GENERATED REFERENCE OVERLAP FIGURES

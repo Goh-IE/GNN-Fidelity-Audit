@@ -1,0 +1,9 @@
+# Version5 fidelity-alpha SAA-MILP standard_endpoint_pwl=False
+dataset=PyG-Infection-ER-L3-Split43 seed=3 row_id=2 metric=sufficiency alpha=0.9 connectivity=none O1=False O4=False O9=False opt_samples=50 eval_samples=1000 objective_type=prob_table pwl_points=None pwl_tail_eps=None pwl_core_bound=None pwl_tail_mode=None gt_incumbent=False exclude_gt_solution=True gurobi_time_limit_s=1200.0 gurobi_symmetry=2 edge_branch_priority=0 mip_focus=None norel_hybrid=False norel_requested_work=10.0 norel_effective_work=0.0 norel_then_continue_same_optimize_to_root_and_bnb=False
+GT opt: score_alpha=0.0002664, fid_alpha=0.0002664, nec_alpha=NA, avg_p=0.9997, samples=50, seed=1097376916
+GT eval: score_alpha=0.0001411, fid_alpha=0.0001411, nec_alpha=NA, avg_p=0.9998, samples=1000, seed=4002558292
+SAA-Table task=node metric=sufficiency alpha=0.9 scenarios=50 budget=3 mode=eq candidate_edges=69 inert_edges=5 inert_reduction=True table_entries=3999 max_switches=15 mean_switches=6.9 build_time_s=0.216 mip_gap=0.0 connectivity=none O4=False O9=False exclude_gt_solution=True gt_no_good_cut_added=True objective_type=prob_table
+SAA-MILP status=optimal objective=0.9650683546066283 bound=0.9650683546066284 gap=0.0 nodes=1.0 root_lp=None root_lp_time=None model_size=14498.0 anderson_cuts=0 connectivity_cuts=0 time_s=0.032 objective_type=prob_table
+SAA-MILP paired-CI: advantage=-0.09929 95%_CI=[-0.1171,-0.08146] status=gt_better_supported paired_scenarios=1000 definition=GT_FidMinus_minus_OPT_FidMinus
+SAA-MILP opt: score_alpha=0.03488, fid_alpha=0.03488, nec_alpha=NA, avg_p=0.9651, samples=50, seed=1097376916
+SAA-MILP eval: score_alpha=0.09943, fid_alpha=0.09943, nec_alpha=NA, avg_p=0.9005, samples=1000, seed=4002558292

@@ -1,0 +1,47 @@
+# Terminal log for Version5 oracle row 19
+
+[row 19] BA-HouseORGrid seed=2 graph=9043 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=3.079369
+    candidate_edges=26, gt_edges=6, context_edges=20, connectivity=cut, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 25 nodes, 26 edges
+[MIP-Graph] Full graph: class=1, margin=3.0794
+[MIP-Graph] Graph: 25 nodes, 26 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 6
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_1 violation=2.762504e-02 y=1.682269e-01 rhs=1.406018e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_2 violation=1.545105e-01 y=1.375300e-01 rhs=-1.698046e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_2 violation=7.520434e-02 y=7.067734e-02 rhs=-4.526999e-03
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_4_1 violation=5.319856e-02 y=2.600791e-01 rhs=2.068805e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_4_2 violation=7.538674e-02 y=3.773716e-01 rhs=3.019849e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_8_1 violation=2.763216e-02 y=4.218414e-02 rhs=1.455198e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_10_1 violation=5.166150e-02 y=1.716158e-01 rhs=1.199543e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_10_2 violation=1.551491e-01 y=1.659285e-01 rhs=1.077941e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_12_1 violation=2.001638e-02 y=4.546499e-02 rhs=2.544861e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_20_1 violation=1.583335e-02 y=1.677425e-01 rhs=1.519091e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_20_2 violation=6.341247e-02 y=1.589251e-01 rhs=9.551261e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_21_1 violation=3.298197e-02 y=7.447173e-02 rhs=4.148976e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_23_1 violation=2.689055e-02 y=4.765630e-02 rhs=2.076575e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_4 violation=7.292312e-02 y=1.634914e-01 rhs=9.056826e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_4_4 violation=7.897526e-02 y=4.209172e-01 rhs=3.419419e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_10_4 violation=1.650573e-01 y=2.096532e-01 rhs=4.459593e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_21_4 violation=1.018884e-01 y=4.426025e-02 rhs=-5.762819e-02
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=17
+[MIPExplainer] Build time: 0.07s, Opt time: 3.44s
+[MIPExplainer] Status: optimal, Edges: 6
+    GT baseline: rho=-2.2511, sufficiency_raw=-6.931819, Fid-=0.955058, objective_value=-2.251052
+    Status: optimal, Edges: 6
+    D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
+    rho_optimal=-1.7729, sufficiency_raw=-5.459289, Fid-=0.951795
+    MIPGap=0.000000, BestBd=-1.772860, Incumbent=-1.772860
+    RootLP=-1.243729, RootLPTime=0.1678s, RootLPSource=mipnode_callback, B&BNodes=663
+    CallbackTime=0.0174s, CallbackCalls=5067, CutsMIPNODE=17, CutsMIPSOLLazy=0, AndersonCutsAdded=17, ConnectivityLazyCutsAdded=0
+    Time: 3.51s
+    Counterexample: YES, status=counterexample_found, OPT Fid-=0.951795, GT Fid-=0.955058, advantage=0.003263
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidminus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/explanations/oracle_seed2_row000019.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidminus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/ground_truth/gt_seed2_row000019.png

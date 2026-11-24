@@ -1,0 +1,28 @@
+# Terminal log for Version5 oracle row 26
+
+[row 26] Tree-Cycles seed=4 node=661 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=1.039394
+    candidate_edges=12, gt_edges=6, context_edges=6, connectivity=none, edge_budget_mode=eq
+    Solver backend: enumeration
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=False
+    Enumeration: subgraphs=187, signatures=45, pruned=142
+    Enumeration cache: status=hit, file=Version5/standard_enumeration_cache/Tree-Cycles/node_sufficiency/node-000661_k6_mode-eq_conn-none_e186df1ee52c89d3155f3b14.json
+    Enumeration probability-fidelity score range: min=-0.738733, max=0.261264
+    GT probability-fidelity rank: 1/46 (ties=2, direction=descending, scope=instance_feasible_exact_rooted_colored_component_representatives), objective=0.261264, rank_max=1, rank_min=45
+    GT baseline: rho=12.2058, sufficiency_raw=12.686644, Fid-=-0.261264, objective_value=0.261264
+    Status: optimal, Edges: 6
+    D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500
+    rho_optimal=12.2058, sufficiency_raw=12.686644, Fid-=-0.261264
+    MIPGap=0.000000, BestBd=N/A, Incumbent=N/A
+    RootLP=N/A, RootLPTime=N/A, RootLPSource=N/A, B&BNodes=0
+    CallbackTime=N/A, CallbackCalls=N/A, CutsMIPNODE=N/A, CutsMIPSOLLazy=N/A, AndersonCutsAdded=N/A, ConnectivityLazyCutsAdded=N/A
+    Time: 0.04s
+    Counterexample: NO, status=exact_tie, OPT Fid-=-0.261264, GT Fid-=-0.261264, advantage=-0.000000
+    Enum max metrics: size=6, D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500
+    Enum min metrics: size=6, D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500
+    GT figure: Version5/standard_fidelity_enumerations/Tree-Cycles/20261115_125458_formal_enum_Fidminus_gin_3L80H_seed1to5_all_obj-max_sufficiency_gtsize-enumeration/seed4/figs/ground_truth/gt_seed4_row000026.png
+    Enum max edges: Version5/standard_fidelity_enumerations/Tree-Cycles/20261115_125458_formal_enum_Fidminus_gin_3L80H_seed1to5_all_obj-max_sufficiency_gtsize-enumeration/seed4/edges/explanations_max/oracle_seed4_row000026.csv
+    Enum min edges: Version5/standard_fidelity_enumerations/Tree-Cycles/20261115_125458_formal_enum_Fidminus_gin_3L80H_seed1to5_all_obj-max_sufficiency_gtsize-enumeration/seed4/edges/explanations_min/oracle_seed4_row000026.csv
+    Enum extrema CSV: Version5/standard_fidelity_enumerations/Tree-Cycles/20261115_125458_formal_enum_Fidminus_gin_3L80H_seed1to5_all_obj-max_sufficiency_gtsize-enumeration/seed4/edges/enumeration_extrema/extrema_seed4_row000026.csv
+    Enum max figure: Version5/standard_fidelity_enumerations/Tree-Cycles/20261115_125458_formal_enum_Fidminus_gin_3L80H_seed1to5_all_obj-max_sufficiency_gtsize-enumeration/seed4/figs/explanations_max/oracle_seed4_row000026.png
+    Enum min figure: Version5/standard_fidelity_enumerations/Tree-Cycles/20261115_125458_formal_enum_Fidminus_gin_3L80H_seed1to5_all_obj-max_sufficiency_gtsize-enumeration/seed4/figs/explanations_min/oracle_seed4_row000026.png
+    Padding: policy=random_node_disjoint, status=not_needed, needed=0, added=0, candidates=0, seed=None

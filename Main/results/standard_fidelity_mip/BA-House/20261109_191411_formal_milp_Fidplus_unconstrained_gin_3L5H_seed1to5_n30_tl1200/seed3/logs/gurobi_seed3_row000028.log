@@ -1,0 +1,89 @@
+
+Gurobi 13.0.0 (linux64) logging started Mon Nov  9 19:21:58 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/logs/gurobi_seed3_row000028.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+
+Optimize a model with 2567 rows, 1383 columns and 8316 nonzeros (Min)
+Model fingerprint: 0xf053e7b5
+Model has 1 linear objective coefficients
+Variable types: 1233 continuous, 150 integer (150 binary)
+Coefficient statistics:
+  Matrix range     [2e-03, 7e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [5e-03, 8e+00]
+  RHS range        [6e-03, 1e+01]
+Presolve removed 870 rows and 570 columns
+Presolve time: 0.10s
+Presolved: 1697 rows, 813 columns, 5458 nonzeros
+Variable types: 703 continuous, 110 integer (110 binary)
+
+Root relaxation: objective -5.419365e+00, 1127 iterations, 0.07 seconds (0.05 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   -5.41937    0   30          -   -5.41937      -     -    0s
+H    0     0                       1.7490421   -5.41937   410%     -    0s
+     0     0   -4.64236    0   22    1.74904   -4.64236   365%     -    0s
+H    0     0                       0.6167735   -4.61915   849%     -    0s
+     0     0   -4.21273    0   17    0.61677   -4.21273   783%     -    0s
+     0     0   -4.21150    0   18    0.61677   -4.21150   783%     -    0s
+     0     0   -4.03593    0   26    0.61677   -4.03593   754%     -    0s
+     0     0   -4.02865    0   26    0.61677   -4.02865   753%     -    0s
+     0     0   -4.02865    0   26    0.61677   -4.02865   753%     -    0s
+     0     0   -3.75870    0   23    0.61677   -3.75870   709%     -    0s
+     0     0   -3.68350    0   21    0.61677   -3.68350   697%     -    0s
+     0     0   -3.68350    0   24    0.61677   -3.68350   697%     -    0s
+     0     0   -3.68350    0   26    0.61677   -3.68350   697%     -    0s
+     0     0   -3.67788    0   25    0.61677   -3.67788   696%     -    0s
+     0     0   -3.67553    0   26    0.61677   -3.67553   696%     -    0s
+     0     0   -3.66797    0   23    0.61677   -3.66797   695%     -    0s
+     0     0   -3.66779    0   26    0.61677   -3.66779   695%     -    0s
+     0     0   -3.66556    0   24    0.61677   -3.66556   694%     -    0s
+     0     0   -3.66454    0   24    0.61677   -3.66454   694%     -    0s
+     0     0   -3.66454    0   24    0.61677   -3.66454   694%     -    0s
+     0     0   -3.66454    0   22    0.61677   -3.66454   694%     -    0s
+     0     0   -3.66454    0   22    0.61677   -3.66454   694%     -    1s
+     0     0   -3.66454    0   22    0.61677   -3.66454   694%     -    1s
+     0     2   -3.61016    0   20    0.61677   -3.61016   685%     -    1s
+*   16     7              11       0.4612042   -3.27720   811%  97.6    1s
+
+Cutting planes:
+  Learned: 6
+  Gomory: 4
+  Cover: 1
+  Implied bound: 20
+  MIR: 24
+  Flow cover: 12
+  RLT: 16
+  Relax-and-lift: 28
+
+Explored 28 nodes (5146 simplex iterations) in 1.30 seconds (0.67 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 3: 0.461204 0.616773 1.74904 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.612041732992e-01, best bound 4.612041732992e-01, gap 0.0000%
+
+User-callback calls 1441, time in user-callback 0.01 sec

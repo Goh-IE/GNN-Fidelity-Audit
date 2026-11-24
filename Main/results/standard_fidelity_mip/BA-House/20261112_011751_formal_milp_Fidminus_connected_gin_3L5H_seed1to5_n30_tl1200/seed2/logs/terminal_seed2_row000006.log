@@ -1,0 +1,35 @@
+# Terminal log for Version5 oracle row 6
+
+[row 6] BA-House seed=2 node=348 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=1.288375
+    candidate_edges=30, gt_edges=6, context_edges=24, connectivity=cut, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Original full-graph reference: class=1, margin=1.2884
+[MIPExplainer] Extracted 3-hop subgraph: 22 nodes, 30 edges
+[MIPExplainer] Explaining node 348 (working: 20)
+[MIPExplainer] Working graph: 22 nodes, 30 edges
+[MIP] Working-graph full prediction: class=1, margin=1.2884
+[MIP] Reference prediction (original full graph): class=1, margin=1.2884
+[MIP] Graph: 22 nodes, 30 edges
+[MIP] Top-κ tightening enabled, cap_mode=global
+[MIP] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 6
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut] added nodecnt=0 tag=relu3_20_2 violation=1.717548e-02 y=8.868993e-01 rhs=8.697238e-01
+[AndersonCut] summary round=1 nodecnt=0 cuts_added=1
+[MIPExplainer] Build time: 0.07s, Opt time: 3.02s
+[MIPExplainer] Status: optimal, Edges: 6
+    GT baseline: rho=1.0346, sufficiency_raw=1.332902, Fid-=-0.007448, objective_value=1.034561
+    Status: optimal, Edges: 6
+    D=0.833, H=0.000, Precision=0.833, Recall=0.833, F1=0.833
+    rho_optimal=1.0627, sufficiency_raw=1.369175, Fid-=-0.013375
+    MIPGap=0.000000, BestBd=1.062714, Incumbent=1.062714
+    RootLP=1.193878, RootLPTime=0.2443s, RootLPSource=mipnode_callback, B&BNodes=2
+    CallbackTime=0.0130s, CallbackCalls=1706, CutsMIPNODE=1, CutsMIPSOLLazy=0, AndersonCutsAdded=1, ConnectivityLazyCutsAdded=0
+    Time: 3.12s
+    Counterexample: YES, status=counterexample_found, OPT Fid-=-0.013375, GT Fid-=-0.007448, advantage=0.005926
+    Figure: Version5/standard_fidelity_experiments/BA-House/20261112_011751_formal_milp_Fidminus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/explanations/oracle_seed2_row000006.png
+    GT figure: Version5/standard_fidelity_experiments/BA-House/20261112_011751_formal_milp_Fidminus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/ground_truth/gt_seed2_row000006.png
+    Padding: policy=random_node_disjoint, status=not_needed, needed=0, added=0, candidates=0, seed=None

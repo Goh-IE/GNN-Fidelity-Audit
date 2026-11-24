@@ -1,0 +1,58 @@
+
+Gurobi 13.0.0 (linux64) logging started Mon Nov  9 19:19:40 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed4/logs/gurobi_seed4_row000011.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+
+Optimize a model with 1064 rows, 576 columns and 3502 nonzeros (Max)
+Model fingerprint: 0x338291b8
+Model has 1 linear objective coefficients
+Variable types: 533 continuous, 43 integer (43 binary)
+Coefficient statistics:
+  Matrix range     [1e-03, 7e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [2e-03, 1e+01]
+  RHS range        [2e-03, 7e+00]
+Presolve removed 771 rows and 439 columns
+Presolve time: 0.03s
+Presolved: 293 rows, 137 columns, 1123 nonzeros
+Variable types: 128 continuous, 9 integer (9 binary)
+Found heuristic solution: objective 0.9817064
+Found heuristic solution: objective 0.9817079
+Found heuristic solution: objective 0.9991900
+
+Root relaxation: interrupted, 106 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0          -    0         0.99919    0.99919  0.00%     -    0s
+
+Explored 1 nodes (106 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 3: 0.99919 0.981708 0.981706 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.991900461150e-01, best bound 9.991932908785e-01, gap 0.0003%
+
+User-callback calls 1277, time in user-callback 0.00 sec

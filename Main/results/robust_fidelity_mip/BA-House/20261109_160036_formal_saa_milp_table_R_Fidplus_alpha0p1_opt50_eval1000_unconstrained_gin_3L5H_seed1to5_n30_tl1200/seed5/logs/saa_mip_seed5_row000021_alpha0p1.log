@@ -1,0 +1,74 @@
+
+Gurobi 13.0.0 (linux64) logging started Mon Nov  9 17:36:07 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/robust_fidelity_experiments/BA-House/20261109_160036_formal_saa_milp_table_R_Fidplus_alpha0p1_opt50_eval1000_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed5/logs/saa_mip_seed5_row000021_alpha0p1.log"
+Set parameter Seed to value 773698297
+Set parameter TimeLimit to value 1200
+Set parameter Threads to value 1
+Set parameter Method to value 1
+Set parameter NumericFocus to value 3
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter MIPGap to value 0
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+MIPGap  0
+Method  1
+Symmetry  2
+NumericFocus  3
+Seed  773698297
+Threads  1
+
+Optimize a model with 1029 rows, 4791536 columns and 31636616 nonzeros (Min)
+Model fingerprint: 0x3cbb34fa
+Model has 4790983 linear objective coefficients
+Variable types: 4790983 continuous, 553 integer (553 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-02, 1e-02]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 6e+00]
+Found heuristic solution: objective 0.5592267
+Presolve removed 0 rows and 363 columns (presolve time = 5s)...
+Presolve removed 0 rows and 363 columns (presolve time = 10s)...
+Presolve removed 0 rows and 363 columns (presolve time = 17s)...
+Presolve removed 0 rows and 363 columns (presolve time = 20s)...
+Presolve removed 0 rows and 363 columns (presolve time = 26s)...
+Presolve removed 0 rows and 363 columns
+Presolve time: 26.72s
+Presolved: 1029 rows, 4791173 columns, 30481290 nonzeros
+Variable types: 4790983 continuous, 190 integer (189 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   5.000000e+01   0.000000e+00     39s
+
+Starting sifting (using dual simplex for sub-problems)...
+
+    Iter     Pivots    Primal Obj      Dual Obj        Time
+       0          0     infinity      0.0000000e+00     39s
+       1        188   5.5922669e-01   5.5922616e-01     39s
+
+Sifting complete
+
+
+Root relaxation: cutoff, 295 iterations, 2.73 seconds (2.39 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0     cutoff    0         0.55923    0.55923  0.00%     -   39s
+
+Explored 1 nodes (295 simplex iterations) in 40.10 seconds (50.20 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 1: 0.559227 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 5.592266917229e-01, best bound 5.592266917229e-01, gap 0.0000%

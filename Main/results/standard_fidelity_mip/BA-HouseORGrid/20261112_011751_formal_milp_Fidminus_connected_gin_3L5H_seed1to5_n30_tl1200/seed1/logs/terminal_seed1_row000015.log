@@ -1,0 +1,55 @@
+# Terminal log for Version5 oracle row 15
+
+[row 15] BA-HouseORGrid seed=1 graph=9037 stage=gt_size K=12 multiplier=None objective=max_sufficiency pred=1 label=1 margin=10.523688
+    candidate_edges=32, gt_edges=12, context_edges=20, connectivity=cut, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 29 nodes, 32 edges
+[MIP-Graph] Full graph: class=1, margin=10.5237
+[MIP-Graph] Graph: 29 nodes, 32 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 7]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 12
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[ConnectivityCut-Graph] added component_size=6 representative=20
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_5_2 violation=1.191286e-01 y=3.157346e-01 rhs=1.966060e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_2_2 violation=9.943212e-02 y=2.560547e+00 rhs=2.461115e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_2_3 violation=2.286316e-01 y=2.803193e+00 rhs=2.574562e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_5_2 violation=3.593699e-02 y=9.512361e-01 rhs=9.152991e-01
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_5_3 violation=2.682038e-01 y=1.281039e+00 rhs=1.012836e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_10_3 violation=6.680331e-03 y=3.627432e-02 rhs=2.959399e-02
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_11_3 violation=1.323397e-01 y=1.647508e+00 rhs=1.515168e+00
+[AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_17_3 violation=7.426651e-03 y=4.032685e-02 rhs=3.290020e-02
+[AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=8
+[ConnectivityCut-Graph] added component_size=2 representative=2
+[ConnectivityCut-Graph] added component_size=8 representative=21
+[ConnectivityCut-Graph] added component_size=3 representative=2
+[ConnectivityCut-Graph] added component_size=8 representative=20
+[ConnectivityCut-Graph] added component_size=3 representative=1
+[ConnectivityCut-Graph] added component_size=11 representative=0
+[ConnectivityCut-Graph] added component_size=3 representative=1
+[ConnectivityCut-Graph] added component_size=2 representative=2
+[ConnectivityCut-Graph] added component_size=9 representative=20
+[ConnectivityCut-Graph] added component_size=3 representative=0
+[ConnectivityCut-Graph] added component_size=11 representative=0
+[ConnectivityCut-Graph] added component_size=11 representative=0
+[ConnectivityCut-Graph] added component_size=11 representative=0
+[ConnectivityCut-Graph] added component_size=11 representative=0
+[ConnectivityCut-Graph] added component_size=11 representative=0
+[ConnectivityCut-Graph] added component_size=11 representative=0
+[MIPExplainer] Build time: 0.08s, Opt time: 477.46s
+[MIPExplainer] Status: optimal, Edges: 12
+    GT baseline: rho=-2.0859, sufficiency_raw=-21.951206, Fid-=0.999973, objective_value=-2.085885
+    Status: optimal, Edges: 12
+    D=0.750, H=0.000, Precision=0.750, Recall=0.750, F1=0.750
+    rho_optimal=-2.1068, sufficiency_raw=-22.171259, Fid-=0.999973
+    MIPGap=0.000000, BestBd=-2.106795, Incumbent=-2.106795
+    RootLP=1.833042, RootLPTime=0.4379s, RootLPSource=mipnode_callback, B&BNodes=76096
+    CallbackTime=1.5417s, CallbackCalls=458593, CutsMIPNODE=8, CutsMIPSOLLazy=17, AndersonCutsAdded=8, ConnectivityLazyCutsAdded=17
+    Time: 446.80s
+    Counterexample: NO, status=exact_tie, OPT Fid-=0.999973, GT Fid-=0.999973, advantage=-0.000000
+    Figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidminus_connected_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/explanations/oracle_seed1_row000015.png
+    GT figure: Version5/standard_fidelity_experiments/BA-HouseORGrid/20261112_011751_formal_milp_Fidminus_connected_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/ground_truth/gt_seed1_row000015.png

@@ -1,0 +1,37 @@
+# Terminal log for Version5 oracle row 14
+
+[row 14] BA-House seed=3 node=461 stage=gt_size K=6 multiplier=None objective=max_necessity pred=1 label=1 margin=0.055045
+    candidate_edges=17, gt_edges=6, context_edges=11, connectivity=none, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    node_necessity_milp=kept_edge_budget=11 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Original full-graph reference: class=1, margin=0.0550
+[MIPExplainer] Extracted 3-hop subgraph: 14 nodes, 17 edges
+[MIPExplainer] Explaining node 461 (working: 10)
+[MIPExplainer] Working graph: 14 nodes, 17 edges
+[MIP] Working-graph full prediction: class=1, margin=0.0550
+[MIP] Reference prediction (original full graph): class=1, margin=0.0550
+[MIP] Graph: 14 nodes, 17 edges
+[MIP] Top-κ tightening enabled, cap_mode=global
+[MIP] kappa range: [1, 9]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 11
+[MIPExplainer] Enforcing exact removal budget: #removed_edges == 6
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 11
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[MIPExplainer] Build time: 0.04s, Opt time: 1.32s
+[MIPExplainer] Status: optimal, Edges: 11
+    GT baseline: removal_rho=4.5072, kept_margin_raw=0.248095, necessity_raw=-0.193050, Fid+=-0.047950, objective_value=-3.507157
+    Status: optimal, Edges: 6
+    D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500
+    removal_rho=0.4612, kept_margin_raw=0.025387, necessity_raw=0.029658, Fid+=0.007411, objective_value=0.538796
+    removal_rooted_connected=0
+    MIPGap=0.000000, BestBd=0.461204, Incumbent=0.461204
+    RootLP=-5.417451, RootLPTime=0.1688s, RootLPSource=mipnode_callback, B&BNodes=29
+    CallbackTime=0.0079s, CallbackCalls=1794, CutsMIPNODE=0, CutsMIPSOLLazy=0, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=0
+    Time: 1.38s
+    Counterexample: YES, status=counterexample_found, OPT Fid+=0.007411, GT Fid+=-0.047950, advantage=0.055361
+    Figure: Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/explanations/oracle_seed3_row000014.png
+    GT figure: Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/ground_truth/gt_seed3_row000014.png
+    Padding: policy=random_node_disjoint, status=not_needed, needed=0, added=0, candidates=0, seed=None

@@ -1,0 +1,88 @@
+
+Gurobi 13.0.0 (linux64) logging started Mon Nov  9 19:24:53 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed5/logs/gurobi_seed5_row000003.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+
+Optimize a model with 8518 rows, 4085 columns and 27117 nonzeros (Min)
+Model fingerprint: 0x2a6aff90
+Model has 1 linear objective coefficients
+Variable types: 3603 continuous, 482 integer (482 binary)
+Coefficient statistics:
+  Matrix range     [2e-03, 7e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [7e-03, 9e+01]
+  RHS range        [7e-03, 7e+01]
+Presolve removed 1985 rows and 1330 columns
+Presolve time: 0.21s
+Presolved: 6533 rows, 2755 columns, 20436 nonzeros
+Variable types: 2397 continuous, 358 integer (358 binary)
+
+Root relaxation: objective -3.897557e-02, 3255 iterations, 0.16 seconds (0.17 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   -0.03898    0   12          -   -0.03898      -     -    0s
+H    0     0                       0.9102429   -0.03898   104%     -    0s
+     0     0    0.25035    0   29    0.91024    0.25035  72.5%     -    0s
+     0     0    0.26339    0   25    0.91024    0.26339  71.1%     -    1s
+     0     0    0.26642    0   22    0.91024    0.26642  70.7%     -    1s
+     0     0    0.27995    0   27    0.91024    0.27995  69.2%     -    1s
+     0     0    0.28095    0   28    0.91024    0.28095  69.1%     -    1s
+     0     0    0.28200    0   30    0.91024    0.28200  69.0%     -    1s
+     0     0    0.28355    0   26    0.91024    0.28355  68.8%     -    1s
+     0     0    0.28392    0   36    0.91024    0.28392  68.8%     -    1s
+     0     0    0.28418    0   35    0.91024    0.28418  68.8%     -    1s
+     0     0    0.28427    0   30    0.91024    0.28427  68.8%     -    1s
+     0     0    0.28427    0   30    0.91024    0.28427  68.8%     -    1s
+     0     0    0.28428    0   30    0.91024    0.28428  68.8%     -    1s
+     0     0    0.28429    0   28    0.91024    0.28429  68.8%     -    1s
+     0     0    0.28429    0   28    0.91024    0.28429  68.8%     -    1s
+     0     0    0.28429    0   29    0.91024    0.28429  68.8%     -    1s
+     0     0    0.28429    0   35    0.91024    0.28429  68.8%     -    1s
+     0     0    0.28430    0   29    0.91024    0.28430  68.8%     -    1s
+     0     0    0.28430    0   29    0.91024    0.28430  68.8%     -    4s
+     0     0    0.28430    0   26    0.91024    0.28430  68.8%     -    5s
+     0     2    0.28430    0   26    0.91024    0.28430  68.8%     -    5s
+*   34    10              10       0.8639400    0.71874  16.8%   237    6s
+
+Cutting planes:
+  Learned: 4
+  Gomory: 4
+  Cover: 2
+  Implied bound: 43
+  MIR: 38
+  Flow cover: 127
+  Inf proof: 1
+  RLT: 62
+  Relax-and-lift: 13
+
+Explored 54 nodes (15171 simplex iterations) in 6.39 seconds (3.40 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 2: 0.86394 0.910243 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.639399666088e-01, best bound 8.639399666088e-01, gap 0.0000%
+
+User-callback calls 2435, time in user-callback 0.05 sec

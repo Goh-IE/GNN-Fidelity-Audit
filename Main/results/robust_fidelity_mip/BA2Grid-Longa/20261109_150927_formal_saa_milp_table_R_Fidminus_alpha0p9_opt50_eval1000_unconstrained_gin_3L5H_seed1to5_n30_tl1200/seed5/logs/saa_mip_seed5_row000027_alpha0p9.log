@@ -1,0 +1,63 @@
+
+Gurobi 13.0.0 (linux64) logging started Mon Nov  9 15:14:04 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/robust_fidelity_experiments/BA2Grid-Longa/20261109_150927_formal_saa_milp_table_R_Fidminus_alpha0p9_opt50_eval1000_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed5/logs/saa_mip_seed5_row000027_alpha0p9.log"
+Set parameter Seed to value 577300076
+Set parameter TimeLimit to value 1200
+Set parameter Threads to value 1
+Set parameter Method to value 1
+Set parameter NumericFocus to value 3
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter MIPGap to value 0
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+MIPGap  0
+Method  1
+Symmetry  2
+NumericFocus  3
+Seed  577300076
+Threads  1
+
+Optimize a model with 172 rows, 772 columns and 3006 nonzeros (Max)
+Model fingerprint: 0x5f6f2a86
+Model has 747 linear objective coefficients
+Variable types: 747 continuous, 25 integer (25 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-09, 2e-02]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+01]
+Presolve removed 31 rows and 65 columns
+Presolve time: 0.00s
+Presolved: 141 rows, 707 columns, 2698 nonzeros
+Variable types: 682 continuous, 25 integer (25 binary)
+Found heuristic solution: objective 0.8180401
+Found heuristic solution: objective 0.8246319
+
+Root relaxation: objective 9.082984e-01, 255 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.90830    0    4    0.82463    0.90830  10.1%     -    0s
+H    0     0                       0.8622543    0.90558  5.02%     -    0s
+H    0     0                       0.8964624    0.90558  1.02%     -    0s
+H    0     0                       0.9036271    0.90558  0.22%     -    0s
+H    0     0                       0.9045845    0.90558  0.11%     -    0s
+H    0     0                       0.9050397    0.90558  0.06%     -    0s
+     0     0     cutoff    0         0.90504    0.90504  0.00%     -    0s
+
+Explored 1 nodes (301 simplex iterations) in 0.04 seconds (0.02 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 7: 0.90504 0.904584 0.903627 ... 0.81804
+No other solutions better than 0.90504
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 9.050397407962e-01, best bound 9.050397407962e-01, gap 0.0000%

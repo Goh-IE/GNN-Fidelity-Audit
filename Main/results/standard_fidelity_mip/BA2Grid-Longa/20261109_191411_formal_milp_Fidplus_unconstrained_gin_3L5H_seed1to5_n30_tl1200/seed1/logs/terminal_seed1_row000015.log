@@ -1,0 +1,31 @@
+# Terminal log for Version5 oracle row 15
+
+[row 15] BA2Grid-Longa seed=1 graph=1839 stage=gt_size K=12 multiplier=None objective=max_necessity pred=1 label=1 margin=5.188937
+    candidate_edges=31, gt_edges=12, context_edges=19, connectivity=none, edge_budget_mode=eq
+    necessity_mode=remove selected edges and score the complement graph
+    graph_necessity_milp=kept_edge_budget=19 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 28 nodes, 31 edges
+[MIP-Graph] Full graph: class=1, margin=5.1889
+[MIP-Graph] Graph: 28 nodes, 31 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 7]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 19
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 19
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[MIPExplainer] Build time: 0.15s, Opt time: 991.14s
+[MIPExplainer] Status: optimal, Edges: 19
+    GT baseline: removal_rho=-2.8048, kept_margin_raw=-14.554158, necessity_raw=19.743095, Fid+=0.994453, objective_value=3.804844
+    Status: optimal, Edges: 12
+    D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500
+    removal_rho=-4.5060, kept_margin_raw=-23.381335, necessity_raw=28.570272, Fid+=0.994453, objective_value=5.505997
+    MIPGap=0.000000, BestBd=-4.505997, Incumbent=-4.505997
+    RootLP=-10.538715, RootLPTime=0.6345s, RootLPSource=mipnode_callback, B&BNodes=54029
+    CallbackTime=2.5275s, CallbackCalls=659996, CutsMIPNODE=0, CutsMIPSOLLazy=0, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=0
+    Time: 959.43s
+    Counterexample: NO, status=exact_tie, OPT Fid+=0.994453, GT Fid+=0.994453, advantage=0.000000
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/explanations/oracle_seed1_row000015.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidplus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed1/figs/ground_truth/gt_seed1_row000015.png

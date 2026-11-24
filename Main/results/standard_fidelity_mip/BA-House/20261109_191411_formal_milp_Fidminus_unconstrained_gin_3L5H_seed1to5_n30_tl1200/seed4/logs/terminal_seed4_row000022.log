@@ -1,0 +1,33 @@
+# Terminal log for Version5 oracle row 22
+
+[row 22] BA-House seed=4 node=532 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=1.577173
+    candidate_edges=8, gt_edges=6, context_edges=2, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Original full-graph reference: class=1, margin=1.5772
+[MIPExplainer] Extracted 3-hop subgraph: 7 nodes, 8 edges
+[MIPExplainer] Explaining node 532 (working: 4)
+[MIPExplainer] Working graph: 7 nodes, 8 edges
+[MIP] Working-graph full prediction: class=1, margin=1.5772
+[MIP] Reference prediction (original full graph): class=1, margin=1.5772
+[MIP] Graph: 7 nodes, 8 edges
+[MIP] Top-κ tightening enabled, cap_mode=global
+[MIP] kappa range: [1, 4]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 6
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[MIPExplainer] Build time: 0.05s, Opt time: 0.18s
+[MIPExplainer] Status: optimal, Edges: 6
+    GT baseline: rho=0.9992, sufficiency_raw=1.575895, Fid-=0.000181, objective_value=0.999190
+    Status: optimal, Edges: 6
+    D=0.833, H=0.000, Precision=0.833, Recall=0.833, F1=0.833
+    rho_optimal=0.9989, sufficiency_raw=1.575470, Fid-=0.000242
+    MIPGap=0.000000, BestBd=0.998920, Incumbent=0.998920
+    RootLP=0.999606, RootLPTime=0.1763s, RootLPSource=mipnode_callback, B&BNodes=1
+    CallbackTime=0.0046s, CallbackCalls=936, CutsMIPNODE=0, CutsMIPSOLLazy=0, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=0
+    Time: 0.27s
+    Counterexample: NO, status=gt_better, OPT Fid-=0.000242, GT Fid-=0.000181, advantage=-0.000060
+    Figure: Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed4/figs/explanations/oracle_seed4_row000022.png
+    GT figure: Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed4/figs/ground_truth/gt_seed4_row000022.png
+    Padding: policy=random_node_disjoint, status=not_needed, needed=0, added=0, candidates=0, seed=None

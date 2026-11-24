@@ -1,0 +1,128 @@
+
+Gurobi 13.0.0 (linux64) logging started Wed Nov 11 18:11:38 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/robust_fidelity_experiments/BA-House/20261111_131758_formal_saa_milp_table_R_Fidminus_alpha0p9_opt50_eval1000_connected_gin_3L5H_seed1to5_n30_tl1200/seed4/logs/saa_mip_seed4_row000021_alpha0p9.log"
+Set parameter Seed to value 1789605597
+Set parameter TimeLimit to value 1200
+Set parameter Threads to value 1
+Set parameter Method to value 1
+Set parameter NumericFocus to value 3
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter MIPGap to value 0
+Set parameter LazyConstraints to value 1
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+MIPGap  0
+Method  1
+Symmetry  2
+NumericFocus  3
+Seed  1789605597
+Threads  1
+LazyConstraints  1
+
+Optimize a model with 2296 rows, 4888611 columns and 32276261 nonzeros (Max)
+Model fingerprint: 0x055a2141
+Model has 4887912 linear objective coefficients
+Variable types: 4887912 continuous, 699 integer (699 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-02, 2e-02]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 6e+00]
+Presolve removed 13 rows and 5 columns (presolve time = 5s)...
+Presolve removed 13 rows and 5 columns (presolve time = 11s)...
+Presolve removed 13 rows and 5 columns (presolve time = 15s)...
+Presolve removed 13 rows and 5 columns
+Presolve time: 19.71s
+Presolved: 2283 rows, 4888606 columns, 31095328 nonzeros
+Variable types: 4887912 continuous, 694 integer (694 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.1565702e+04   2.624008e+07   0.000000e+00     37s
+
+Starting sifting (using dual simplex for sub-problems)...
+
+    Iter     Pivots    Primal Obj      Dual Obj        Time
+       0          0     infinity     -7.1565785e+04     38s
+       1       1216   6.5212554e+12  -7.1438960e+04     39s
+       2       2863   6.4914831e+12  -7.1000887e+04     40s
+       3       4677   6.4745637e+12  -6.9916168e+04     41s
+       4       6604   6.4666071e+12  -6.1034170e+04     42s
+       5       8624   6.4626071e+12  -5.4503910e+04     43s
+       6      10627   6.4606033e+12  -9.5273751e+03     44s
+       7      12423   6.4110083e+12  -9.3925201e+03     44s
+       8      14211   6.3523833e+12  -9.3096211e+03     45s
+       9      16029   6.3065018e+12  -8.8344289e+03     46s
+      10      17856   6.2882738e+12  -8.7301232e+03     46s
+      11      19673   6.2659491e+12  -8.6454861e+03     47s
+      12      21501   6.2355428e+12  -8.5630713e+03     47s
+      13      23342   6.1976798e+12  -8.4832262e+03     47s
+      14      25168   6.1524476e+12  -8.4061105e+03     47s
+      15      27015   6.1001663e+12  -8.3311019e+03     48s
+      16      28883   6.0448296e+12  -8.2582178e+03     48s
+      17      30723   5.9869396e+12  -8.1870329e+03     49s
+      18      32595   5.9282971e+12  -8.1156156e+03     49s
+      19      34520   5.8761471e+12  -8.0467955e+03     50s
+      20      36344   5.8194033e+12  -7.9623471e+03     51s
+      21      38196   5.7562056e+12  -7.8416088e+03     52s
+      22      40046   5.6865083e+12  -7.6605215e+03     53s
+      23      41945   5.6234138e+12  -7.2544366e+03     54s
+      24      43768   5.5248958e+12  -6.9686182e+03     55s
+      25      45601   5.4310503e+12  -6.7724708e+03     56s
+      26      47406   5.3386853e+12  -6.5572705e+03     57s
+      27      49364   5.2437741e+12  -6.1283170e+03     58s
+      28      51569   5.1199126e+12  -5.8549077e+03     60s
+      29      53813   5.0132256e+12  -5.7600778e+03     61s
+      30      56028   4.9169493e+12  -5.7042839e+03     62s
+      31      58382   4.8109776e+12  -5.6581287e+03     63s
+      32      60615   4.6935653e+12  -5.6167101e+03     63s
+      33      62880   4.5666751e+12  -5.5801109e+03     64s
+      34      65183   4.4318258e+12  -5.5481063e+03     65s
+      35      67519   4.2912336e+12  -5.5186969e+03     67s
+      36      69816   4.1539423e+12  -5.4901042e+03     68s
+      37      72293   4.0265898e+12  -5.4618217e+03     69s
+      38      74522   3.9094766e+12  -5.4331805e+03     70s
+      39      76819   3.8028051e+12  -5.4086633e+03     71s
+      40      79169   3.6879303e+12  -5.3761022e+03     73s
+      41      81410   3.5625086e+12  -5.3353709e+03     74s
+      42      83642   3.4417616e+12  -5.2844647e+03     76s
+      43      85810   3.3284351e+12  -5.2251892e+03     77s
+      44      87984   3.2178686e+12  -5.1584883e+03     79s
+      45      90035   3.1130624e+12  -5.0882883e+03     80s
+      46      91999   3.0069056e+12  -5.0088580e+03     81s
+      47      94046   2.9180274e+12  -4.3724199e+03     83s
+      48      96153   2.8062639e+12  -2.8942870e+03     84s
+      49      98086   2.6265819e+12  -2.7237890e+03     85s
+
+Sifting complete
+
+  100281    7.0215626e+28   3.480000e+32   2.808625e-01     87s
+  100974    8.8522488e-01   1.866667e+01   0.000000e+00     91s
+  101214    8.8881657e-01   0.000000e+00   0.000000e+00     94s
+
+Root relaxation: objective 8.888166e-01, 101214 iterations, 57.50 seconds (78.17 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.8888166    0.88882  0.00%     -   94s
+     0     0          -    0         0.88882    0.88882  0.00%     -   94s
+
+Explored 1 nodes (101214 simplex iterations) in 94.21 seconds (150.12 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 1: 0.888817 
+No other solutions better than 0.888817
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 8.888165712357e-01, best bound 8.888165712357e-01, gap 0.0000%
+
+User-callback calls 4884, time in user-callback 0.52 sec

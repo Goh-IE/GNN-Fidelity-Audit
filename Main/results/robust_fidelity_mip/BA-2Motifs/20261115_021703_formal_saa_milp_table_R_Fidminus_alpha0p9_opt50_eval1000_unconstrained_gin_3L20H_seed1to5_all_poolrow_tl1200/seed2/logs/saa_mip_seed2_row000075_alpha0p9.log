@@ -1,0 +1,57 @@
+
+Gurobi 13.0.0 (linux64) logging started Sun Nov 15 02:22:27 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/robust_fidelity_experiments/BA-2Motifs/20261115_021703_formal_saa_milp_table_R_Fidminus_alpha0p9_opt50_eval1000_unconstrained_gin_3L20H_seed1to5_all_poolrow_tl1200/seed2/logs/saa_mip_seed2_row000075_alpha0p9.log"
+Set parameter Seed to value 1567486219
+Set parameter TimeLimit to value 1200
+Set parameter Threads to value 1
+Set parameter Method to value 1
+Set parameter NumericFocus to value 3
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter MIPGap to value 0
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+MIPGap  0
+Method  1
+Symmetry  2
+NumericFocus  3
+Seed  1567486219
+Threads  1
+
+Optimize a model with 166 rows, 366 columns and 1056 nonzeros (Max)
+Model fingerprint: 0x5b046dd4
+Model has 341 linear objective coefficients
+Variable types: 341 continuous, 25 integer (25 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-02, 2e-02]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+00]
+Found heuristic solution: objective 0.9994223
+Presolve removed 29 rows and 74 columns
+Presolve time: 0.00s
+Presolved: 137 rows, 292 columns, 910 nonzeros
+Variable types: 267 continuous, 25 integer (25 binary)
+
+Root relaxation: objective 9.995060e-01, 45 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0       0.9995060    0.99951  0.00%     -    0s
+     0     0          -    0         0.99951    0.99951  0.00%     -    0s
+
+Explored 1 nodes (45 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 2: 0.999506 0.999422 
+No other solutions better than 0.999506
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 9.995059943199e-01, best bound 9.995059943199e-01, gap 0.0000%

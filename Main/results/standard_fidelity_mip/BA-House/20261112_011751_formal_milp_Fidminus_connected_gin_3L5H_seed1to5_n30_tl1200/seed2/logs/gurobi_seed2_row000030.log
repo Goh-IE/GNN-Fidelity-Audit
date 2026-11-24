@@ -1,0 +1,95 @@
+
+Gurobi 13.0.0 (linux64) logging started Thu Nov 12 01:21:02 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-House/20261112_011751_formal_milp_Fidminus_connected_gin_3L5H_seed1to5_n30_tl1200/seed2/logs/gurobi_seed2_row000030.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter LazyConstraints to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+LazyConstraints  1
+
+Optimize a model with 43214 rows, 17096 columns and 135428 nonzeros (Max)
+Model fingerprint: 0x91a86d32
+Model has 1 linear objective coefficients
+Variable types: 15368 continuous, 1728 integer (1728 binary)
+Coefficient statistics:
+  Matrix range     [2e-04, 1e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [3e-03, 1e+01]
+  RHS range        [6e-03, 1e+01]
+Presolve removed 4679 rows and 3160 columns
+Presolve time: 1.14s
+Presolved: 38535 rows, 13936 columns, 109709 nonzeros
+Variable types: 12350 continuous, 1586 integer (1586 binary)
+
+Root relaxation: objective 1.910967e+00, 13868 iterations, 1.00 seconds (0.58 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    1.91097    0   24          -    1.91097      -     -    2s
+H    0     0                       1.3240972    1.91097  44.3%     -    2s
+     0     0    1.75687    0   31    1.32410    1.75687  32.7%     -    3s
+     0     0    1.75687    0   31    1.32410    1.75687  32.7%     -    4s
+     0     0    1.71606    0   40    1.32410    1.71606  29.6%     -    4s
+     0     0    1.71433    0   33    1.32410    1.71433  29.5%     -    5s
+     0     0    1.71127    0   37    1.32410    1.71127  29.2%     -    6s
+     0     0    1.71083    0   35    1.32410    1.71083  29.2%     -    6s
+     0     0    1.70685    0   27    1.32410    1.70685  28.9%     -    6s
+     0     0    1.70632    0   37    1.32410    1.70632  28.9%     -    6s
+     0     0    1.70365    0   30    1.32410    1.70365  28.7%     -    6s
+     0     0    1.70305    0   33    1.32410    1.70305  28.6%     -    7s
+     0     0    1.70305    0   36    1.32410    1.70305  28.6%     -    7s
+     0     0    1.70305    0   39    1.32410    1.70305  28.6%     -    7s
+     0     0    1.70305    0   38    1.32410    1.70305  28.6%     -    7s
+     0     0    1.70305    0   49    1.32410    1.70305  28.6%     -    7s
+     0     0    1.70305    0   49    1.32410    1.70305  28.6%     -    7s
+     0     0    1.70303    0   48    1.32410    1.70303  28.6%     -    7s
+     0     0    1.70303    0   47    1.32410    1.70303  28.6%     -    7s
+     0     0    1.70303    0   49    1.32410    1.70303  28.6%     -    8s
+     0     0    1.70303    0   51    1.32410    1.70303  28.6%     -    8s
+     0     0    1.70283    0   38    1.32410    1.70283  28.6%     -   13s
+     0     0    1.70283    0   38    1.32410    1.70283  28.6%     -   13s
+     0     0    1.70283    0   38    1.32410    1.70283  28.6%     -   13s
+     0     2    1.70219    0   36    1.32410    1.70219  28.6%     -   16s
+   111    18    1.39666   11    2    1.32410    1.39668  5.48%  79.4   20s
+*  130     8               9       1.3240973    1.35545  2.37%  70.8   20s
+
+Cutting planes:
+  Learned: 1
+  Gomory: 3
+  Cover: 29
+  Implied bound: 182
+  MIR: 74
+  Flow cover: 117
+  GUB cover: 1
+  RLT: 60
+  Relax-and-lift: 133
+  BQP: 2
+
+Explored 139 nodes (28238 simplex iterations) in 20.70 seconds (11.27 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 1: 1.3241 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.324097269517e+00, best bound 1.324097269517e+00, gap 0.0000%
+
+User-callback calls 5487, time in user-callback 0.14 sec

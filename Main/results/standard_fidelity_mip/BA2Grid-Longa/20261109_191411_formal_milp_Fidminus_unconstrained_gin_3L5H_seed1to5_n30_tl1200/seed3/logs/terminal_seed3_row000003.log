@@ -1,0 +1,29 @@
+# Terminal log for Version5 oracle row 3
+
+[row 3] BA2Grid-Longa seed=3 graph=1806 stage=gt_size K=12 multiplier=None objective=max_sufficiency pred=1 label=1 margin=5.177243
+    candidate_edges=25, gt_edges=12, context_edges=13, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Explaining graph
+[MIPExplainer] Graph: 22 nodes, 25 edges
+[MIP-Graph] Full graph: class=1, margin=5.1772
+[MIP-Graph] Graph: 22 nodes, 25 edges, readout=sum
+[MIP-Graph] Top-κ tightening enabled, cap_mode=global
+[MIP-Graph] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 12
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[MIPExplainer] Build time: 0.06s, Opt time: 892.87s
+[MIPExplainer] Status: optimal, Edges: 12
+    GT baseline: rho=1.0265, sufficiency_raw=5.314567, Fid-=-0.000717, objective_value=1.026525
+    Status: optimal, Edges: 12
+    D=0.917, H=0.000, Precision=0.917, Recall=0.917, F1=0.917
+    rho_optimal=0.5554, sufficiency_raw=2.875192, Fid-=0.047782
+    MIPGap=0.000000, BestBd=0.555352, Incumbent=0.555352
+    RootLP=7.340819, RootLPTime=0.3518s, RootLPSource=mipnode_callback, B&BNodes=31248
+    CallbackTime=2.0891s, CallbackCalls=504359, CutsMIPNODE=0, CutsMIPSOLLazy=0, AndersonCutsAdded=0, ConnectivityLazyCutsAdded=0
+    Time: 861.33s
+    Counterexample: NO, status=gt_better, OPT Fid-=0.047782, GT Fid-=-0.000717, advantage=-0.048498
+    Figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/explanations/oracle_seed3_row000003.png
+    GT figure: Version5/standard_fidelity_experiments/BA2Grid-Longa/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed3/figs/ground_truth/gt_seed3_row000003.png

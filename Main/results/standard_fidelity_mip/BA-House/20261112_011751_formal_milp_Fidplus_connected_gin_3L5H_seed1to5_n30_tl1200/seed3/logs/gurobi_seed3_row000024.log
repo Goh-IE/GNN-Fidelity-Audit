@@ -1,0 +1,94 @@
+
+Gurobi 13.0.0 (linux64) logging started Thu Nov 12 04:08:26 2026
+
+Set parameter LogFile to value "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_experiments/BA-House/20261112_011751_formal_milp_Fidplus_connected_gin_3L5H_seed1to5_n30_tl1200/seed3/logs/gurobi_seed3_row000024.log"
+Set parameter Seed to value 0
+Set parameter TimeLimit to value 1200
+Set parameter PreCrush to value 1
+Set parameter LazyConstraints to value 1
+Set parameter TimeLimit to value 1200
+Set parameter Method to value 1
+Set parameter Threads to value 1
+Set parameter NoRelHeurWork to value 0
+Set parameter Symmetry to value 2
+Set parameter TimeLimit to value 1200
+Gurobi Optimizer version 13.0.0 build v13.0.0rc1 (linux64 - "Ubuntu 22.04.5 LTS")
+
+CPU model: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  1200
+Method  1
+Symmetry  2
+PreCrush  1
+Threads  1
+LazyConstraints  1
+
+Optimize a model with 2271 rows, 1206 columns and 7332 nonzeros (Min)
+Model fingerprint: 0x0348e718
+Model has 1 linear objective coefficients
+Variable types: 1063 continuous, 143 integer (143 binary)
+Coefficient statistics:
+  Matrix range     [2e-03, 6e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [6e-03, 6e+00]
+  RHS range        [6e-03, 8e+00]
+Presolve removed 708 rows and 467 columns
+Presolve time: 0.07s
+Presolved: 1563 rows, 739 columns, 5217 nonzeros
+Variable types: 637 continuous, 102 integer (102 binary)
+
+Root relaxation: objective -6.588330e-01, 1163 iterations, 0.05 seconds (0.05 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   -0.65883    0   20          -   -0.65883      -     -    0s
+     0     0   -0.17202    0   27          -   -0.17202      -     -    0s
+     0     0   -0.13844    0   27          -   -0.13844      -     -    0s
+     0     0    0.08132    0   21          -    0.08132      -     -    0s
+H    0     0                       1.3904113    0.08234  94.1%     -    0s
+     0     0    0.08234    0   23    1.39041    0.08234  94.1%     -    0s
+     0     0    0.08234    0   23    1.39041    0.08234  94.1%     -    0s
+     0     0    0.12573    0   35    1.39041    0.12573  91.0%     -    0s
+     0     0    0.12648    0   40    1.39041    0.12648  90.9%     -    0s
+     0     0    0.12655    0   40    1.39041    0.12655  90.9%     -    0s
+     0     0    0.16604    0   25    1.39041    0.16604  88.1%     -    0s
+     0     0    0.16887    0   23    1.39041    0.16887  87.9%     -    0s
+     0     0    0.17387    0   21    1.39041    0.17387  87.5%     -    0s
+     0     0    0.17393    0   26    1.39041    0.17393  87.5%     -    0s
+     0     0    0.17418    0   23    1.39041    0.17418  87.5%     -    0s
+     0     0    0.17567    0   26    1.39041    0.17567  87.4%     -    0s
+     0     0    0.17567    0   24    1.39041    0.17567  87.4%     -    0s
+     0     0    0.17567    0   25    1.39041    0.17567  87.4%     -    0s
+     0     0    0.17629    0   28    1.39041    0.17629  87.3%     -    0s
+     0     0    0.18076    0   17    1.39041    0.18076  87.0%     -    0s
+     0     0    0.18076    0   17    1.39041    0.18076  87.0%     -    0s
+     0     0    0.18076    0   14    1.39041    0.18076  87.0%     -    0s
+     0     2    0.18104    0   13    1.39041    0.18104  87.0%     -    0s
+H    5     1                       1.3904106    0.18104  87.0%   287    0s
+
+Cutting planes:
+  Learned: 11
+  Gomory: 7
+  Cover: 21
+  Implied bound: 204
+  Clique: 2
+  MIR: 31
+  StrongCG: 3
+  Flow cover: 13
+  GUB cover: 1
+  RLT: 15
+  Relax-and-lift: 28
+  Lazy constraints: 40
+
+Explored 196 nodes (11850 simplex iterations) in 1.21 seconds (0.96 work units)
+Thread count was 1 (of 12 available processors)
+
+Solution count 2: 1.39041 1.39041 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.390410622884e+00, best bound 1.390410622884e+00, gap 0.0000%
+
+User-callback calls 1701, time in user-callback 0.02 sec

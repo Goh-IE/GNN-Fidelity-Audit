@@ -1,0 +1,36 @@
+# Terminal log for Version5 oracle row 13
+
+[row 13] BA-House seed=2 node=454 stage=gt_size K=6 multiplier=None objective=max_sufficiency pred=1 label=1 margin=1.352428
+    candidate_edges=14, gt_edges=6, context_edges=8, connectivity=none, edge_budget_mode=eq
+    Solver backend: milp
+    GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
+[MIPExplainer] Original full-graph reference: class=1, margin=1.3524
+[MIPExplainer] Extracted 3-hop subgraph: 12 nodes, 14 edges
+[MIPExplainer] Explaining node 454 (working: 11)
+[MIPExplainer] Working graph: 12 nodes, 14 edges
+[MIP] Working-graph full prediction: class=1, margin=1.3524
+[MIP] Reference prediction (original full graph): class=1, margin=1.3524
+[MIP] Graph: 12 nodes, 14 edges
+[MIP] Top-κ tightening enabled, cap_mode=global
+[MIP] kappa range: [1, 6]
+[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[MIPExplainer] Enforcing exact edge budget: #edges == 6
+[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
+[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[AndersonCut] added nodecnt=0 tag=relu3_11_2 violation=1.539851e-02 y=8.916470e-01 rhs=8.762485e-01
+[AndersonCut] added nodecnt=0 tag=relu3_11_4 violation=1.999297e-02 y=8.010683e-01 rhs=7.810753e-01
+[AndersonCut] summary round=1 nodecnt=0 cuts_added=2
+[MIPExplainer] Build time: 0.04s, Opt time: 0.68s
+[MIPExplainer] Status: optimal, Edges: 6
+    GT baseline: rho=1.0012, sufficiency_raw=1.354063, Fid-=-0.000267, objective_value=1.001209
+    Status: optimal, Edges: 6
+    D=0.833, H=0.000, Precision=0.833, Recall=0.833, F1=0.833
+    rho_optimal=1.0224, sufficiency_raw=1.382694, Fid-=-0.004897
+    MIPGap=0.000000, BestBd=1.022379, Incumbent=1.022379
+    RootLP=1.174958, RootLPTime=0.1777s, RootLPSource=mipnode_callback, B&BNodes=7
+    CallbackTime=0.0072s, CallbackCalls=1482, CutsMIPNODE=2, CutsMIPSOLLazy=0, AndersonCutsAdded=2, ConnectivityLazyCutsAdded=0
+    Time: 0.75s
+    Counterexample: YES, status=counterexample_found, OPT Fid-=-0.004897, GT Fid-=-0.000267, advantage=0.004630
+    Figure: Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/explanations/oracle_seed2_row000013.png
+    GT figure: Version5/standard_fidelity_experiments/BA-House/20261109_191411_formal_milp_Fidminus_unconstrained_gin_3L5H_seed1to5_n30_tl1200/seed2/figs/ground_truth/gt_seed2_row000013.png
+    Padding: policy=random_node_disjoint, status=not_needed, needed=0, added=0, candidates=0, seed=None
