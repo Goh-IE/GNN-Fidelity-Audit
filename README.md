@@ -241,36 +241,11 @@ also list Grad-CAM, which the paper does not report.
 
 ## Notes on the saved files
 
-- Each run keeps its `config.json`, the per-seed `instance_fid.csv`, the
-  selected and reference edge masks, solver records and other provenance
-  records. Rendered figures and per-run notes are not included.
-- Paths inside the saved files follow the layout of the original workspace
-  (for example `Version5/standard_fidelity_enumerations/...`), with the run
-  folder names used here. The code in this repository maps these paths to the
-  current layout. Other tools need to do the same.
-- After the runs were produced, some names in the saved files were changed to
-  match the current code. No values changed. Four MILP options and their log
-  labels were renamed (`use_incident_cap_tightening`,
-  `use_gurobi_symmetry_detection`, `use_star_constraints` and
-  `use_connectivity_lower_bound`). The model, its checkpoint folder and the
-  solver files are now named GIN, `standard_milp.py` and `gin_milp.py`. Paths
-  use the run folder names above, while `run_name` keeps the original name.
-- The checkpoint files are unchanged. SHA-256 hashes recorded inside saved
-  files refer to the files as first written, so they no longer match the
-  renamed CSV headers, configs and logs. For the same reason,
-  `--reuse-successful-run-name` cannot reuse the saved explainer runs.
-- Raw sufficiency fidelity is better when smaller, and necessity is better
-  when larger. The robust audit uses 50 optimization scenarios and 1,000
-  independent evaluation scenarios that are paired with the reference. A run
-  that stops at the time limit gives no proof of optimality, and the optimum of
-  a fixed sample average is not the optimum of the expectation.
-
-The code is the current version, and the results come from earlier runs. We
-did not rerun the full training and searches for this release. Short checks
-did reproduce the saved rows for standard MILP, standard enumeration, robust
-MILP at hidden dimensions 5 and 80 with and without connected masks, and all
-five explainers. A short training run also wrote GIN checkpoints to the
-expected place.
+Paths inside the saved files follow the original workspace layout (for example
+`Version5/...`). The code here maps them to this repository. After the runs
+were produced, some names in the saved files were changed to match the current
+code. No values changed, so SHA-256 hashes recorded inside the files refer to
+the original versions.
 
 ## License and citation
 
