@@ -1361,7 +1361,7 @@ def _u1_bounds_direct(
 
     This is tighter than computing bounds on pre first, then applying linear transform.
 
-    O1 Top-κ Tightening (when kappa is provided):
+    Top-κ incident cap tightening (when kappa is provided):
         Instead of summing over ALL neighbors, only sum the κ_i most extreme:
         - For L: sum the κ_i most negative values (bottom-k)
         - For U: sum the κ_i most positive values (top-k)
@@ -1394,7 +1394,7 @@ def _u1_bounds_direct(
                 L_u[i, :] += np.minimum(0.0, XW[j, :])
                 U_u[i, :] += np.maximum(0.0, XW[j, :])
         else:
-            # O1 Top-κ tightening
+            # Top-κ incident cap tightening
             k_i = int(kappa[i])
 
             if k_i == 0:
@@ -1962,7 +1962,7 @@ def _compute_node_bounds_with_sequential_obbt(
     Compute node-layer bounds with optional sequential OBBT.
 
     Flow:
-    1) Build baseline IBP/O1 bounds for all layers.
+    1) Build baseline IBP/incident-cap bounds for all layers.
     2) For selected OBBT layers (deep -> shallow), tighten u^(l) by LP.
     3) After each u-tightening, refresh downstream bounds in the order
        u -> a -> p(next layer) -> ... while keeping previously tightened
@@ -2259,7 +2259,7 @@ def find_symmetric_branch_groups(
     tol: float = 1e-8,
 ) -> Dict[int, List[List[int]]]:
     """
-    Find symmetric sibling branch groups for symmetry breaking (O3).
+    Find symmetric sibling branch groups for symmetry breaking.
 
     For each parent node u, consider each incident direction u-v. Remove u from the
     current subgraph and look at the connected component reachable from v. If that
@@ -2353,7 +2353,7 @@ def add_symmetry_breaking_constraints(
     terminal_log_file: Optional[str] = None,
 ) -> int:
     """
-    Add symmetry breaking constraints for symmetric sibling branches (O3).
+    Add symmetry breaking constraints for symmetric sibling branches.
 
     For each parent node u with symmetric branch roots {v1, v2, ...},
     add lexicographic ordering constraints on the root-adjacent edges:
@@ -2400,7 +2400,7 @@ def add_symmetry_breaking_constraints(
 
     if num_constraints > 0:
         _print_and_log(
-            f"[MIP] Symmetry breaking edges (O3): {num_constraints} constraints, "
+            f"[MIP] Symmetry breaking edges: {num_constraints} constraints, "
             f"eliminated {total_permutations_eliminated}x equivalent solutions",
             verbose=verbose,
             terminal_log_file=terminal_log_file,
@@ -2417,7 +2417,7 @@ def add_symmetry_breaking_constraints_nodes(
     terminal_log_file: Optional[str] = None,
 ) -> int:
     """
-    Add symmetry breaking constraints for symmetric branch roots on y variables (O3).
+    Add symmetry breaking constraints for symmetric branch roots on y variables.
 
     For each parent node u with symmetric branch roots {v1, v2, ...},
     add lexicographic ordering constraints on those root nodes:
@@ -2458,7 +2458,7 @@ def add_symmetry_breaking_constraints_nodes(
 
     if num_constraints > 0:
         _print_and_log(
-            f"[MIP] Symmetry breaking nodes (O3): {num_constraints} constraints, "
+            f"[MIP] Symmetry breaking nodes: {num_constraints} constraints, "
             f"eliminated {total_permutations_eliminated}x equivalent solutions",
             verbose=verbose,
             terminal_log_file=terminal_log_file,
@@ -2467,7 +2467,7 @@ def add_symmetry_breaking_constraints_nodes(
     return num_constraints
 
 
-# ========== Bridge-based Constraints (O6) ==========
+# ========== Bridge-based Constraints ==========
 
 def find_bridges_tarjan(
     n: int,
@@ -2792,7 +2792,7 @@ def add_hierarchical_bridge_constraints(
     terminal_log_file: Optional[str] = None,
 ) -> int:
     """
-    O8: Bridge-tree hierarchical constraints.
+    Bridge-tree hierarchical constraints.
 
     For each parent-child bridge pair (e_parent, e_child) on the rooted bridge-tree:
         z_{e_child} <= z_{e_parent}
@@ -2818,7 +2818,7 @@ def add_hierarchical_bridge_constraints(
 
     if num_constraints > 0:
         _print_and_log(
-            f"[MIP] Hierarchical bridge constraints (O8): {num_constraints} constraints added",
+            f"[MIP] Hierarchical bridge constraints: {num_constraints} constraints added",
             verbose=verbose,
             terminal_log_file=terminal_log_file,
         )
@@ -2846,8 +2846,8 @@ def add_bridge_constraints(
 
     For each bridge e = (u, v) where u is on v*'s side and v is on the opposite side S:
 
-    1. Individual constraints (O6, if use_individual=True): y_k <= z_e for each k ∈ S
-    2. Aggregated constraint (O7, if use_aggregated=True):
+    1. Individual constraints (if use_individual=True): y_k <= z_e for each k ∈ S
+    2. Aggregated constraint (if use_aggregated=True):
        Σ_{k ∈ S} y_k <= max{0, min(|S|, K - d + 1[edge budget])} * z_e
 
     where:
@@ -2864,8 +2864,8 @@ def add_bridge_constraints(
         v_star: Target node
         edge_budget: Edge budget K
         node_budget: Node budget K for connectivity-constrained subgraph mode
-        use_individual: Add individual constraints y_k <= z_e (O6)
-        use_aggregated: Add aggregated budget-aware constraint (O7)
+        use_individual: Add individual constraints y_k <= z_e
+        use_aggregated: Add aggregated budget-aware constraint
         verbose: Print debug info
         log_file: Deprecated (kept for backward compatibility; not used)
         terminal_log_file: Path to mirror verbose terminal messages
@@ -2925,9 +2925,9 @@ def add_bridge_constraints(
             coeff = S_size  # Without budget info, use |S|
 
         # Add individual and/or aggregated constraints based on flags
-        # 1. Individual constraints (O6): y_k <= z_e for each k in S
+        # 1. Individual constraints: y_k <= z_e for each k in S
         #    - Enforces that selecting any node in S requires the bridge
-        # 2. Aggregated constraint (O7): Σ_{k ∈ S} y_k <= coeff * z_e
+        # 2. Aggregated constraint: Σ_{k ∈ S} y_k <= coeff * z_e
         #    - Strengthens LP relaxation with budget-aware coefficient
 
         if coeff == 0:
@@ -2936,14 +2936,14 @@ def add_bridge_constraints(
                 model.addConstr(y[k] == 0, name=f"bridge_unreachable_{k}")
                 num_constraints += 1
         else:
-            # Individual constraints (O6): y_k <= z_e
+            # Individual constraints: y_k <= z_e
             if use_individual:
                 for k in valid_nodes:
                     model.addConstr(y[k] <= z[bridge],
                                    name=f"bridge_ind_{bridge[0]}_{bridge[1]}_{k}")
                     num_constraints += 1
 
-            # Aggregated constraint (O7): Σ_{k ∈ S} y_k <= coeff * z_e
+            # Aggregated constraint: Σ_{k ∈ S} y_k <= coeff * z_e
             # Only add if use_aggregated=True AND coeff < S_size
             if use_aggregated and coeff < S_size:
                 lhs = gp.quicksum(y[k] for k in valid_nodes)
@@ -2957,7 +2957,7 @@ def add_bridge_constraints(
             log_msg(f"      Bridge {bridge}: |S|={S_size}, d={d}, coeff={coeff}, ind={ind_added}, agg={agg_added}")
 
     if num_constraints > 0:
-        log_msg(f"[MIP] Bridge constraints (O6/O7): {num_constraints} constraints added")
+        log_msg(f"[MIP] Bridge constraints: {num_constraints} constraints added")
 
     return num_constraints
 
@@ -3253,7 +3253,7 @@ def build_vanilla_nodegnn_milp(
     cap_mode: CapMode = "global",
     use_symmetry_breaking: bool = False,
     use_star_constraints: bool = True,
-    use_o9_connectivity_lb: bool = False,
+    use_connectivity_lower_bound: bool = False,
     use_forced_edges: bool = False,
     use_bridge_constraints: bool = False,
     use_aggregated_bridge_constraints: bool = False,
@@ -3284,14 +3284,14 @@ def build_vanilla_nodegnn_milp(
         objective: "min_edges", "max_sufficiency", "min_sufficiency", or "feasible"
         connectivity: "none", "flow", or "cut"
         use_maxflow_separation: Use max-flow for cut separation
-        use_incident_cap_tightening: Enable Top-κ incident cap tightening (O1)
+        use_incident_cap_tightening: Enable Top-κ incident cap tightening
         cap_mode: "global" (κ_i = K) or "distance" (κ_i = max(0, K - dist(i)))
-        use_symmetry_breaking: Enable symmetric-branch symmetry breaking (O3)
-        use_o9_connectivity_lb: Enable connectivity lower bound Σz >= Σy - 1 when connectivity is enabled (O9)
-        use_forced_edges: Enable forced edge detection and constraints (O5)
-        use_bridge_constraints: Enable bridge-based implication constraints (O6)
-        use_aggregated_bridge_constraints: Enable aggregated bridge constraints (O7)
-        use_hierarchical_bridge: Enable bridge-tree hierarchical constraints (O8)
+        use_symmetry_breaking: Enable symmetric-branch symmetry breaking
+        use_connectivity_lower_bound: Enable connectivity lower bound Σz >= Σy - 1 when connectivity is enabled
+        use_forced_edges: Enable forced edge detection and constraints
+        use_bridge_constraints: Enable bridge-based implication constraints
+        use_aggregated_bridge_constraints: Enable aggregated bridge constraints
+        use_hierarchical_bridge: Enable bridge-tree hierarchical constraints
         use_obbt_u: Enable LP-based OBBT tightening for u-variable bounds.
             Currently applied only when connectivity='none'.
         max_obbt_u_layers: Apply u-OBBT to layers [1..max_obbt_u_layers]. None = all layers.
@@ -3362,13 +3362,13 @@ def build_vanilla_nodegnn_milp(
         terminal_log_file=terminal_log_file,
     )
 
-    # ========== Forced Edges (O5) - compute early for use in O1 ==========
+    # ========== Forced Edges - computed early for incident cap tightening ==========
     forced_edges: List[Tuple[int, int]] = []
     if use_forced_edges:
         forced_edges = compute_forced_edges(adj, v_star, edge_budget, edges)
         if forced_edges:
             _print_and_log(
-                f"[MIP] Forced edges (O5): {len(forced_edges)} edges",
+                f"[MIP] Forced edges: {len(forced_edges)} edges",
                 verbose=verbose,
                 terminal_log_file=terminal_log_file,
             )
@@ -3378,7 +3378,7 @@ def build_vanilla_nodegnn_milp(
     alpha2 = 1.0 + float(weights.eps2)
     alpha3 = 1.0 + float(weights.eps3)
 
-    # Compute incident caps for Top-κ tightening (O1)
+    # Compute incident caps for Top-κ tightening
     # Pass forced_edges for additional tightening in distance mode
     if use_incident_cap_tightening:
         kappa = compute_incident_caps(
@@ -3471,9 +3471,9 @@ def build_vanilla_nodegnn_milp(
         a, b = (i, j) if i < j else (j, i)
         return z[(a, b)]
 
-    # ========== Symmetry Breaking (O3) ==========
-    # Create y variables early if O3 is enabled (needed for node symmetry breaking)
-    # O6/O7 will reuse these variables if also enabled
+    # ========== Symmetry Breaking ==========
+    # Create y variables early if symmetry breaking is enabled (needed for node symmetry breaking)
+    # Bridge constraints reuse these variables if also enabled
     y: Optional[Dict[int, "gp.Var"]] = None
     symmetric_groups: Optional[Dict[int, List[List[int]]]] = None
     if use_symmetry_breaking:
@@ -3505,8 +3505,8 @@ def build_vanilla_nodegnn_milp(
             terminal_log_file=terminal_log_file,
         )
 
-    # ========== Forced Edges Constraints (O5) ==========
-    # forced_edges was already computed above for use in O1 tightening
+    # ========== Forced Edges Constraints ==========
+    # forced_edges was already computed above for incident cap tightening
     if use_forced_edges:
         add_forced_edge_constraints(
             model,
@@ -3516,7 +3516,7 @@ def build_vanilla_nodegnn_milp(
             terminal_log_file=terminal_log_file,
         )
 
-    # ========== Hierarchical Bridge Constraints (O8) ==========
+    # ========== Hierarchical Bridge Constraints ==========
     if use_hierarchical_bridge:
         adj_list: List[List[int]] = [[] for _ in range(n)]
         for (a, b) in edges:
@@ -3532,8 +3532,8 @@ def build_vanilla_nodegnn_milp(
             terminal_log_file=terminal_log_file,
         )
 
-    # ========== Bridge Constraints (O6/O7) - Node Classification ==========
-    # Create y variables if not already created by O3
+    # ========== Bridge Constraints - Node Classification ==========
+    # Create y variables if not already created by symmetry breaking
     if use_bridge_constraints or use_aggregated_bridge_constraints:
         if y is None:
             # Create y variables for node selection (y[i] = 1 if node i has at least one incident selected edge)
@@ -3900,13 +3900,13 @@ def build_vanilla_nodegnn_milp(
         for (i, j), zij in explanation_z.items():
             model.addConstr(zij <= y[i], name=f"edge_node1_{i}_{j}")
             model.addConstr(zij <= y[j], name=f"edge_node2_{i}_{j}")
-        if use_o9_connectivity_lb:
+        if use_connectivity_lower_bound:
             model.addConstr(
                 gp.quicksum(explanation_z[e] for e in edges) >= gp.quicksum(y[i] for i in range(n)) - 1.0,
-                name="o9_connectivity_lb",
+                name="connectivity_lower_bound",
             )
 
-        # O4: optional star inequalities
+        # Optional star inequalities
         if use_star_constraints:
             for i in range(n):
                 if i == v_star:
@@ -4029,7 +4029,7 @@ def build_vanilla_nodegnn_milp_4l(
     cap_mode: CapMode = "global",
     use_symmetry_breaking: bool = False,
     use_star_constraints: bool = True,
-    use_o9_connectivity_lb: bool = False,
+    use_connectivity_lower_bound: bool = False,
     use_forced_edges: bool = False,
     use_bridge_constraints: bool = False,
     use_aggregated_bridge_constraints: bool = False,
@@ -4107,13 +4107,13 @@ def build_vanilla_nodegnn_milp_4l(
         terminal_log_file=terminal_log_file,
     )
 
-    # ========== Forced Edges (O5) - compute early for use in O1 ==========
+    # ========== Forced Edges - computed early for incident cap tightening ==========
     forced_edges: List[Tuple[int, int]] = []
     if use_forced_edges:
         forced_edges = compute_forced_edges(adj, v_star, edge_budget, edges)
         if forced_edges:
             _print_and_log(
-                f"[MIP-4L] Forced edges (O5): {len(forced_edges)} edges",
+                f"[MIP-4L] Forced edges: {len(forced_edges)} edges",
                 verbose=verbose,
                 terminal_log_file=terminal_log_file,
             )
@@ -4214,9 +4214,9 @@ def build_vanilla_nodegnn_milp_4l(
         a, b = (i, j) if i < j else (j, i)
         return z[(a, b)]
 
-    # ========== Symmetry Breaking (O3) ==========
-    # Create y variables early if O3 is enabled (needed for node symmetry breaking)
-    # O6/O7 will reuse these variables if also enabled
+    # ========== Symmetry Breaking ==========
+    # Create y variables early if symmetry breaking is enabled (needed for node symmetry breaking)
+    # Bridge constraints reuse these variables if also enabled
     y: Optional[Dict[int, "gp.Var"]] = None
     symmetric_groups: Optional[Dict[int, List[List[int]]]] = None
     if use_symmetry_breaking:
@@ -4248,7 +4248,7 @@ def build_vanilla_nodegnn_milp_4l(
             terminal_log_file=terminal_log_file,
         )
 
-    # ========== Forced Edges Constraints (O5) ==========
+    # ========== Forced Edges Constraints ==========
     if use_forced_edges:
         add_forced_edge_constraints(
             model,
@@ -4258,7 +4258,7 @@ def build_vanilla_nodegnn_milp_4l(
             terminal_log_file=terminal_log_file,
         )
 
-    # ========== Hierarchical Bridge Constraints (O8) ==========
+    # ========== Hierarchical Bridge Constraints ==========
     if use_hierarchical_bridge:
         adj_list: List[List[int]] = [[] for _ in range(n)]
         for (a, b) in edges:
@@ -4274,8 +4274,8 @@ def build_vanilla_nodegnn_milp_4l(
             terminal_log_file=terminal_log_file,
         )
 
-    # ========== Bridge Constraints (O6/O7) - Node Classification ==========
-    # Create y variables if not already created by O3
+    # ========== Bridge Constraints - Node Classification ==========
+    # Create y variables if not already created by symmetry breaking
     if use_bridge_constraints or use_aggregated_bridge_constraints:
         if y is None:
             y = {i: model.addVar(vtype=GRB.BINARY, name=f"y_{i}") for i in range(n)}
@@ -4597,10 +4597,10 @@ def build_vanilla_nodegnn_milp_4l(
         for (i, j), zij in explanation_z.items():
             model.addConstr(zij <= y[i], name=f"edge_node1_{i}_{j}")
             model.addConstr(zij <= y[j], name=f"edge_node2_{i}_{j}")
-        if use_o9_connectivity_lb:
+        if use_connectivity_lower_bound:
             model.addConstr(
                 gp.quicksum(explanation_z[e] for e in edges) >= gp.quicksum(y[i] for i in range(n)) - 1.0,
-                name="o9_connectivity_lb",
+                name="connectivity_lower_bound",
             )
 
         if use_star_constraints:
@@ -4725,7 +4725,7 @@ def build_vanilla_nodegnn_milp_2l(
     cap_mode: CapMode = "global",
     use_symmetry_breaking: bool = False,
     use_star_constraints: bool = True,
-    use_o9_connectivity_lb: bool = False,
+    use_connectivity_lower_bound: bool = False,
     use_forced_edges: bool = False,
     use_bridge_constraints: bool = False,
     use_aggregated_bridge_constraints: bool = False,
@@ -4803,13 +4803,13 @@ def build_vanilla_nodegnn_milp_2l(
         terminal_log_file=terminal_log_file,
     )
 
-    # ========== Forced Edges (O5) ==========
+    # ========== Forced Edges ==========
     forced_edges: List[Tuple[int, int]] = []
     if use_forced_edges:
         forced_edges = compute_forced_edges(adj, v_star, edge_budget, edges)
         if forced_edges:
             _print_and_log(
-                f"[MIP-2L] Forced edges (O5): {len(forced_edges)} edges",
+                f"[MIP-2L] Forced edges: {len(forced_edges)} edges",
                 verbose=verbose,
                 terminal_log_file=terminal_log_file,
             )
@@ -4818,7 +4818,7 @@ def build_vanilla_nodegnn_milp_2l(
     alpha1 = 1.0 + float(weights.eps1)
     alpha2 = 1.0 + float(weights.eps2)
 
-    # Compute incident caps for Top-κ tightening (O1)
+    # Compute incident caps for Top-κ tightening
     if use_incident_cap_tightening:
         kappa = compute_incident_caps(
             adj,
@@ -4909,9 +4909,9 @@ def build_vanilla_nodegnn_milp_2l(
         a, b = (i, j) if i < j else (j, i)
         return z[(a, b)]
 
-    # ========== Symmetry Breaking (O3) ==========
-    # Create y variables early if O3 is enabled (needed for node symmetry breaking)
-    # O6/O7 will reuse these variables if also enabled
+    # ========== Symmetry Breaking ==========
+    # Create y variables early if symmetry breaking is enabled (needed for node symmetry breaking)
+    # Bridge constraints reuse these variables if also enabled
     y: Optional[Dict[int, "gp.Var"]] = None
     symmetric_groups: Optional[Dict[int, List[List[int]]]] = None
     if use_symmetry_breaking:
@@ -4943,7 +4943,7 @@ def build_vanilla_nodegnn_milp_2l(
             terminal_log_file=terminal_log_file,
         )
 
-    # ========== Forced Edges Constraints (O5) ==========
+    # ========== Forced Edges Constraints ==========
     if use_forced_edges:
         add_forced_edge_constraints(
             model,
@@ -4953,7 +4953,7 @@ def build_vanilla_nodegnn_milp_2l(
             terminal_log_file=terminal_log_file,
         )
 
-    # ========== Hierarchical Bridge Constraints (O8) ==========
+    # ========== Hierarchical Bridge Constraints ==========
     if use_hierarchical_bridge:
         adj_list: List[List[int]] = [[] for _ in range(n)]
         for (a, b) in edges:
@@ -4969,8 +4969,8 @@ def build_vanilla_nodegnn_milp_2l(
             terminal_log_file=terminal_log_file,
         )
 
-    # ========== Bridge Constraints (O6/O7) ==========
-    # Create y variables if not already created by O3
+    # ========== Bridge Constraints ==========
+    # Create y variables if not already created by symmetry breaking
     if use_bridge_constraints or use_aggregated_bridge_constraints:
         if y is None:
             y = {i: model.addVar(vtype=GRB.BINARY, name=f"y_{i}") for i in range(n)}
@@ -5227,10 +5227,10 @@ def build_vanilla_nodegnn_milp_2l(
         for (i, j), zij in explanation_z.items():
             model.addConstr(zij <= y[i], name=f"edge_node1_{i}_{j}")
             model.addConstr(zij <= y[j], name=f"edge_node2_{i}_{j}")
-        if use_o9_connectivity_lb:
+        if use_connectivity_lower_bound:
             model.addConstr(
                 gp.quicksum(explanation_z[e] for e in edges) >= gp.quicksum(y[i] for i in range(n)) - 1.0,
-                name="o9_connectivity_lb",
+                name="connectivity_lower_bound",
             )
 
         if use_star_constraints:
@@ -6213,7 +6213,7 @@ def build_vanilla_graphgnn_milp_2l(
     cap_mode: CapMode = "global",
     use_symmetry_breaking: bool = False,
     use_star_constraints: bool = True,
-    use_o9_connectivity_lb: bool = False,
+    use_connectivity_lower_bound: bool = False,
     use_bridge_constraints: bool = False,
     use_anderson_cuts: bool = False,
     anderson_max_node_count: int = 0,
@@ -6385,10 +6385,10 @@ def build_vanilla_graphgnn_milp_2l(
                     )
                 else:
                     model.addConstr(y[i] <= r[i] + eps_empty, name=f"isolated_or_root_{i}")
-        if use_o9_connectivity_lb:
+        if use_connectivity_lower_bound:
             model.addConstr(
                 gp.quicksum(explanation_z[e] for e in edges) >= gp.quicksum(y[i] for i in range(n)) - 1.0,
-                name="o9_connectivity_lb",
+                name="connectivity_lower_bound",
             )
         if connectivity == "flow":
             cap = _flow_cap_upper_bound(n, connectivity_edge_budget, node_budget)
@@ -6824,7 +6824,7 @@ def build_vanilla_graphgnn_milp(
     cap_mode: CapMode = "global",
     use_symmetry_breaking: bool = False,
     use_star_constraints: bool = True,
-    use_o9_connectivity_lb: bool = False,
+    use_connectivity_lower_bound: bool = False,
     use_bridge_constraints: bool = False,
     use_anderson_cuts: bool = False,
     anderson_max_node_count: int = 0,
@@ -6857,11 +6857,11 @@ def build_vanilla_graphgnn_milp(
 
     Args:
         connectivity: "none", "flow", or "cut" for graph classification
-        use_incident_cap_tightening: Enable Top-κ incident cap tightening (O1)
+        use_incident_cap_tightening: Enable Top-κ incident cap tightening
         cap_mode: Only "global" supported for graph classification
-        use_symmetry_breaking: Enable symmetric-branch symmetry breaking (O3)
+        use_symmetry_breaking: Enable symmetric-branch symmetry breaking
 
-    Note: Bridge constraints (O6) are only for node classification (requires v_star).
+    Note: Bridge constraints are only for node classification (requires v_star).
     """
     _validate_objective_mode(objective, rho)
     if connectivity not in ("none", "flow", "cut"):
@@ -6898,7 +6898,7 @@ def build_vanilla_graphgnn_milp(
         terminal_log_file=terminal_log_file,
     )
 
-    # Compute incident caps for Top-κ tightening (O1)
+    # Compute incident caps for Top-κ tightening
     if use_incident_cap_tightening:
         kappa = compute_incident_caps(
             adj,
@@ -6945,7 +6945,7 @@ def build_vanilla_graphgnn_milp(
             terminal_log_file=terminal_log_file,
         )
     else:
-        # Layer 1: Use direct u1 bounds with O1 top-κ tightening when enabled
+        # Layer 1: Use direct u1 bounds with top-κ incident cap tightening when enabled
         L_pre1, U_pre1 = _pre_bounds_layer1(adj, X, alpha1)
         L_u1, U_u1 = _u1_bounds_direct(adj, X, weights.W1_1, weights.b1_1, alpha1,
                                         kappa if use_incident_cap_tightening else None)
@@ -6955,7 +6955,7 @@ def build_vanilla_graphgnn_milp(
         L_a1, U_a1 = np.maximum(L_u1, 0.0), np.maximum(U_u1, 0.0)
         L_h1, U_h1 = _linear_bounds(L_a1, U_a1, weights.W1_2, weights.b1_2)
 
-        # Layer 2: Use O1 per-dimension top-κ tightening when enabled
+        # Layer 2: Use per-dimension top-κ incident cap tightening when enabled
         if use_incident_cap_tightening and kappa is not None:
             L_pre2, U_pre2 = _pre_bounds_selectable_topk(adj, L_h1, U_h1, alpha2, kappa)
         else:
@@ -6967,7 +6967,7 @@ def build_vanilla_graphgnn_milp(
     L_a2, U_a2 = np.maximum(L_u2, 0.0), np.maximum(U_u2, 0.0)
     L_h2, U_h2 = _linear_bounds(L_a2, U_a2, weights.W2_2, weights.b2_2)
 
-    # Layer 3: Use O1 per-dimension top-κ tightening when enabled
+    # Layer 3: Use per-dimension top-κ incident cap tightening when enabled
     if use_incident_cap_tightening and kappa is not None:
         L_pre3, U_pre3 = _pre_bounds_selectable_topk(adj, L_h2, U_h2, alpha3, kappa)
     else:
@@ -7007,7 +7007,7 @@ def build_vanilla_graphgnn_milp(
         a, b = (i, j) if i < j else (j, i)
         return z[(a, b)]
 
-    # ========== Symmetry Breaking (O3) ==========
+    # ========== Symmetry Breaking ==========
     symmetric_groups: Optional[Dict[int, List[List[int]]]] = None
     if use_symmetry_breaking:
         symmetric_groups = find_symmetric_branch_groups(adj, X, edges)
@@ -7020,7 +7020,7 @@ def build_vanilla_graphgnn_milp(
             terminal_log_file=terminal_log_file,
         )
 
-    # Node selection helpers (used by O3 and optional connectivity)
+    # Node selection helpers (used by symmetry breaking and optional connectivity)
     y = {i: model.addVar(vtype=GRB.BINARY, name=f"y_{i}") for i in range(n)}
     model.update()
 
@@ -7056,10 +7056,10 @@ def build_vanilla_graphgnn_milp(
                     )
                 else:
                     model.addConstr(y[i] <= r[i] + eps_empty, name=f"isolated_or_root_{i}")
-        if use_o9_connectivity_lb:
+        if use_connectivity_lower_bound:
             model.addConstr(
                 gp.quicksum(explanation_z[e] for e in edges) >= gp.quicksum(y[i] for i in range(n)) - 1.0,
-                name="o9_connectivity_lb",
+                name="connectivity_lower_bound",
             )
         if connectivity == "flow":
             cap = _flow_cap_upper_bound(n, connectivity_edge_budget, node_budget)
@@ -7095,7 +7095,7 @@ def build_vanilla_graphgnn_milp(
             else:
                 model.addConstr(y[i] == 0, name=f"y_isolated_{i}")
 
-    # Node-level symmetry breaking (O3)
+    # Node-level symmetry breaking
     if use_symmetry_breaking and symmetric_groups:
         add_symmetry_breaking_constraints_nodes(
             model,
@@ -7105,7 +7105,7 @@ def build_vanilla_graphgnn_milp(
             terminal_log_file=terminal_log_file,
         )
 
-    # Note: Bridge Constraints (O6) not applicable for graph classification
+    # Note: Bridge Constraints not applicable for graph classification
     # (no target node v* to define connectivity from)
 
     # Layer 1
@@ -7549,7 +7549,7 @@ def build_vanilla_graphgnn_milp_4l(
     cap_mode: CapMode = "global",
     use_symmetry_breaking: bool = False,
     use_star_constraints: bool = True,
-    use_o9_connectivity_lb: bool = False,
+    use_connectivity_lower_bound: bool = False,
     use_bridge_constraints: bool = False,
     use_anderson_cuts: bool = False,
     anderson_max_node_count: int = 0,
@@ -7609,7 +7609,7 @@ def build_vanilla_graphgnn_milp_4l(
         terminal_log_file=terminal_log_file,
     )
 
-    # Compute incident caps for Top-κ tightening (O1)
+    # Compute incident caps for Top-κ tightening
     if use_incident_cap_tightening:
         kappa = compute_incident_caps(
             adj,
@@ -7637,7 +7637,7 @@ def build_vanilla_graphgnn_milp_4l(
     alpha3 = 1.0 + float(weights.eps3)
     alpha4 = 1.0 + float(weights.eps4)
 
-    # Layer 1: Use direct u1 bounds with O1 top-κ tightening when enabled
+    # Layer 1: Use direct u1 bounds with top-κ incident cap tightening when enabled
     L_pre1, U_pre1 = _pre_bounds_layer1(adj, X, alpha1)
     L_u1, U_u1 = _u1_bounds_direct(adj, X, weights.W1_1, weights.b1_1, alpha1,
                                     kappa if use_incident_cap_tightening else None)
@@ -7647,7 +7647,7 @@ def build_vanilla_graphgnn_milp_4l(
     L_a1, U_a1 = np.maximum(L_u1, 0.0), np.maximum(U_u1, 0.0)
     L_h1, U_h1 = _linear_bounds(L_a1, U_a1, weights.W1_2, weights.b1_2)
 
-    # Layer 2: Use O1 per-dimension top-κ tightening when enabled
+    # Layer 2: Use per-dimension top-κ incident cap tightening when enabled
     if use_incident_cap_tightening and kappa is not None:
         L_pre2, U_pre2 = _pre_bounds_selectable_topk(adj, L_h1, U_h1, alpha2, kappa)
     else:
@@ -7659,7 +7659,7 @@ def build_vanilla_graphgnn_milp_4l(
     L_a2, U_a2 = np.maximum(L_u2, 0.0), np.maximum(U_u2, 0.0)
     L_h2, U_h2 = _linear_bounds(L_a2, U_a2, weights.W2_2, weights.b2_2)
 
-    # Layer 3: Use O1 per-dimension top-κ tightening when enabled
+    # Layer 3: Use per-dimension top-κ incident cap tightening when enabled
     if use_incident_cap_tightening and kappa is not None:
         L_pre3, U_pre3 = _pre_bounds_selectable_topk(adj, L_h2, U_h2, alpha3, kappa)
     else:
@@ -7671,7 +7671,7 @@ def build_vanilla_graphgnn_milp_4l(
     L_a3, U_a3 = np.maximum(L_u3, 0.0), np.maximum(U_u3, 0.0)
     L_h3, U_h3 = _linear_bounds(L_a3, U_a3, weights.W3_2, weights.b3_2)
 
-    # Layer 4: Use O1 per-dimension top-κ tightening when enabled
+    # Layer 4: Use per-dimension top-κ incident cap tightening when enabled
     if use_incident_cap_tightening and kappa is not None:
         L_pre4, U_pre4 = _pre_bounds_selectable_topk(adj, L_h3, U_h3, alpha4, kappa)
     else:
@@ -7711,7 +7711,7 @@ def build_vanilla_graphgnn_milp_4l(
         a, b = (i, j) if i < j else (j, i)
         return z[(a, b)]
 
-    # ========== Symmetry Breaking (O3) ==========
+    # ========== Symmetry Breaking ==========
     symmetric_groups: Optional[Dict[int, List[List[int]]]] = None
     if use_symmetry_breaking:
         symmetric_groups = find_symmetric_branch_groups(adj, X, edges)
@@ -7724,7 +7724,7 @@ def build_vanilla_graphgnn_milp_4l(
             terminal_log_file=terminal_log_file,
         )
 
-    # Node selection helpers (used by O3 and optional connectivity)
+    # Node selection helpers (used by symmetry breaking and optional connectivity)
     y = {i: model.addVar(vtype=GRB.BINARY, name=f"y_{i}") for i in range(n)}
     model.update()
 
@@ -7758,10 +7758,10 @@ def build_vanilla_graphgnn_milp_4l(
                     )
                 else:
                     model.addConstr(y[i] <= r[i] + eps_empty, name=f"isolated_or_root_{i}")
-        if use_o9_connectivity_lb:
+        if use_connectivity_lower_bound:
             model.addConstr(
                 gp.quicksum(explanation_z[e] for e in edges) >= gp.quicksum(y[i] for i in range(n)) - 1.0,
-                name="o9_connectivity_lb",
+                name="connectivity_lower_bound",
             )
         if connectivity == "flow":
             cap = _flow_cap_upper_bound(n, connectivity_edge_budget, node_budget)
@@ -7796,7 +7796,7 @@ def build_vanilla_graphgnn_milp_4l(
             else:
                 model.addConstr(y[i] == 0, name=f"y_isolated_{i}")
 
-    # Node-level symmetry breaking (O3)
+    # Node-level symmetry breaking
     if use_symmetry_breaking and symmetric_groups:
         add_symmetry_breaking_constraints_nodes(
             model,

@@ -57,9 +57,9 @@ python Main/audit_standard.py \
   --node_edge_budget_mode eq --architecture gin --num_layers 3 --hidden_dim 5 \
   --connectivity none --exclude_gt --no-incumbent --max_instances 30 \
   --time_limit 1200 --gurobi_method 1 --gurobi_threads 1 \
-  --use_o1_tightening --use_o3_symmetry_breaking \
+  --use_incident_cap_tightening --use_gurobi_symmetry_detection \
   --use_anderson_cuts --anderson_max_node_count 0 --anderson_max_cuts 300 \
-  --no-use_o4_star_constraints --no-use_o9_connectivity_lb \
+  --no-use_star_constraints --no-use_connectivity_lower_bound \
   --no-gurobi_norel_hybrid --no-use_obbt_u --no-degree_table_layer1 \
   --output_dir /tmp/gnn-audit-standard --run_name example_standard
 ```
@@ -86,11 +86,13 @@ python Main/audit_robust.py \
   --output_root /tmp/gnn-audit-robust --run_name example_robust
 ```
 
-Use `--metric necessity --alphas 0.1` for robust necessity. Several later runs
-also pass `--direct_row_numbering pool` (run names ending in `poolrow`), which
-numbers rows by their position in the instance pool. The flag changes row
-labels only. Larger models use `--hidden_dim 20` or `--hidden_dim 80`. The
-connectivity ablation uses `--connectivity cut`.
+Use `--metric necessity --alphas 0.1` for robust necessity. Some runs also
+pass `--direct_row_numbering pool`, which numbers rows by their position in the
+instance pool (the `row_numbering` column of `Main/results/run_index.csv`).
+Row IDs enter the scenario seeds, so runs are compared only under the same
+numbering. Larger models use `--hidden_dim 20` or `--hidden_dim 80`. The
+connectivity ablation uses `--connectivity cut --use_star_constraints
+--use_connectivity_lower_bound`.
 
 Default result roots are separated by metric family and solver:
 
@@ -103,24 +105,29 @@ Main/results/
 
 The `_mip` directories contain MILP runs. The standard runner takes
 `--solver milp` or `--solver enumeration`, and the robust runner takes
-`--solver milp` only. Each family keeps the original `<dataset>/<run-name>/seedN/`
-layout. Dataset folders `BA2Grid-Longa` and `PyG-Infection-ER-L3-Split43` hold
-BA2Grid and Infection.
+`--solver milp` only. Dataset folders use the dataset IDs of the CLI.
+`BA2Grid-Longa` and `PyG-Infection-ER-L3-Split43` hold BA2Grid and Infection.
 
 ## Which runs back which result
 
-Runs are identified by the timestamp at the start of their names.
+Each run directory is named `hidden<width>_<objective>`, with `_connected`
+for the connected-mask ablation:
 
-| Result | Standard fidelity | Robust fidelity |
-| --- | --- | --- |
-| Main audit, MILP benchmarks | `20261109_191411` | `20261109_150927` (BA-House: `20261109_160036`) |
-| Main audit, Tree-Cycles and BA-2Motifs | `20260811_051355`, `20260811_052610` | `20261115_021703` (Tree-Cycles), `20261115_003921` (BA-2Motifs) |
-| Main audit, Infection | `20260825_213900`, `20260825_213901` | `20261115_003921` |
-| Hidden dimension 20 | `20261114_230238`, Infection `20260903_224506` | `20261114_230238` (MILP benchmarks), `20261115_021703` (Tree-Cycles, BA-2Motifs), `20261115_003921` (Infection) |
-| Hidden dimension 80 | `20261115_125458` | `20261115_125458` |
-| Connected masks, MILP benchmarks | `20261112_011751` | `20261111_131758` |
-| Connected masks, enumeration benchmarks | `20261026_191500`, Infection `20260907_021500`, `20260907_021501` | `20261123_154018` |
+```text
+Main/results/<family>/<dataset>/
+  hidden5_sufficiency/             # main audit
+  hidden5_necessity/
+  hidden5_sufficiency_connected/   # connectivity ablation
+  hidden5_necessity_connected/
+  hidden20_sufficiency/            # larger hidden dimensions
+  hidden80_necessity/
+  ...
+    seed1/ ... seed5/
+```
 
+`Main/results/run_index.csv` lists every run with its original run name,
+search method, hidden dimension, connectivity, time limit, alpha and row
+numbering. The original name is also the `run_name` inside each `config.json`.
 Standard runs at hidden dimension 20 and 80 cover the three enumeration
 benchmarks only. BA-HouseANDGrid has no connectivity ablation because its
 references are disconnected. The BA-2Motifs model with hidden dimension 80 and
@@ -179,16 +186,18 @@ budget. Available method names are `random`, `gnnexplainer`, `pgexplainer`,
 ```bash
 python Explainers/run_explainers.py --help
 python Explainers/run_explainers.py \
-  --source-runs Main/results/standard_fidelity_enumerations/BA-2Motifs/*Fid^-* \
+  --source-runs Main/results/standard_fidelity_enumerations/BA-2Motifs/hidden5_sufficiency \
   --methods random --nn-seeds 1 --phase smoke --max-instances 1 \
   --output-root /tmp/gnn-explainer-example --run-name example_random
 ```
 
-Formal outputs use `Explainers/results/<method>/<dataset>/<run-name>/`.
-Existing runs are never overwritten. FlowX uses the pinned upstream sampling
+Saved explainer runs are in `Explainers/results/<method>/<dataset>/hidden5/`,
+and `Explainers/results/run_index.csv` gives their original run names. New
+formal runs go to `Explainers/results/<method>/<dataset>/<run-name>/`, and
+existing runs are never overwritten. FlowX uses the pinned upstream sampling
 and refinement with an undirected edge projection and fixed GIN self terms
-during final evaluation. On BA-2Motifs the FlowX results are the
-explicit-loop completion runs (`20260917_152207`).
+during final evaluation. On BA-2Motifs the FlowX results come from an
+explicit-loop completion run.
 
 The robust explainer scores in the manuscript come from
 `Explainers/results/robust_reevaluations/`. These runs evaluate the saved
@@ -205,9 +214,16 @@ the manuscript does not report.
 Each run keeps its original `config.json`, per-seed `instance_fid.csv`,
 selected and GT edge masks, solver records and available machine-readable
 provenance. Rendered figures and per-run Markdown notes are omitted. Result
-bytes and run names are unchanged. Paths written inside saved artifacts refer
-to the original workspace. The execution readers map those paths to this
-layout. Other external tools must account for them.
+bytes are unchanged, and only the run directories were renamed. Paths written
+inside saved artifacts use the original workspace layout and run names. The
+execution readers map them to this layout through the two `run_index.csv`
+files. Other external tools must account for them.
+
+Saved runs record four MILP options under their original key names. In
+current code they are `use_incident_cap_tightening` (saved as
+`use_o1_tightening`), `use_gurobi_symmetry_detection` (`use_o3_symmetry_breaking`),
+`use_star_constraints` (`use_o4_star_constraints`) and
+`use_connectivity_lower_bound` (`use_o9_connectivity_lb`).
 
 Raw sufficiency fidelity is smaller-is-better and necessity is larger-is-better.
 The robust protocol uses 50 optimization scenarios and 1,000 independent,

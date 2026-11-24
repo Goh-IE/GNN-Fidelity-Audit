@@ -159,13 +159,13 @@ FIELDNAMES = [
     "enumeration_cache_status",
     "enumeration_cache_file",
     "acceleration_profile",
-    "use_o1_tightening",
+    "use_incident_cap_tightening",
     "cap_mode",
-    "use_o3_symmetry_breaking",
-    "use_o4_star_constraints",
-    # Node-specific O5-O8 accelerations are intentionally excluded from this
+    "use_gurobi_symmetry_detection",
+    "use_star_constraints",
+    # Node-specific forced-edge and bridge accelerations are intentionally excluded from this
     # standard-fidelity driver; the paper uses the task-agnostic bundle.
-    "use_o9_connectivity_lb",
+    "use_connectivity_lower_bound",
     "use_anderson_cuts",
     "anderson_max_node_count",
     "anderson_max_cuts",
@@ -315,12 +315,12 @@ COUNTEREXAMPLE_RESULT_FIELDS = [
 
 SUMMARY_ACCEL_FIELDS = [
     "acceleration_profile",
-    "use_o1_tightening",
+    "use_incident_cap_tightening",
     "cap_mode",
-    "use_o3_symmetry_breaking",
-    "use_o4_star_constraints",
-    # O5-O8 are intentionally not part of the reported acceleration bundle.
-    "use_o9_connectivity_lb",
+    "use_gurobi_symmetry_detection",
+    "use_star_constraints",
+    # Forced-edge and bridge accelerations are intentionally not part of the reported acceleration bundle.
+    "use_connectivity_lower_bound",
     "use_anderson_cuts",
     "edge_branch_priority",
     "use_obbt_u",
@@ -333,8 +333,8 @@ SUMMARY_ACCEL_FIELDS = [
 
 
 CONNECTIVITY_DISABLED_ACCEL_FIELDS = (
-    "use_o4_star_constraints",
-    "use_o9_connectivity_lb",
+    "use_star_constraints",
+    "use_connectivity_lower_bound",
 )
 
 
@@ -370,12 +370,12 @@ class RunConfig:
     gt_incumbent: bool
     exclude_gt_solution: bool
     acceleration_profile: str
-    use_o1_tightening: bool
+    use_incident_cap_tightening: bool
     cap_mode: str
-    use_o3_symmetry_breaking: bool
-    use_o4_star_constraints: bool
-    # Node-only O5-O8 fields are intentionally omitted.
-    use_o9_connectivity_lb: bool
+    use_gurobi_symmetry_detection: bool
+    use_star_constraints: bool
+    # Node-only forced-edge and bridge fields are intentionally omitted.
+    use_connectivity_lower_bound: bool
     use_anderson_cuts: bool
     anderson_max_node_count: int
     anderson_max_cuts: int
@@ -421,7 +421,7 @@ def gurobi_param_overrides(config: RunConfig) -> Dict[str, Any]:
     params["NoRelHeurWork"] = effective_gurobi_norel_heur_work(config)
     if config.gurobi_mem_limit is not None:
         params["MemLimit"] = float(config.gurobi_mem_limit)
-    params["Symmetry"] = 2 if config.use_o3_symmetry_breaking else 0
+    params["Symmetry"] = 2 if config.use_gurobi_symmetry_detection else 0
     return params
 
 
@@ -5514,16 +5514,16 @@ def initialize_seed_output(
     print_and_log(f"GT incumbent: {config.gt_incumbent}", run_log_file)
     print_and_log(f"Exclude exact GT solution: {config.exclude_gt_solution}", run_log_file)
     print_and_log(f"Acceleration profile: {seed_config['acceleration_profile']}", run_log_file)
-    print_and_log(f"O1: {seed_config['use_o1_tightening']}, cap_mode: {seed_config['cap_mode']}", run_log_file)
+    print_and_log(f"Incident cap tightening: {seed_config['use_incident_cap_tightening']}, cap_mode: {seed_config['cap_mode']}", run_log_file)
     print_and_log(
-        "O3/Gurobi symmetry: "
-        f"{seed_config['use_o3_symmetry_breaking']} "
-        f"(Symmetry={2 if seed_config['use_o3_symmetry_breaking'] else 0}, custom hanging-tree O3 disabled)",
+        "Gurobi symmetry detection: "
+        f"{seed_config['use_gurobi_symmetry_detection']} "
+        f"(Symmetry={2 if seed_config['use_gurobi_symmetry_detection'] else 0}, custom hanging-tree symmetry breaking disabled)",
         run_log_file,
     )
-    print_and_log(f"O4: {seed_config['use_o4_star_constraints']}", run_log_file)
-    # O5-O8 are node-specific OR accelerations and are intentionally not used.
-    print_and_log(f"O9: {seed_config['use_o9_connectivity_lb']}", run_log_file)
+    print_and_log(f"Star inequalities: {seed_config['use_star_constraints']}", run_log_file)
+    # Forced-edge and bridge accelerations are node-specific and are intentionally not used.
+    print_and_log(f"Connectivity lower bound: {seed_config['use_connectivity_lower_bound']}", run_log_file)
     print_and_log(f"Anderson cuts: {seed_config['use_anderson_cuts']}", run_log_file)
     print_and_log(f"Graph edge branch priority: {config.edge_branch_priority}", run_log_file)
     print_and_log(
@@ -5707,14 +5707,14 @@ def acceleration_row_fields(
         "gt_incumbent": bool(config.gt_incumbent),
         "exclude_gt_solution": bool(config.exclude_gt_solution),
         "acceleration_profile": config.acceleration_profile,
-        "use_o1_tightening": config.use_o1_tightening,
+        "use_incident_cap_tightening": config.use_incident_cap_tightening,
         "cap_mode": "global",
-        "use_o3_symmetry_breaking": config.use_o3_symmetry_breaking,
-        "use_o4_star_constraints": (
-            config.use_o4_star_constraints if uses_connectivity else False
+        "use_gurobi_symmetry_detection": config.use_gurobi_symmetry_detection,
+        "use_star_constraints": (
+            config.use_star_constraints if uses_connectivity else False
         ),
-        "use_o9_connectivity_lb": (
-            config.use_o9_connectivity_lb if uses_connectivity else False
+        "use_connectivity_lower_bound": (
+            config.use_connectivity_lower_bound if uses_connectivity else False
         ),
         "use_anderson_cuts": config.use_anderson_cuts,
         "anderson_max_node_count": config.anderson_max_node_count,
@@ -6317,12 +6317,12 @@ def run_or_skip_row(
                 use_anderson_cuts=bool(row["use_anderson_cuts"]),
                 anderson_max_node_count=int(row["anderson_max_node_count"]),
                 anderson_max_cuts=int(row["anderson_max_cuts"]),
-                use_incident_cap_tightening=bool(row["use_o1_tightening"]),
+                use_incident_cap_tightening=bool(row["use_incident_cap_tightening"]),
                 cap_mode=mip_cap_mode,
                 use_symmetry_breaking=False,
-                use_star_constraints=bool(row["use_o4_star_constraints"]),
-                use_o9_connectivity_lb=bool(row["use_o9_connectivity_lb"]),
-                # O5-O8 and OBBT-u intentionally use their False defaults.
+                use_star_constraints=bool(row["use_star_constraints"]),
+                use_connectivity_lower_bound=bool(row["use_connectivity_lower_bound"]),
+                # Forced-edge, bridge and OBBT-u options intentionally use their False defaults.
             )
         else:
             mip_objective = str(row["oracle_objective"])
@@ -6360,10 +6360,10 @@ def run_or_skip_row(
                 log_file=str(log_file),
                 terminal_log_file=str(terminal_log_file),
                 gurobi_params=gurobi_param_overrides(config),
-                use_incident_cap_tightening=bool(row["use_o1_tightening"]),
+                use_incident_cap_tightening=bool(row["use_incident_cap_tightening"]),
                 use_symmetry_breaking=False,
-                use_star_constraints=bool(row["use_o4_star_constraints"]),
-                use_o9_connectivity_lb=bool(row["use_o9_connectivity_lb"]),
+                use_star_constraints=bool(row["use_star_constraints"]),
+                use_connectivity_lower_bound=bool(row["use_connectivity_lower_bound"]),
                 use_bridge_constraints=False,
                 use_anderson_cuts=bool(row["use_anderson_cuts"]),
                 anderson_max_node_count=int(row["anderson_max_node_count"]),
@@ -7718,12 +7718,12 @@ def build_config(args: argparse.Namespace) -> RunConfig:
         gt_incumbent=bool(args.gt_incumbent),
         exclude_gt_solution=bool(args.exclude_gt),
         acceleration_profile=acceleration_profile,
-        use_o1_tightening=False if plain_milp else bool(args.use_o1_tightening),
+        use_incident_cap_tightening=False if plain_milp else bool(args.use_incident_cap_tightening),
         cap_mode="global",
-        use_o3_symmetry_breaking=False if plain_milp else bool(args.use_o3_symmetry_breaking),
-        use_o4_star_constraints=False if plain_milp else bool(args.use_o4_star_constraints),
-        # O5-O8 are intentionally excluded from this experiment driver.
-        use_o9_connectivity_lb=False if plain_milp else bool(args.use_o9_connectivity_lb),
+        use_gurobi_symmetry_detection=False if plain_milp else bool(args.use_gurobi_symmetry_detection),
+        use_star_constraints=False if plain_milp else bool(args.use_star_constraints),
+        # Forced-edge and bridge accelerations are intentionally excluded from this experiment driver.
+        use_connectivity_lower_bound=False if plain_milp else bool(args.use_connectivity_lower_bound),
         use_anderson_cuts=False if plain_milp else bool(args.use_anderson_cuts),
         anderson_max_node_count=int(args.anderson_max_node_count),
         anderson_max_cuts=int(args.anderson_max_cuts),
@@ -7959,11 +7959,11 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
             "require --no-incumbent."
         ),
     )
-    parser.add_argument("--use_o1_tightening", action=argparse.BooleanOptionalAction, default=True)
-    # Distance-based O1 caps are node-specific and intentionally not exposed.
+    parser.add_argument("--use_incident_cap_tightening", action=argparse.BooleanOptionalAction, default=True)
+    # Distance-based incident caps are node-specific and intentionally not exposed.
     # parser.add_argument("--cap_mode", choices=["global", "distance"], default="global")
     parser.add_argument(
-        "--use_o3_symmetry_breaking",
+        "--use_gurobi_symmetry_detection",
         action=argparse.BooleanOptionalAction,
         default=True,
         help=(
@@ -7972,13 +7972,9 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
             "are not used by this runner."
         ),
     )
-    parser.add_argument("--use_o4_star_constraints", action=argparse.BooleanOptionalAction, default=True)
-    # Node-specific OR accelerations are intentionally not exposed.
-    # parser.add_argument("--use_o5_forced_edges", action=argparse.BooleanOptionalAction, default=True)
-    # parser.add_argument("--use_o6_bridge_constraints", action=argparse.BooleanOptionalAction, default=True)
-    # parser.add_argument("--use_o7_aggregated_bridge_constraints", action=argparse.BooleanOptionalAction, default=True)
-    # parser.add_argument("--use_o8_hierarchical_bridge", action=argparse.BooleanOptionalAction, default=True)
-    parser.add_argument("--use_o9_connectivity_lb", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--use_star_constraints", action=argparse.BooleanOptionalAction, default=True)
+    # Node-specific forced-edge and bridge accelerations are intentionally not exposed.
+    parser.add_argument("--use_connectivity_lower_bound", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--use_anderson_cuts", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--anderson_max_node_count", type=int, default=0)
     parser.add_argument("--anderson_max_cuts", type=int, default=300)

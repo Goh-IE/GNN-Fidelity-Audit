@@ -620,7 +620,7 @@ class MIPExplainer:
         cap_mode: str = "global",
         use_symmetry_breaking: bool = False,
         use_star_constraints: bool = True,
-        use_o9_connectivity_lb: bool = False,
+        use_connectivity_lower_bound: bool = False,
         use_forced_edges: bool = False,
         use_bridge_constraints: bool = False,
         use_aggregated_bridge_constraints: bool = False,
@@ -655,23 +655,23 @@ class MIPExplainer:
             connectivity: "none", "flow", or "cut"
             explanation_on_complement: If True, z remains the kept/message-passing
                 mask while explicit r=1-z removal variables define the explanation
-                connectivity, O4, O9, and lazy connectivity cuts. With connectivity
+                connectivity, star inequalities, the connectivity lower bound, and lazy connectivity cuts. With connectivity
                 enabled for a node task, that removal explanation is rooted at the
                 target node.
             use_anderson_cuts: Enable Anderson ReLU user cuts at MIPNODE
             anderson_max_node_count: Maximum B&B node count for Anderson cuts (0=root only)
             anderson_max_cuts: Maximum Anderson cuts added per callback
-            use_incident_cap_tightening: Enable Top-κ incident cap tightening (O1)
+            use_incident_cap_tightening: Enable Top-κ incident cap tightening
             cap_mode: "global" (κ_i = K) or "distance" (κ_i = max(0, K - dist(i)))
-            use_symmetry_breaking: Enable leaf symmetry breaking (O3)
+            use_symmetry_breaking: Enable leaf symmetry breaking
             use_star_constraints: Enable star inequalities on the explanation-edge
-                variables when connectivity is enabled (O4).
-            use_o9_connectivity_lb: Enable Σq >= Σy - 1 on explanation-edge
-                variables q (q=z normally, q=r for complement explanations) (O9).
-            use_forced_edges: Enable forced edge detection and constraints (O5)
-            use_bridge_constraints: Enable bridge-based implication constraints (O6)
-            use_aggregated_bridge_constraints: Enable aggregated bridge constraints (O7)
-            use_hierarchical_bridge: Enable bridge-tree hierarchical constraints (O8)
+                variables when connectivity is enabled.
+            use_connectivity_lower_bound: Enable Σq >= Σy - 1 on explanation-edge
+                variables q (q=z normally, q=r for complement explanations).
+            use_forced_edges: Enable forced edge detection and constraints
+            use_bridge_constraints: Enable bridge-based implication constraints
+            use_aggregated_bridge_constraints: Enable aggregated bridge constraints
+            use_hierarchical_bridge: Enable bridge-tree hierarchical constraints
             use_obbt_u: Enable LP-based OBBT tightening for u bounds (connectivity='none' only).
             max_obbt_u_layers: Apply u-OBBT to layers [1..max_obbt_u_layers]. None = all layers.
             node_induced: If True, enforce node-induced subgraph (z_ij = y_i AND y_j).
@@ -822,7 +822,7 @@ class MIPExplainer:
                 cap_mode=cap_mode,
                 use_symmetry_breaking=use_symmetry_breaking,
                 use_star_constraints=use_star_constraints,
-                use_o9_connectivity_lb=use_o9_connectivity_lb,
+                use_connectivity_lower_bound=use_connectivity_lower_bound,
                 use_forced_edges=use_forced_edges,
                 use_bridge_constraints=use_bridge_constraints,
                 use_aggregated_bridge_constraints=use_aggregated_bridge_constraints,
@@ -867,7 +867,7 @@ class MIPExplainer:
                     cap_mode=cap_mode,
                     use_symmetry_breaking=use_symmetry_breaking,
                     use_star_constraints=use_star_constraints,
-                    use_o9_connectivity_lb=use_o9_connectivity_lb,
+                    use_connectivity_lower_bound=use_connectivity_lower_bound,
                     use_forced_edges=use_forced_edges,
                     use_bridge_constraints=use_bridge_constraints,
                     use_aggregated_bridge_constraints=use_aggregated_bridge_constraints,
@@ -910,7 +910,7 @@ class MIPExplainer:
                     cap_mode=cap_mode,
                     use_symmetry_breaking=use_symmetry_breaking,
                     use_star_constraints=use_star_constraints,
-                    use_o9_connectivity_lb=use_o9_connectivity_lb,
+                    use_connectivity_lower_bound=use_connectivity_lower_bound,
                     use_forced_edges=use_forced_edges,
                     use_bridge_constraints=use_bridge_constraints,
                     use_aggregated_bridge_constraints=use_aggregated_bridge_constraints,
@@ -1091,7 +1091,7 @@ class MIPExplainer:
         use_incident_cap_tightening: bool = False,
         use_symmetry_breaking: bool = False,
         use_star_constraints: bool = True,
-        use_o9_connectivity_lb: bool = False,
+        use_connectivity_lower_bound: bool = False,
         use_bridge_constraints: bool = False,
         use_anderson_cuts: bool = False,
         anderson_max_node_count: int = 0,
@@ -1122,17 +1122,17 @@ class MIPExplainer:
             connectivity: "none", "flow", or "cut"
             explanation_on_complement: If True, z remains the kept/message-passing
                 mask while explicit removal variables 1-z define connectivity,
-                O4, O9, and lazy connectivity cuts.
+                star inequalities, the connectivity lower bound, and lazy connectivity cuts.
             rho: Margin preservation ratio
             edge_budget: Maximum number of edges
             node_budget: Maximum number of selected nodes (connectivity='flow'/'cut' only)
             edge_budget_mode: "le" => #edges <= K, "eq" => #edges == K (fidelity objectives only)
             min_edges: Minimum number of edges
             objective: "min_edges", "max_sufficiency", "min_sufficiency", or "feasible"
-            use_incident_cap_tightening: Enable Top-κ incident cap tightening (O1)
-            use_symmetry_breaking: Enable leaf symmetry breaking (O3)
-            use_star_constraints: Enable star inequalities when connectivity is enabled (O4)
-            use_o9_connectivity_lb: Enable connectivity lower bound Σz >= Σy - 1 when connectivity is enabled (O9)
+            use_incident_cap_tightening: Enable Top-κ incident cap tightening
+            use_symmetry_breaking: Enable leaf symmetry breaking
+            use_star_constraints: Enable star inequalities when connectivity is enabled
+            use_connectivity_lower_bound: Enable connectivity lower bound Σz >= Σy - 1 when connectivity is enabled
             use_bridge_constraints: Kept for API compatibility (not applied in graph mode)
             use_anderson_cuts: Enable Anderson ReLU user cuts at MIPNODE
             anderson_max_node_count: Highest B&B node count where Anderson separation may run
@@ -1250,7 +1250,7 @@ class MIPExplainer:
                 cap_mode="global",
                 use_symmetry_breaking=use_symmetry_breaking,
                 use_star_constraints=use_star_constraints,
-                use_o9_connectivity_lb=use_o9_connectivity_lb,
+                use_connectivity_lower_bound=use_connectivity_lower_bound,
                 use_bridge_constraints=use_bridge_constraints,
                 use_anderson_cuts=use_anderson_cuts,
                 anderson_max_node_count=anderson_max_node_count,

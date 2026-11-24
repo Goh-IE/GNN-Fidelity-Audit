@@ -113,9 +113,9 @@ INSTANCE_FIELDS = [
     "selected_size",
     "candidate_size",
     "connectivity",
-    "use_o1_tightening",
-    "use_o4_star_constraints",
-    "use_o9_connectivity_lb",
+    "use_incident_cap_tightening",
+    "use_star_constraints",
+    "use_connectivity_lower_bound",
     "standard_endpoint_pwl_generator",
     "one_swap_candidate_count",
     "one_swap_feasible_count",
@@ -436,15 +436,48 @@ def format_duration(seconds: float) -> str:
     return f"{minutes}m{sec:02d}s"
 
 
+_RUN_NAME_ALIASES: Optional[Dict[Tuple[str, str, str], str]] = None
+
+
+def run_name_aliases() -> Dict[Tuple[str, str, str], str]:
+    """Map (group, family/dataset, original run name) to the published run directory name."""
+    global _RUN_NAME_ALIASES
+    if _RUN_NAME_ALIASES is None:
+        aliases: Dict[Tuple[str, str, str], str] = {}
+        for group in ("Main", "Explainers"):
+            index = REPO_DIR / group / "results" / "run_index.csv"
+            if index.is_file():
+                with index.open(newline="") as handle:
+                    for row in csv.DictReader(handle):
+                        parent, name = row["path"].rsplit("/", 1)
+                        aliases[(group, parent, row["original_run_name"])] = name
+        _RUN_NAME_ALIASES = aliases
+    return _RUN_NAME_ALIASES
+
+
+def published_run_path(path: Path) -> Path:
+    """Replace an original run directory name with its published name."""
+    parts = path.parts
+    for group in ("Main", "Explainers"):
+        if group in parts:
+            tail = parts[parts.index(group) + 1:]
+            if len(tail) >= 4 and tail[0] == "results":
+                key = (group, f"{tail[1]}/{tail[2]}", tail[3])
+                name = run_name_aliases().get(key)
+                if name is not None:
+                    return Path(*parts[: parts.index(group) + 1], "results", tail[1], tail[2], name, *tail[4:])
+    return path
+
+
 def resolve_repo_path(value: str) -> Path:
     """Resolve current paths and preserve reads of original artifact paths."""
     path = Path(str(value))
     if "Version5" in path.parts:
         tail = path.parts[path.parts.index("Version5") + 1:]
         if tail:
-            group = "Explainers" if tail[0].endswith("_experiments") and tail[0] not in {
+            group = "Explainers" if (tail[0].endswith("_experiments") and tail[0] not in {
                 "standard_fidelity_experiments", "robust_fidelity_experiments"
-            } else "Main"
+            }) or tail[0] == "baseline_robust_reevaluations" else "Main"
             path = REPO_DIR / group / Path(*tail)
     if "ExplanationEvaluation" in path.parts:
         tail = path.parts[path.parts.index("ExplanationEvaluation") + 1:]
@@ -466,20 +499,22 @@ def resolve_repo_path(value: str) -> Path:
         "robust_fidelity_enumerations": "robust_fidelity_enumerations",
     }
     methods = ("random", "gradcam", "gnnexplainer", "pgexplainer", "flowx_suf", "flowx_nec")
+    explainer_families = {method + "_experiments": method for method in methods}
+    explainer_families["baseline_robust_reevaluations"] = "robust_reevaluations"
     for group, aliases in [
         ("Main", audit_families),
-        ("Explainers", {method + "_experiments": method for method in methods}),
+        ("Explainers", explainer_families),
     ]:
         if group in path.parts:
             tail = path.parts[path.parts.index(group) + 1:]
             if tail and tail[0] in aliases:
-                return REPO_DIR / group / "results" / aliases[tail[0]] / Path(*tail[1:])
+                return published_run_path(REPO_DIR / group / "results" / aliases[tail[0]] / Path(*tail[1:]))
     names = {"run_standard_fidelity_experiment.py": "audit_standard.py",
              "run_robust_fidelity_experiment.py": "audit_robust.py",
              "systematic_training.py": "train_gnn.py"}
     if path.parent.name == "Main" and path.name in names:
         path = path.with_name(names[path.name])
-    return path if path.is_absolute() else REPO_DIR / path
+    return published_run_path(path if path.is_absolute() else REPO_DIR / path)
 
 
 def output_path_string(path: Path) -> str:
@@ -1242,8 +1277,8 @@ def append_skipped_alpha_rows(
                 "selected_size": None,
                 "candidate_size": row.get("candidate_size"),
                 "connectivity": row.get("connectivity", "none"),
-                "use_o4_star_constraints": row.get("use_o4_star_constraints", ""),
-                "use_o9_connectivity_lb": row.get("use_o9_connectivity_lb", ""),
+                "use_star_constraints": row.get("use_star_constraints", ""),
+                "use_connectivity_lower_bound": row.get("use_connectivity_lower_bound", ""),
                 "context_pool_size": None,
                 "k_context": None,
                 "num_combinations": None,
@@ -1347,8 +1382,8 @@ def evaluate_target(
             "selected_size": metrics["selected_size"],
             "candidate_size": metrics["candidate_size"],
             "connectivity": row.get("connectivity", "none"),
-            "use_o4_star_constraints": row.get("use_o4_star_constraints", ""),
-            "use_o9_connectivity_lb": row.get("use_o9_connectivity_lb", ""),
+            "use_star_constraints": row.get("use_star_constraints", ""),
+            "use_connectivity_lower_bound": row.get("use_connectivity_lower_bound", ""),
             "standard_endpoint_pwl_generator": bool(
                 row.get("standard_endpoint_pwl_generator", False)
             ),
@@ -2488,7 +2523,7 @@ def solve_saa_table_milp(
     gurobi_model.update()
 
     # Connectivity acts on z only. The block adds node variables y, the root (the target for node tasks,
-    # a chosen root r for graph tasks), O4 star and O9 inequalities, and lazy cuts
+    # a chosen root r for graph tasks), star and connectivity lower-bound inequalities, and lazy cuts
     # y_t <= z(delta(C)) [+ r(C) + empty] for selected components C without the root.
     connectivity_cut_count = [0]
     connectivity_callback = None
@@ -2519,10 +2554,10 @@ def solve_saa_table_milp(
             gurobi_model.addConstr(zvar <= y[int(j)], name=f"edge_node2_{i}_{j}")
         r: Optional[Dict[int, Any]] = None
         eps_empty: Any = None
-        use_o4 = bool(getattr(args, "use_o4_star_constraints", False))
+        use_star = bool(getattr(args, "use_star_constraints", False))
         if ctx.task == "node":
             gurobi_model.addConstr(y[root_node] == 1.0, name="root_selected")
-            if use_o4:
+            if use_star:
                 for i in node_list:
                     if i == root_node:
                         continue
@@ -2538,16 +2573,16 @@ def solve_saa_table_milp(
             for i in node_list:
                 gurobi_model.addConstr(y[i] <= 1.0 - eps_empty, name=f"y_empty_{i}")
                 gurobi_model.addConstr(r[i] <= y[i], name=f"root_implies_selected_{i}")
-                if use_o4:
+                if use_star:
                     if incident[i]:
                         gurobi_model.addConstr(
                             y[i] <= gp.quicksum(incident[i]) + r[i] + eps_empty, name=f"star_or_root_{i}"
                         )
                     else:
                         gurobi_model.addConstr(y[i] <= r[i] + eps_empty, name=f"isolated_or_root_{i}")
-        if bool(getattr(args, "use_o9_connectivity_lb", False)):
+        if bool(getattr(args, "use_connectivity_lower_bound", False)):
             gurobi_model.addConstr(
-                gp.quicksum(z_vars) >= gp.quicksum(y.values()) - 1.0, name="o9_connectivity_lb"
+                gp.quicksum(z_vars) >= gp.quicksum(y.values()) - 1.0, name="connectivity_lower_bound"
             )
         gurobi_model.update()
 
@@ -2671,8 +2706,8 @@ def solve_saa_table_milp(
             f"mean_switches={table_metadata['saa_table_mean_switches']:.6g} "
             f"build_time_s={build_time:.3f} mip_gap={float(getattr(args, 'saa_table_mip_gap', 0.0))} "
             f"connectivity={connectivity} "
-            f"O4={bool(getattr(args, 'use_o4_star_constraints', False)) if connectivity == 'cut' else False} "
-            f"O9={bool(getattr(args, 'use_o9_connectivity_lb', False)) if connectivity == 'cut' else False} "
+            f"star_constraints={bool(getattr(args, 'use_star_constraints', False)) if connectivity == 'cut' else False} "
+            f"connectivity_lower_bound={bool(getattr(args, 'use_connectivity_lower_bound', False)) if connectivity == 'cut' else False} "
             f"exclude_gt_solution={bool(args.exclude_gt)} "
             f"gt_no_good_cut_added={gt_no_good_cut_added} objective_type=prob_table\n"
         )
@@ -2928,9 +2963,9 @@ def solve_and_evaluate_saa_mip_row(
                 f" standard_endpoint_pwl=False\n"
                 f"dataset={row.get('dataset')} seed={seed} row_id={row_id} "
                 f"metric={metric} alpha={float(alpha)} connectivity={connectivity} "
-                f"O1=False "
-                f"O4={bool(args.use_o4_star_constraints) if connectivity in {'cut', 'flow'} else False} "
-                f"O9={bool(args.use_o9_connectivity_lb) if connectivity in {'cut', 'flow'} else False} "
+                f"incident_cap_tightening=False "
+                f"star_constraints={bool(args.use_star_constraints) if connectivity in {'cut', 'flow'} else False} "
+                f"connectivity_lower_bound={bool(args.use_connectivity_lower_bound) if connectivity in {'cut', 'flow'} else False} "
                 f"opt_samples={int(args.opt_samples)} "
                 f"eval_samples={int(args.eval_samples)} objective_type={args.saa_milp_objective} "
                 f"pwl_points=None "
@@ -2996,7 +3031,7 @@ def solve_and_evaluate_saa_mip_row(
             "one_swap_eval_time_s": None,
             "one_swap_edge_file": None,
             "warm_start_source": "gt" if bool(args.gt_incumbent) else "none",
-            "use_o1_tightening": False,
+            "use_incident_cap_tightening": False,
             "gurobi_symmetry": int(args.gurobi_symmetry),
             "edge_branch_priority": 0,
             "gurobi_mip_focus": None,
@@ -3190,8 +3225,8 @@ def build_direct_graph_milp_rows(
     metric: str,
     device: torch.device,
     connectivity: str,
-    use_o4_star_constraints: bool,
-    use_o9_connectivity_lb: bool,
+    use_star_constraints: bool,
+    use_connectivity_lower_bound: bool,
     row_numbering: str = "eligible",
 ) -> List[Tuple[Dict[str, Any], List[Tuple[int, int]]]]:
     if data.task != "graph":
@@ -3241,8 +3276,8 @@ def build_direct_graph_milp_rows(
             "budget_mode": "gt_size",
             "connectivity": row_connectivity,
             "edge_budget_mode": "eq",
-            "use_o4_star_constraints": bool(use_o4_star_constraints) if row_connectivity in {"cut", "flow"} else False,
-            "use_o9_connectivity_lb": bool(use_o9_connectivity_lb) if row_connectivity in {"cut", "flow"} else False,
+            "use_star_constraints": bool(use_star_constraints) if row_connectivity in {"cut", "flow"} else False,
+            "use_connectivity_lower_bound": bool(use_connectivity_lower_bound) if row_connectivity in {"cut", "flow"} else False,
             "oracle_objective": (
                 "max_necessity"
                 if metric == "necessity"
@@ -3284,8 +3319,8 @@ def build_direct_node_milp_rows(
     device: torch.device,
     k_hop: int,
     connectivity: str,
-    use_o4_star_constraints: bool,
-    use_o9_connectivity_lb: bool,
+    use_star_constraints: bool,
+    use_connectivity_lower_bound: bool,
     row_numbering: str = "eligible",
 ) -> List[Tuple[Dict[str, Any], List[Tuple[int, int]]]]:
     if data.task != "node":
@@ -3355,8 +3390,8 @@ def build_direct_node_milp_rows(
             "budget_mode": "gt_size",
             "connectivity": row_connectivity,
             "edge_budget_mode": "eq",
-            "use_o4_star_constraints": bool(use_o4_star_constraints) if row_connectivity in {"cut", "flow"} else False,
-            "use_o9_connectivity_lb": bool(use_o9_connectivity_lb) if row_connectivity in {"cut", "flow"} else False,
+            "use_star_constraints": bool(use_star_constraints) if row_connectivity in {"cut", "flow"} else False,
+            "use_connectivity_lower_bound": bool(use_connectivity_lower_bound) if row_connectivity in {"cut", "flow"} else False,
             "oracle_objective": (
                 "max_necessity"
                 if metric == "necessity"
@@ -3510,7 +3545,7 @@ def run(args: argparse.Namespace) -> Path:
             "standard_endpoint_warm_start": (
                 (None)
             ),
-            "standard_endpoint_use_o1_tightening": False,
+            "standard_endpoint_use_incident_cap_tightening": False,
             "standard_endpoint_gurobi_symmetry": (
                 (None)
             ),
@@ -3539,8 +3574,8 @@ def run(args: argparse.Namespace) -> Path:
             "num_layers": int(args.num_layers),
             "hidden_dim": int(args.hidden_dim),
             "connectivity": str(args.connectivity),
-            "use_o4_star_constraints": bool(args.use_o4_star_constraints) if args.connectivity in {"cut", "flow"} else False,
-            "use_o9_connectivity_lb": bool(args.use_o9_connectivity_lb) if args.connectivity in {"cut", "flow"} else False,
+            "use_star_constraints": bool(args.use_star_constraints) if args.connectivity in {"cut", "flow"} else False,
+            "use_connectivity_lower_bound": bool(args.use_connectivity_lower_bound) if args.connectivity in {"cut", "flow"} else False,
             "optimization_samples": int(args.opt_samples),
             "evaluation_samples": int(args.eval_samples),
             "counterexample_ci_method": (
@@ -3704,8 +3739,8 @@ def run(args: argparse.Namespace) -> Path:
                     device=device,
                     k_hop=int(run_config["num_layers"]),
                     connectivity=str(args.connectivity),
-                    use_o4_star_constraints=bool(args.use_o4_star_constraints),
-                    use_o9_connectivity_lb=bool(args.use_o9_connectivity_lb),
+                    use_star_constraints=bool(args.use_star_constraints),
+                    use_connectivity_lower_bound=bool(args.use_connectivity_lower_bound),
                     row_numbering=str(getattr(args, "direct_row_numbering", "eligible")),
                 )
             else:
@@ -3719,8 +3754,8 @@ def run(args: argparse.Namespace) -> Path:
                     metric=metric,
                     device=device,
                     connectivity=str(args.connectivity),
-                    use_o4_star_constraints=bool(args.use_o4_star_constraints),
-                    use_o9_connectivity_lb=bool(args.use_o9_connectivity_lb),
+                    use_star_constraints=bool(args.use_star_constraints),
+                    use_connectivity_lower_bound=bool(args.use_connectivity_lower_bound),
                     row_numbering=str(getattr(args, "direct_row_numbering", "eligible")),
                 )
             if requested_row_ids is not None:
@@ -4084,16 +4119,16 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
-        "--use_o4_star_constraints",
+        "--use_star_constraints",
         action=argparse.BooleanOptionalAction,
         default=True,
-        help="Enable O4 star inequalities for SAA-MILP connectivity helper node variables.",
+        help="Enable star inequalities for SAA-MILP connectivity helper node variables.",
     )
     parser.add_argument(
-        "--use_o9_connectivity_lb",
+        "--use_connectivity_lower_bound",
         action=argparse.BooleanOptionalAction,
         default=True,
-        help="Enable O9 connectivity lower bound sum(z) >= sum(y)-1 when SAA-MILP connectivity is enabled.",
+        help="Enable the connectivity lower bound sum(z) >= sum(y)-1 when SAA-MILP connectivity is enabled.",
     )
     parser.add_argument(
         "--use_anderson_cuts",
