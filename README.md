@@ -1,7 +1,7 @@
 # GNN Fidelity Audit
 
 Code and saved results for **Are Ground-Truth Explanations Optimal under Fidelity
-Objectives? A Systematic Audit of Synthetic Benchmarks for Graph Neural
+Objectives? An Optimization-Based Audit of Synthetic Benchmarks for Graph Neural
 Networks**, by Woo Seok Goh and Kyungsik Lee.
 
 | Directory | Contents |
