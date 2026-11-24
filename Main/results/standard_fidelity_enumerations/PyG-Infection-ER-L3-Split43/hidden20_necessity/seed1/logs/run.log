@@ -30,10 +30,10 @@ Enumeration rank absolute tolerance: 1e-06
 GT incumbent: False
 Exclude exact GT solution: True
 Acceleration profile: accelerated
-O1: True, cap_mode: global
-O3/Gurobi symmetry: True (Symmetry=2, custom hanging-tree O3 disabled)
-O4: False
-O9: False
+Incident cap tightening: True, cap_mode: global
+Gurobi symmetry detection: True (Symmetry=2, custom hanging-tree symmetry breaking disabled)
+Star inequalities: False
+Connectivity lower bound: False
 Anderson cuts: True
 Graph edge branch priority: 0
 Graph OBBT(u): False, max_layers=None

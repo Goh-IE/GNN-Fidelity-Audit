@@ -213,17 +213,21 @@ the manuscript does not report.
 
 Each run keeps its original `config.json`, per-seed `instance_fid.csv`,
 selected and GT edge masks, solver records and available machine-readable
-provenance. Rendered figures and per-run Markdown notes are omitted. Result
-bytes are unchanged, and only the run directories were renamed. Paths written
-inside saved artifacts use the original workspace layout and run names. The
-execution readers map them to this layout through the two `run_index.csv`
-files. Other external tools must account for them.
+provenance. Rendered figures and per-run Markdown notes are omitted. Run
+directories were renamed, and option names were edited as described below.
+Paths written inside saved artifacts use the original workspace layout and run
+names. The execution readers map them to this layout through the two
+`run_index.csv` files. Other external tools must account for them.
 
-Saved runs record four MILP options under their original key names. In
-current code they are `use_incident_cap_tightening` (saved as
-`use_o1_tightening`), `use_gurobi_symmetry_detection` (`use_o3_symmetry_breaking`),
-`use_star_constraints` (`use_o4_star_constraints`) and
-`use_connectivity_lower_bound` (`use_o9_connectivity_lb`).
+After the runs were produced, the saved files were edited in one way only. The
+names of four MILP options (`use_incident_cap_tightening`,
+`use_gurobi_symmetry_detection`, `use_star_constraints` and
+`use_connectivity_lower_bound`) and their labels in the logs were changed to the
+names the current code uses. No value changed. SHA-256 values recorded inside
+saved artifacts refer to the files as first produced, so they do not match the
+renamed CSV headers, configs and logs. For the same reason,
+`--reuse_successful_run_name` does not accept the saved explainer runs as
+reuse sources.
 
 Raw sufficiency fidelity is smaller-is-better and necessity is larger-is-better.
 The robust protocol uses 50 optimization scenarios and 1,000 independent,
