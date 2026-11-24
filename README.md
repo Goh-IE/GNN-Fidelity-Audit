@@ -67,19 +67,19 @@ python Main/audit_standard.py \
 Tree-Cycles, BA-2Motifs and Infection use `--solver enumeration` with the same
 model, budget and GT options and without `--max_instances 30`.
 
-Robust fidelity uses the scenario-table MILP (`--saa_milp_objective
-prob_table`, the only option). It precomputes the model's class probabilities
-for every scenario and does not encode the network. All robust results,
-including the connected-mask ablation, come from this formulation.
+Robust fidelity is searched with a scenario-table MILP. Before solving, it
+computes the model's target-class probability for every relevant edge subset
+in each of the 50 fixed optimization scenarios, and the MILP selects the mask
+with the best scenario average. It does not encode the network, so the
+fixed-SAA optimum it returns is exact. All robust results, including the
+connectivity ablation, use this method.
 
 ```bash
 python Main/audit_robust.py \
-  --datasets BA-House --nn_seeds 1,2,3,4,5 --architecture gin \
-  --num_layers 3 --hidden_dim 5 --solver milp \
+  --datasets BA-House --nn_seeds 1,2,3,4,5 --num_layers 3 --hidden_dim 5 \
   --metric sufficiency --alphas 0.9 --max_instances 30 \
   --opt_samples 50 --eval_samples 1000 --sampling_seed 0 \
-  --counterexample_ci_level 0.95 \
-  --saa_milp_objective prob_table --saa_table_mip_gap 0 \
+  --counterexample_ci_level 0.95 --saa_table_mip_gap 0 \
   --connectivity none --exclude_gt --no-incumbent --time_limit 1200 \
   --gurobi_method 1 --gurobi_threads 1 --gurobi_numeric_focus 3 \
   --gurobi_symmetry 2 --no-gurobi_norel_hybrid --torch_threads 1 --device cpu \
@@ -104,8 +104,8 @@ Main/results/
 ```
 
 The `_mip` directories contain MILP runs. The standard runner takes
-`--solver milp` or `--solver enumeration`, and the robust runner takes
-`--solver milp` only. Dataset folders use the dataset IDs of the CLI.
+`--solver milp` or `--solver enumeration`. The robust runner has no solver
+option. Dataset folders use the dataset IDs of the CLI.
 `BA2Grid-Longa` and `PyG-Infection-ER-L3-Split43` hold BA2Grid and Infection.
 
 ## Which runs back which result

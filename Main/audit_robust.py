@@ -10,8 +10,9 @@ In necessity mode it records
 
     Fid+_alpha(S) = p_full(c*) - mean_D p_model(c* | E_c minus D(S)).
 
-The fixed optimization SAA is solved with the scenario-table MILP
-(--solver milp --saa_milp_objective prob_table).
+The fixed optimization SAA is solved with the scenario-table MILP, which
+precomputes true model probabilities per scenario and does not encode the
+network. The runner supports this search only, for GIN checkpoints.
 """
 
 from __future__ import annotations
@@ -86,8 +87,10 @@ STANDARD_ENDPOINT_COUNTEREXAMPLE_TOLERANCE = 1e-6
 MIP_TIME_LIMIT_SECONDS = 600.0
 ALPHA_METRICS = {"sufficiency", "necessity", "delta"}
 ALPHA_METRIC_CHOICES = ALPHA_METRICS
-OPTIMIZATION_SOLVERS = {"milp"}
-SAA_MILP_OBJECTIVES = {"prob_table"}
+# Fixed settings of this runner, recorded in config.json as before.
+SOLVER = "milp"
+ARCHITECTURE = "gin"
+SAA_MILP_OBJECTIVE = "prob_table"
 # N_opt * 10^6: the evaluation budget implied by the manuscript's enumeration rule.
 DEFAULT_SAA_TABLE_MAX_ENTRIES = 50_000_000
 CONNECTIVITY_MODES = {"none", "cut", "flow"}
@@ -339,20 +342,6 @@ def normalize_alpha_metric(value: str) -> str:
     if metric not in ALPHA_METRIC_CHOICES:
         raise ValueError(f"--metric must be one of {sorted(ALPHA_METRIC_CHOICES)}, got {value!r}.")
     return metric
-
-
-def normalize_solver(value: str) -> str:
-    solver = str(value).strip().lower()
-    if solver not in OPTIMIZATION_SOLVERS:
-        raise ValueError(f"--solver must be one of {sorted(OPTIMIZATION_SOLVERS)}, got {value!r}.")
-    return solver
-
-
-def normalize_saa_milp_objective(value: str) -> str:
-    objective = str(value).strip().lower()
-    if objective not in SAA_MILP_OBJECTIVES:
-        raise ValueError(f"--saa_milp_objective must be one of {sorted(SAA_MILP_OBJECTIVES)}, got {value!r}.")
-    return objective
 
 
 def effective_gurobi_norel_heur_work(args: argparse.Namespace) -> float:
@@ -1518,7 +1507,7 @@ def saa_mip_objective_metadata(
     optimization_objective_value: Any,
     optimization_metrics: Dict[str, Any],
 ) -> Dict[str, Any]:
-    objective_type = normalize_saa_milp_objective(getattr(args, "saa_milp_objective", "prob_table"))
+    objective_type = SAA_MILP_OBJECTIVE
     objective_value = finite_float(optimization_objective_value)
     opt_delta_true = finite_float(optimization_metrics.get("opt_delta_true"))
     opt_avg_p_true = finite_float(optimization_metrics.get("opt_avg_p_true"))
@@ -3430,19 +3419,14 @@ def run(args: argparse.Namespace) -> Path:
         else None
     )
     metric = normalize_alpha_metric(args.metric)
-    solver = normalize_solver(args.solver)
-    architecture = str(args.architecture).lower()
-    if architecture not in MODEL_PAPERS:
-        raise ValueError(f"Unknown architecture {architecture!r}.")
-    if architecture != "gin":
-        raise ValueError("The scenario-table SAA-MILP supports GIN checkpoints only.")
+    args.solver, args.architecture, args.saa_milp_objective = SOLVER, ARCHITECTURE, SAA_MILP_OBJECTIVE
+    solver, architecture = SOLVER, ARCHITECTURE
     args.requested_time_limit = args.time_limit
     if args.output_root is None:
         args.output_root = str(RESULTS_DIR / "robust_fidelity_mip")
     args.connectivity = normalize_connectivity(args.connectivity)
-    args.saa_milp_objective = normalize_saa_milp_objective(args.saa_milp_objective)
     if args.connectivity not in {"none", "cut"}:
-        raise ValueError("--saa_milp_objective prob_table supports --connectivity none or cut.")
+        raise ValueError("The scenario-table MILP supports --connectivity none or cut.")
     if int(args.saa_table_max_entries) <= 0:
         raise ValueError("--saa_table_max_entries must be positive.")
     if float(args.saa_table_mip_gap) < 0.0:
@@ -3904,12 +3888,6 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--nn_seeds", default=DEFAULT_SEEDS, help="Comma-separated neural-network seeds.")
     parser.add_argument("--nn_seed", dest="nn_seeds", help="Alias for --nn_seeds.")
     parser.add_argument(
-        "--architecture",
-        choices=["gin"],
-        default="gin",
-        help="Checkpoint architecture. Only GIN is supported.",
-    )
-    parser.add_argument(
         "--alphas",
         default=None,
         help=(
@@ -3925,12 +3903,6 @@ def build_parser() -> argparse.ArgumentParser:
             "Alpha metric to compute. 'sufficiency' is Fid-alpha-: selected edges plus retained context. "
             "'necessity' is Fid-alpha+: selected edges are probabilistically dropped from the candidate graph."
         ),
-    )
-    parser.add_argument(
-        "--solver",
-        choices=sorted(OPTIMIZATION_SOLVERS),
-        default="milp",
-        help="Solve the fixed-scenario SAA with the scenario-table MILP before independent inference (the only option).",
     )
     parser.add_argument(
         "--output_root",
@@ -4008,22 +3980,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Number of fixed Bernoulli(alpha) scenarios used for SAA optimization.",
     )
     parser.add_argument(
-        "--saa_milp_objective",
-        choices=sorted(SAA_MILP_OBJECTIVES),
-        default="prob_table",
-        help=(
-            "SAA-MILP objective. 'prob_table' (the only option) solves the fixed-scenario SAA "
-            "exactly from true-probability scenario tables (--connectivity none or cut) and does "
-            "not encode the network. Reported alpha metrics always use true torch probabilities."
-        ),
-    )
-    parser.add_argument(
         "--saa_table_max_entries",
         type=int,
         default=DEFAULT_SAA_TABLE_MAX_ENTRIES,
         help=(
             "Maximum number of scenario-table entries (true-probability forward passes) for "
-            f"--saa_milp_objective prob_table. Default {DEFAULT_SAA_TABLE_MAX_ENTRIES} = N_opt * 10^6. "
+            f"the scenario-table MILP. Default {DEFAULT_SAA_TABLE_MAX_ENTRIES} = N_opt * 10^6. "
             "Rows above the cap are skipped with a recorded reason."
         ),
     )
@@ -4032,7 +3994,7 @@ def build_parser() -> argparse.ArgumentParser:
         type=float,
         default=0.0,
         help=(
-            "Gurobi MIPGap for --saa_milp_objective prob_table (default 0: prove the table optimum). "
+            "Gurobi MIPGap for the scenario-table MILP (default 0: prove the table optimum). "
             "Gurobi's default 1e-4 is of the same order as the audit tolerance."
         ),
     )
