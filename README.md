@@ -257,14 +257,15 @@ scenario-table MILP at hidden dimensions 5 and 80 with unrestricted and
 connected masks, and all five explainers. A short training run also wrote GIN
 checkpoints in the expected place.
 
-## Attribution and licenses
+## License and citation
 
-The code in this repository is released under the [MIT License](LICENSE).
-The pinned FlowX sources under
-[Explainers/methods/_vendor/flowx/](Explainers/methods/_vendor/flowx/) keep their
-[MIT license](Explainers/methods/_vendor/flowx/LICENSE) and `provenance.json` for
-CM-BF/FlowX commit `01fc6390bf8dc64201d491a1effc5b71ae37e344`.
-DIG is installed separately through the explainer requirements. Third-party
-packages keep their own licenses. Dataset definitions and provenance are in
-`Main/data/pyg_datasets.py`. See `CITATION.cff` for the accompanying research
-citation.
+This repository is released under the [MIT License](LICENSE).
+
+The FlowX code in `Explainers/methods/_vendor/flowx/` is copied from the
+[FlowX repository](https://github.com/CM-BF/FlowX) (commit `01fc639`) and keeps
+its own [MIT license](Explainers/methods/_vendor/flowx/LICENSE). DIG and the
+other packages are installed through the requirements files and keep their own
+licenses.
+
+Dataset definitions are in `Main/data/pyg_datasets.py`. To cite this work, see
+`CITATION.cff`.
