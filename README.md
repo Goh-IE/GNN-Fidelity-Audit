@@ -29,7 +29,8 @@ python -m pip install -r Explainers/requirements.txt
 
 The verification environment used Python 3.11.14, CPU PyTorch 2.9.1, PyG 2.7.0
 and Gurobi 13.0.0. MILP execution requires a Gurobi license. Enumeration imports
-the shared solver module but does not optimize a Gurobi model. A C++ compiler
+the shared solver module but does not optimize a Gurobi model. Standard
+sufficiency enumeration uses `pynauty` to group isomorphic masks. A C++ compiler
 is optional for the accelerated enumeration helpers in `Main/enumeration/native/`.
 
 ## Run the audit
@@ -259,8 +260,8 @@ checkpoints in the expected place.
 
 ## Attribution and licenses
 
-The original source workspace did not specify a repository-wide license.
-Existing source attribution is kept. The pinned FlowX sources under
+The code in this repository is released under the [MIT License](LICENSE).
+The pinned FlowX sources under
 [Explainers/methods/_vendor/flowx/](Explainers/methods/_vendor/flowx/) keep their
 [MIT license](Explainers/methods/_vendor/flowx/LICENSE) and `provenance.json` for
 CM-BF/FlowX commit `01fc6390bf8dc64201d491a1effc5b71ae37e344`.
