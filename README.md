@@ -170,11 +170,11 @@ A few cases to note:
 The paper applies its own decision rule to the saved rows. This rule is not
 the same as the `counterexample_status` column written by the runners.
 
-- **Cohort.** For each benchmark, the paper uses the first 30 instances of the
-  standard pool in pool order, or all of them if there are fewer. The same
+- **Instances.** For each benchmark, the paper uses the first 30 instances of
+  the standard pool in pool order, or all of them if there are fewer. The same
   instances are used for every model, width and objective. Some runs contain
-  the whole pool, so this cut is made when the results are read. Pairs whose
-  model misclassifies the instance are dropped.
+  more instances, and the paper keeps only these 30 when reading them. Pairs
+  whose model misclassifies the instance are dropped.
 - **Tolerance.** Scores within `tau = 1e-4` count as tied.
 - **Standard fidelity.** Each pair is sorted into one of four outcomes: the
   reference is beaten by more than `tau`, a tie within `tau`, the reference
