@@ -1,25 +1,27 @@
 # GNN Fidelity Audit
 
-Code and saved results for **Are Ground-Truth Explanations Optimal under Fidelity
-Objectives? An Optimization-Based Audit of Synthetic Benchmarks for Graph Neural
-Networks**, by Woo Seok Goh and Kyungsik Lee.
+Code and saved results for the paper **Are Ground-Truth Explanations Optimal
+under Fidelity Objectives? An Optimization-Based Audit of Synthetic Benchmarks
+for Graph Neural Networks** by Woo Seok Goh and Kyungsik Lee.
 
 | Directory | Contents |
 | --- | --- |
 | [Main/](Main/) | Standard and robust fidelity audit, model training, data, checkpoints and audit results |
-| [Explainers/](Explainers/) | Random, GNNExplainer, PGExplainer and FlowX implementations or adapters and their saved results |
+| [Explainers/](Explainers/) | Random, GNNExplainer, PGExplainer and FlowX, with their saved results |
 
-The repository holds the runs that the manuscript reports, and only those.
 The audit covers seven benchmarks: BA-House, BA2Grid, BA-HouseANDGrid,
-BA-HouseORGrid, Tree-Cycles, BA-2Motifs and Infection. Each benchmark has five
-3-layer GINs with hidden dimension 5 (the main models) and five each with
-hidden dimensions 20 and 80 (the capacity study). The main audit has 937
-instance/model pairs. Paper sources, rendering and reporting tools, tests, and
-runs that the manuscript does not use are omitted.
+BA-HouseORGrid, Tree-Cycles, BA-2Motifs and Infection. For each benchmark we
+trained five 3-layer GINs with hidden dimension 5, which are the main models,
+and five more at each of hidden dimensions 20 and 80 for the capacity study.
+The main audit has 937 instance/model pairs.
+
+This repository contains only the runs that the paper reports. It does not
+include the paper sources, the tools that build the paper's tables and
+figures, or tests.
 
 ## Install
 
-Use Python 3.11 and run commands from the repository root.
+Use Python 3.11 and run all commands from the repository root.
 
 ```bash
 python -m pip install -r requirements.txt
@@ -27,29 +29,34 @@ python -m pip install -r requirements.txt
 python -m pip install -r Explainers/requirements.txt
 ```
 
-The verification environment used Python 3.11.14, CPU PyTorch 2.9.1, PyG 2.7.0
-and Gurobi 13.0.0. MILP execution requires a Gurobi license. Enumeration imports
-the shared solver module but does not optimize a Gurobi model. A C++ compiler
-is optional for the accelerated enumeration helpers in `Main/enumeration/native/`.
+We tested with Python 3.11.14, CPU PyTorch 2.9.1, PyG 2.7.0 and Gurobi 13.0.0.
+The MILP searches need a Gurobi license. Enumeration does not, but `gurobipy`
+must still be installed because the solver module is imported. A C++ compiler
+is optional. If one is available, the enumeration helpers in
+`Main/enumeration/native/` run faster.
 
-## Run the audit
+## Code layout
 
-`Main/audit_standard.py` runs deterministic fidelity audits and
-`Main/audit_robust.py` runs robust SAA audits. `Main/train_gnn.py` trains the
-GIN predictors. Shared dataset loaders and frozen inputs live in
-`Main/data/`, the GIN model in `Main/models/GIN.py` and its checkpoints in
-`Main/models/pretrained/GIN/`, and training and configuration helpers in
-`Main/training/`. The MILP searches are in `Main/solvers/`:
+- `Main/audit_standard.py` runs the standard fidelity audit.
+- `Main/audit_robust.py` runs the robust fidelity audit.
+- `Main/train_gnn.py` trains the GINs.
+- `Main/data/` holds the dataset loaders and the frozen inputs.
+- `Main/models/GIN.py` defines the GIN, and its checkpoints are in
+  `Main/models/pretrained/GIN/`.
+- `Main/training/` holds the training helpers and configurations.
+- `Main/solvers/` holds the MILP searches:
 
 ```text
 Main/solvers/
-  standard_milp.py   # standard-fidelity search over exact-K edge masks
+  standard_milp.py   # standard fidelity search over exact-K edge masks
   gin_milp.py        # MILP encoding of the trained GIN, used by standard_milp.py
   robust_milp.py     # scenario-table SAA-MILP for robust fidelity
 ```
 
-`Main/robust_common.py` holds the evaluation helpers that the robust runner and
-`robust_milp.py` share.
+`Main/robust_common.py` holds helpers shared by the robust runner and
+`robust_milp.py`.
+
+## Run the audit
 
 ```bash
 python Main/audit_standard.py --help
@@ -57,9 +64,12 @@ python Main/audit_robust.py --help
 python Main/train_gnn.py --help
 ```
 
-Standard fidelity on the four MILP benchmarks (BA-House, BA2Grid,
-BA-HouseANDGrid, BA-HouseORGrid), as run for the manuscript. Use
-`--objective max_necessity` for necessity.
+### Standard fidelity
+
+The command below runs standard sufficiency on BA-House with the settings used
+in the paper. The other three MILP benchmarks (BA2Grid, BA-HouseANDGrid and
+BA-HouseORGrid) use the same command. For necessity, use
+`--objective max_necessity`.
 
 ```bash
 python Main/audit_standard.py \
@@ -75,15 +85,18 @@ python Main/audit_standard.py \
   --output_dir /tmp/gnn-audit-standard --run_name example_standard
 ```
 
-Tree-Cycles, BA-2Motifs and Infection use `--solver enumeration` with the same
-model, budget and GT options and without `--max_instances 30`.
+Tree-Cycles, BA-2Motifs and Infection are searched by enumeration instead. Use
+`--solver enumeration` and drop `--max_instances 30`.
 
-Robust fidelity is searched with a scenario-table MILP. Before solving, it
-computes the model's target-class probability for every relevant edge subset
-in each of the 50 fixed optimization scenarios, and the MILP selects the mask
-with the best scenario average. It does not encode the network, so a search
-that ends optimal returns the exact fixed-SAA optimum. All robust results,
-including the connectivity ablation, use this method.
+### Robust fidelity
+
+Robust fidelity is searched with a scenario-table MILP. Before solving, the
+code runs the model to get the target-class probability for every relevant
+edge subset in each of the 50 fixed optimization scenarios. The MILP then picks
+the mask with the best average over these scenarios. Because the network is
+not encoded in the MILP, a search that ends optimal gives the exact optimum of
+this fixed sample average. All robust results in the paper, including the
+connectivity ablation, use this method.
 
 ```bash
 python Main/audit_robust.py \
@@ -97,15 +110,21 @@ python Main/audit_robust.py \
   --output_root /tmp/gnn-audit-robust --run_name example_robust
 ```
 
-Use `--metric necessity --alphas 0.1` for robust necessity. Some runs also
+For robust necessity, use `--metric necessity --alphas 0.1`. Some runs also
 pass `--direct_row_numbering pool`, which numbers rows by their position in the
-instance pool (`direct_row_numbering` in the run's `config.json`).
-Row IDs enter the scenario seeds, so runs are compared only under the same
-numbering. Larger models use `--hidden_dim 20` or `--hidden_dim 80`. The
-connectivity ablation uses `--connectivity cut --use_star_constraints
---use_connectivity_lower_bound`.
+instance pool. Each run's `config.json` shows which numbering it used. Row IDs
+determine the scenario seeds, so compare two runs only if they use the same
+numbering.
 
-Default result roots are separated by metric family and solver:
+Other settings used in the paper:
+
+- Larger models: `--hidden_dim 20` or `--hidden_dim 80`.
+- Connectivity ablation: `--connectivity cut --use_star_constraints
+  --use_connectivity_lower_bound`.
+
+## Saved results
+
+Results are stored by fidelity type and search method:
 
 ```text
 Main/results/
@@ -114,15 +133,10 @@ Main/results/
   robust_fidelity_mip/
 ```
 
-The `_mip` directories contain MILP runs. The standard runner takes
-`--solver milp` or `--solver enumeration`. The robust runner has no solver
-option. Dataset folders use the dataset IDs of the CLI.
-`BA2Grid-Longa` and `PyG-Infection-ER-L3-Split43` hold BA2Grid and Infection.
-
-## Which runs back which result
-
-Each run directory is named `hidden<width>_<objective>`, with `_connected`
-for the connected-mask ablation:
+The `_mip` folders hold MILP runs. Dataset folders use the dataset names that
+the command line expects, so BA2Grid is in `BA2Grid-Longa` and Infection is in
+`PyG-Infection-ER-L3-Split43`. Each run folder is named after the model width
+and the objective, with `_connected` added for the connectivity ablation:
 
 ```text
 Main/results/<family>/<dataset>/
@@ -136,45 +150,48 @@ Main/results/<family>/<dataset>/
     seed1/ ... seed5/
 ```
 
-Each run's `config.json` records its settings (hidden dimension,
-connectivity, time limit, alpha, row numbering) and keeps the original run name
-in `run_name`. The models are in
-`Main/models/pretrained/GIN/<dataset>_3L_<width>H_seed<seed>/`. Standard runs
-at hidden dimension 20 and 80 cover the three enumeration benchmarks only.
-BA-HouseANDGrid has no connectivity ablation because its references are
-disconnected. The BA-2Motifs model with hidden dimension 80 and seed 4 failed
-to learn the task (test accuracy 44.0%). Its rows are kept in the run files, and
-the manuscript excludes them.
+Each run's `config.json` records its settings, such as hidden dimension,
+connectivity, time limit, alpha and row numbering, and keeps the original run
+name in `run_name`. The trained models are in
+`Main/models/pretrained/GIN/<dataset>_3L_<width>H_seed<seed>/`.
 
-## How the manuscript reads these files
+A few cases to note:
 
-The manuscript applies its own decision rule to the saved rows. The rule
-differs from the `counterexample_status` column that the runners write.
+- Standard runs at hidden dimensions 20 and 80 exist only for the three
+  enumeration benchmarks.
+- BA-HouseANDGrid has no connectivity ablation, because its reference
+  explanations are not connected.
+- The BA-2Motifs model with hidden dimension 80 and seed 4 did not learn the
+  task (test accuracy 44.0%). Its rows are in the run files, but the paper
+  leaves them out.
 
-- **Cohort.** For each benchmark, the main cohort is the first 30 instances of
-  the model-independent standard pool, in pool order (all instances when fewer
-  exist). The same instances are used for every model, width and objective.
-  Standard enumeration runs and some robust runs contain the full pool, so the
-  cohort is applied when reading. Pairs whose model misclassifies the instance are
-  dropped.
-- **Tolerance.** The score tolerance is `tau = 1e-4`.
-- **Standard fidelity.** Each pair falls into one of four classes: reference
-  inferiority (a candidate beats the reference by more than `tau`), tie within
-  tolerance, reference superiority, or unresolved. For MILP runs the classes
-  come from the incumbent and from the Gurobi dual bound in `best_bound`,
-  mapped to probability space with `bar_m`. A time-limited run can still give
-  a certified class when the bound settles it.
+## How the paper counts the results
+
+The paper applies its own decision rule to the saved rows. This rule is not
+the same as the `counterexample_status` column written by the runners.
+
+- **Cohort.** For each benchmark, the paper uses the first 30 instances of the
+  standard pool in pool order, or all of them if there are fewer. The same
+  instances are used for every model, width and objective. Some runs contain
+  the whole pool, so this cut is made when the results are read. Pairs whose
+  model misclassifies the instance are dropped.
+- **Tolerance.** Scores within `tau = 1e-4` count as tied.
+- **Standard fidelity.** Each pair is sorted into one of four outcomes: the
+  reference is beaten by more than `tau`, a tie within `tau`, the reference
+  wins, or unresolved. For MILP runs, the outcome comes from the best mask
+  found and from the Gurobi bound in `best_bound`, converted to a probability
+  with `bar_m`. A run that hit the time limit can still be settled by its bound.
 - **Robust fidelity.** For each pair, a one-sided paired t test on the 1,000
-  held-out scenarios checks whether the expected improvement over the
-  reference exceeds `tau`. It uses `paired_advantage_mean`,
-  `paired_advantage_std` and `paired_scenario_count`. A zero standard deviation
-  gives `p = 1`. Holm correction at level 0.05 is applied within each
-  benchmark, hidden dimension, mask family and objective.
+  held-out scenarios asks whether the best mask beats the reference by more
+  than `tau`. It uses `paired_advantage_mean`, `paired_advantage_std` and
+  `paired_scenario_count`. A zero standard deviation gives `p = 1`. Holm
+  correction at level 0.05 is applied within each benchmark, hidden dimension,
+  mask family and objective.
 
-## Run the explainers
+## Explainers
 
-`Explainers/run_explainers.py` is the shared entry point. Implementation and
-results are grouped as follows:
+`Explainers/run_explainers.py` runs all explainers. The folder is organized as
+follows:
 
 ```text
 Explainers/
@@ -183,17 +200,17 @@ Explainers/
   methods/
     gnnexplainer.py
     pgexplainer.py
-    dig_loader.py    # Shared loader for the pinned DIG implementation
-    model_adapter.py # Shared frozen-model and edge-mask interface
-    flowx.py         # FlowX sufficiency and necessity adapters
-    _vendor/flowx/   # Pinned upstream sources, provenance and license
+    dig_loader.py    # loads GNNExplainer and PGExplainer from DIG
+    model_adapter.py # wraps the trained GIN and its edge masks
+    flowx.py         # FlowX for sufficiency and necessity
+    _vendor/flowx/   # FlowX source code with its license
   results/<method>/
   results/robust_reevaluations/
 ```
 
-All methods use the same explicit audit cohort and exact reference-size edge
-budget. Available method names are `random`, `gnnexplainer`, `pgexplainer`,
-`flowx_suf` and `flowx_nec`.
+Every explainer is run on the same instances as the audit and selects exactly
+as many edges as the reference explanation has. The available methods are
+`random`, `gnnexplainer`, `pgexplainer`, `flowx_suf` and `flowx_nec`.
 
 ```bash
 python Explainers/run_explainers.py --help
@@ -203,59 +220,57 @@ python Explainers/run_explainers.py \
   --output-root /tmp/gnn-explainer-example --run-name example_random
 ```
 
-Saved explainer runs are in `Explainers/results/<method>/<dataset>/hidden5/`.
-New formal runs go to `Explainers/results/<method>/<dataset>/<run-name>/`, and
-existing runs are never overwritten. FlowX uses the pinned upstream sampling
-and refinement with an undirected edge projection and fixed GIN self terms
-during final evaluation. On BA-2Motifs the FlowX results come from a completion
-run. It copied the finished records of an earlier, incomplete run and
-recomputed the records whose input graphs contain self-loops, after a fix to
-how those loops are handled.
+The saved runs are in `Explainers/results/<method>/<dataset>/hidden5/`. New
+formal runs are written to `Explainers/results/<method>/<dataset>/<run-name>/`,
+and existing runs are never overwritten.
 
-The robust explainer scores in the manuscript come from
-`Explainers/results/robust_reevaluations/`. These runs evaluate the saved
-explainer masks on the same 1,000 held-out scenarios as the robust audit
-(the sampling seeds and reference scores match the audit runs above). Each
-`evaluation/*.npz` file stores the masks, the scenario draws and the resulting
-probabilities. The producing script needs per-instance attribution scores that
-are not part of this repository, so these runs are records rather than a
-command you can rerun here. Their files still list a Grad-CAM method, which
-the manuscript does not report.
+FlowX runs its original sampling and refinement code. We make its edge scores
+undirected and keep the GIN self term fixed in the final evaluation. On
+BA-2Motifs, the FlowX results come from a second run. It copied the finished
+records of an earlier run that had stopped, and recomputed the records whose
+input graphs contain self-loops after we fixed how those loops are handled.
 
-## Saved results and interpretation
+The robust explainer scores in the paper come from
+`Explainers/results/robust_reevaluations/`. These runs score the saved
+explainer masks on the same 1,000 held-out scenarios as the robust audit, with
+the same sampling seeds and the same reference scores. Each `evaluation/*.npz`
+file stores the masks, the scenarios and the resulting probabilities. The
+script that made these runs needs per-instance attribution scores that are
+not in this repository, so the runs cannot be repeated from here. Their files
+also list Grad-CAM, which the paper does not report.
 
-Each run keeps its `config.json`, per-seed `instance_fid.csv`,
-selected and GT edge masks, solver records and available machine-readable
-provenance. Rendered figures and per-run Markdown notes are omitted. Paths
-written inside saved artifacts use the original workspace layout (for example
-`Version5/standard_fidelity_enumerations/...`) with the published run directory
-names. The execution readers map them to this layout. Other external tools must
-account for them.
+## Notes on the saved files
 
-After the runs were produced, names in the saved files were edited to match
-the current code. No value changed. The names of four MILP options
-(`use_incident_cap_tightening`, `use_gurobi_symmetry_detection`,
-`use_star_constraints` and `use_connectivity_lower_bound`) and their log labels
-were renamed, and the model namespace, its checkpoint paths and its source file
-names now say GIN. Paths inside saved files use the published run directory
-names, while `run_name` keeps the original name. The checkpoint files keep their
-bytes. SHA-256 values recorded inside saved artifacts refer to the files as
-first produced, so they do not match the renamed CSV headers, configs and logs.
-For the same reason, `--reuse-successful-run-name` does not accept the saved
-explainer runs as reuse sources.
+- Each run keeps its `config.json`, the per-seed `instance_fid.csv`, the
+  selected and reference edge masks, solver records and other provenance
+  records. Rendered figures and per-run notes are not included.
+- Paths inside the saved files follow the layout of the original workspace
+  (for example `Version5/standard_fidelity_enumerations/...`), with the run
+  folder names used here. The code in this repository maps these paths to the
+  current layout. Other tools need to do the same.
+- After the runs were produced, some names in the saved files were changed to
+  match the current code. No values changed. Four MILP options and their log
+  labels were renamed (`use_incident_cap_tightening`,
+  `use_gurobi_symmetry_detection`, `use_star_constraints` and
+  `use_connectivity_lower_bound`). The model, its checkpoint folder and the
+  solver files are now named GIN, `standard_milp.py` and `gin_milp.py`. Paths
+  use the run folder names above, while `run_name` keeps the original name.
+- The checkpoint files are unchanged. SHA-256 hashes recorded inside saved
+  files refer to the files as first written, so they no longer match the
+  renamed CSV headers, configs and logs. For the same reason,
+  `--reuse-successful-run-name` cannot reuse the saved explainer runs.
+- Raw sufficiency fidelity is better when smaller, and necessity is better
+  when larger. The robust audit uses 50 optimization scenarios and 1,000
+  independent evaluation scenarios that are paired with the reference. A run
+  that stops at the time limit gives no proof of optimality, and the optimum of
+  a fixed sample average is not the optimum of the expectation.
 
-Raw sufficiency fidelity is smaller-is-better and necessity is larger-is-better.
-The robust protocol uses 50 optimization scenarios and 1,000 independent,
-paired evaluation scenarios. A time-limited incumbent is not a certified
-optimum, and a fixed-SAA optimum is not a population optimum.
-
-This is a current-code snapshot with historical result artifacts. Producer
-code hashes and environment records are kept where available. The full formal
-training and optimization were not rerun for this snapshot. Small checks
-reproduced saved rows for standard MILP, standard enumeration, the robust
-scenario-table MILP at hidden dimensions 5 and 80 with unrestricted and
-connected masks, and all five explainers. A short training run also wrote GIN
-checkpoints in the expected place.
+The code is the current version, and the results come from earlier runs. We
+did not rerun the full training and searches for this release. Short checks
+did reproduce the saved rows for standard MILP, standard enumeration, robust
+MILP at hidden dimensions 5 and 80 with and without connected masks, and all
+five explainers. A short training run also wrote GIN checkpoints to the
+expected place.
 
 ## License and citation
 
