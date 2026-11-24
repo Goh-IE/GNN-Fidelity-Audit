@@ -155,43 +155,40 @@ connectivity, time limit, alpha and row numbering, and keeps the original run
 name in `run_name`. The trained models are in
 `Main/models/pretrained/GIN/<dataset>_3L_<width>H_seed<seed>/`.
 
-A few cases to note:
-
-- Standard runs at hidden dimensions 20 and 80 exist only for the three
-  enumeration benchmarks.
-- BA-HouseANDGrid has no connectivity ablation, because its reference
-  explanations are not connected.
-- The BA-2Motifs model with hidden dimension 80 and seed 4 did not learn the
-  task (test accuracy 44.0%). Its rows are in the run files, but the paper
-  leaves them out.
+Standard runs at hidden dimensions 20 and 80 exist only for the three
+enumeration benchmarks. BA-HouseANDGrid has no connectivity ablation, because
+its reference explanations are not connected. The BA-2Motifs model with hidden
+dimension 80 and seed 4 did not learn the task (test accuracy 44.0%). Its rows
+are in the run files, but the paper leaves them out.
 
 ## How the paper counts the results
 
-The paper applies its own decision rule to the saved rows. This rule is not
-the same as the `counterexample_status` column written by the runners.
+The paper does not use the `counterexample_status` column that the runners
+write. It reads the saved rows as follows.
 
-- **Instances.** For each benchmark, the paper uses the first 30 instances of
-  the standard pool in pool order, or all of them if there are fewer. The same
-  instances are used for every model, width and objective. Some runs contain
-  more instances, and the paper keeps only these 30 when reading them. Pairs
-  whose model misclassifies the instance are dropped.
-- **Tolerance.** Scores within `tau = 1e-4` count as tied.
-- **Standard fidelity.** Each pair is sorted into one of four outcomes: the
-  reference is beaten by more than `tau`, a tie within `tau`, the reference
-  wins, or unresolved. For MILP runs, the outcome comes from the best mask
-  found and from the Gurobi bound in `best_bound`, converted to a probability
-  with `bar_m`. A run that hit the time limit can still be settled by its bound.
-- **Robust fidelity.** For each pair, a one-sided paired t test on the 1,000
-  held-out scenarios asks whether the best mask beats the reference by more
-  than `tau`. It uses `paired_advantage_mean`, `paired_advantage_std` and
-  `paired_scenario_count`. A zero standard deviation gives `p = 1`. Holm
-  correction at level 0.05 is applied within each benchmark, hidden dimension,
-  mask family and objective.
+For each benchmark, the paper uses the first 30 instances of the standard pool
+in pool order, or all of them if there are fewer, for every model, width and
+objective. Some runs contain more instances, and only these 30 are read. Pairs
+whose model misclassifies the instance are dropped. Scores within
+`tau = 1e-4` count as tied.
+
+Under standard fidelity, each pair ends in one of four outcomes: the reference
+is beaten by more than `tau`, the two tie within `tau`, the reference wins, or
+the comparison is unresolved. For MILP runs, the outcome comes from the best
+mask found and from the Gurobi bound in `best_bound`, converted to a
+probability with `bar_m`. A run that hit the time limit can still be settled
+by its bound.
+
+Under robust fidelity, a one-sided paired t test on the 1,000 held-out
+scenarios checks whether the best mask beats the reference by more than `tau`.
+It uses `paired_advantage_mean`, `paired_advantage_std` and
+`paired_scenario_count`, and a zero standard deviation gives `p = 1`. Holm
+correction at level 0.05 is applied within each benchmark, hidden dimension,
+mask family and objective.
 
 ## Explainers
 
-`Explainers/run_explainers.py` runs all explainers. The folder is organized as
-follows:
+`Explainers/run_explainers.py` runs all explainers:
 
 ```text
 Explainers/
