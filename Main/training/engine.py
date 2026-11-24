@@ -99,10 +99,10 @@ def store_checkpoint(
     :param val_acc: validation accuracy obtained by the model
     :param test_acc: test accuracy obtained by the model
     :param epoch: the current epoch of the training process
-    :param num_layers: number of GNN layers (2 or 3). Only used for Vanilla models.
-    :param hidden_dim: hidden dimension for Vanilla models.
-    :param use_batchnorm: whether batch normalization is used. Only for Vanilla models.
-    :param use_jk_concat: whether JK-concat is used. Only for Vanilla models.
+    :param num_layers: number of GNN layers (2 or 3). Only used for GIN models.
+    :param hidden_dim: hidden dimension for GIN models.
+    :param use_batchnorm: whether batch normalization is used. Only for GIN models.
+    :param use_jk_concat: whether JK-concat is used. Only for GIN models.
     :param config: training configuration object
     :retunrs: None
     """
@@ -184,10 +184,10 @@ def load_best_model(
     :param dataset: str, the dataset (supports both canonical and legacy names)
     :param model: the model who's parameters overide
     :param eval_enabled: wheater to activate evaluation mode on the model or not
-    :param num_layers: number of GNN layers (2 or 3). Only used for Vanilla models.
-    :param hidden_dim: hidden dimension for Vanilla models.
-    :param use_batchnorm: whether batch normalization is used. Only for Vanilla models.
-    :param use_jk_concat: whether JK-concat is used. Only for Vanilla models.
+    :param num_layers: number of GNN layers (2 or 3). Only used for GIN models.
+    :param hidden_dim: hidden dimension for GIN models.
+    :param use_batchnorm: whether batch normalization is used. Only for GIN models.
+    :param use_jk_concat: whether JK-concat is used. Only for GIN models.
     :return: model with pramaters taken from the checkpoint
     """
     print(best_epoch)
@@ -241,10 +241,10 @@ def train_node(_dataset, _paper, config, num_layers=3, hidden_dim=20, use_batchn
     :param _dataset: the dataset we wish to use for training
     :param _paper: the paper we whish to follow, chose from "GNN" or "PG"
     :param config: training configuration object
-    :param num_layers: number of GNN layers (2 or 3). Only used for Vanilla models.
-    :param hidden_dim: hidden dimension for Vanilla models.
-    :param use_batchnorm: whether to use batch normalization. Only for Vanilla models.
-    :param use_jk_concat: whether to use JK-concat. Only for Vanilla models.
+    :param num_layers: number of GNN layers (2 or 3). Only used for GIN models.
+    :param hidden_dim: hidden dimension for GIN models.
+    :param use_batchnorm: whether to use batch normalization. Only for GIN models.
+    :param use_jk_concat: whether to use JK-concat. Only for GIN models.
     """
     normalize_features = getattr(config, "normalize_features", True)
     graph, features, labels, train_mask, val_mask, test_mask = load_dataset(
@@ -390,10 +390,10 @@ def train_graph(_dataset, _paper, config, num_layers=3, hidden_dim=20, use_batch
     :param _dataset: the dataset we wish to use for training
     :param _paper: the paper we whish to follow, chose from "GNN" or "PG"
     :param config: training configuration object
-    :param num_layers: number of GNN layers (2 or 3). Only used for Vanilla models.
-    :param hidden_dim: hidden dimension for Vanilla models.
-    :param use_batchnorm: whether to use batch normalization. Only for Vanilla models.
-    :param use_jk_concat: whether to use JK-concat. Only for Vanilla models.
+    :param num_layers: number of GNN layers (2 or 3). Only used for GIN models.
+    :param hidden_dim: hidden dimension for GIN models.
+    :param use_batchnorm: whether to use batch normalization. Only for GIN models.
+    :param use_jk_concat: whether to use JK-concat. Only for GIN models.
     """
     normalize_features = getattr(config, "normalize_features", True)
     graphs, features, labels, train_mask, val_mask, test_mask = load_dataset(

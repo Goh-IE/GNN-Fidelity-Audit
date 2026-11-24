@@ -1,5 +1,5 @@
 """
-MILP-based Explainer for Vanilla GNN (GIN-style).
+MILP-based Explainer for GIN (GIN-style).
 
 This module provides a high-level interface for explaining GNN predictions
 using Mixed Integer Linear Programming (MILP).
@@ -24,27 +24,27 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from .mip_gnn_vanilla import (
-    VanillaNodeGnnWeights,
-    VanillaNodeGnnWeights4L,
-    VanillaNodeGnnWeights2L,
-    VanillaGraphGnnWeights,
-    VanillaGraphGnnWeights4L,
-    VanillaGraphGnnWeights2L,
-    build_vanilla_nodegnn_milp,
-    build_vanilla_nodegnn_milp_4l,
-    build_vanilla_nodegnn_milp_2l,
-    build_vanilla_graphgnn_milp,
-    build_vanilla_graphgnn_milp_4l,
-    build_vanilla_graphgnn_milp_2l,
+from .mip_gin import (
+    GINNodeGnnWeights,
+    GINNodeGnnWeights4L,
+    GINNodeGnnWeights2L,
+    GINGraphGnnWeights,
+    GINGraphGnnWeights4L,
+    GINGraphGnnWeights2L,
+    build_gin_nodegnn_milp,
+    build_gin_nodegnn_milp_4l,
+    build_gin_nodegnn_milp_2l,
+    build_gin_graphgnn_milp,
+    build_gin_graphgnn_milp_4l,
+    build_gin_graphgnn_milp_2l,
     optimize_and_extract,
     optimize_and_extract_graph,
     compute_adjacency,
-    forward_vanilla_nodegnn_full,
-    forward_vanilla_nodegnn_full_4l,
-    forward_vanilla_nodegnn_full_2l,
-    forward_vanilla_graphgnn_full,
-    forward_vanilla_graphgnn_full_2l,
+    forward_gin_nodegnn_full,
+    forward_gin_nodegnn_full_4l,
+    forward_gin_nodegnn_full_2l,
+    forward_gin_graphgnn_full,
+    forward_gin_graphgnn_full_2l,
     MilpSolution,
     ObjectiveMode,
     ConnectivityMode,
@@ -75,25 +75,25 @@ def _compute_original_node_reference_prediction(
     x: np.ndarray,
     edge_index: np.ndarray,
     node_idx: int,
-    weights: Union[VanillaNodeGnnWeights2L, VanillaNodeGnnWeights, VanillaNodeGnnWeights4L],
+    weights: Union[GINNodeGnnWeights2L, GINNodeGnnWeights, GINNodeGnnWeights4L],
 ) -> Tuple[int, float]:
     """Return (c_star, bar_m) from the original full graph before any k-hop truncation."""
     full_edge_sequence, _ = _edge_sequence_with_self_loops(edge_index, int(x.shape[0]))
     full_adj = compute_adjacency(int(x.shape[0]), full_edge_sequence)
     use_jk_concat = getattr(weights, "use_jk_concat", True)
 
-    if isinstance(weights, VanillaNodeGnnWeights2L):
-        h1_full, h2_full = forward_vanilla_nodegnn_full_2l(x, full_adj, weights)
+    if isinstance(weights, GINNodeGnnWeights2L):
+        h1_full, h2_full = forward_gin_nodegnn_full_2l(x, full_adj, weights)
         v_embed = np.concatenate([h1_full[node_idx], h2_full[node_idx]], axis=0) if use_jk_concat else h2_full[node_idx]
-    elif isinstance(weights, VanillaNodeGnnWeights4L):
-        h1_full, h2_full, h3_full, h4_full = forward_vanilla_nodegnn_full_4l(x, full_adj, weights)
+    elif isinstance(weights, GINNodeGnnWeights4L):
+        h1_full, h2_full, h3_full, h4_full = forward_gin_nodegnn_full_4l(x, full_adj, weights)
         v_embed = (
             np.concatenate([h1_full[node_idx], h2_full[node_idx], h3_full[node_idx], h4_full[node_idx]], axis=0)
             if use_jk_concat
             else h4_full[node_idx]
         )
     else:
-        h1_full, h2_full, h3_full = forward_vanilla_nodegnn_full(x, full_adj, weights)
+        h1_full, h2_full, h3_full = forward_gin_nodegnn_full(x, full_adj, weights)
         v_embed = (
             np.concatenate([h1_full[node_idx], h2_full[node_idx], h3_full[node_idx]], axis=0)
             if use_jk_concat
@@ -433,7 +433,7 @@ def _maybe_add_no_good_edge_solution_cuts(
 
 class MIPExplainer:
     """
-    MILP-based Explainer for Vanilla GNN models.
+    MILP-based Explainer for GIN models.
 
     Finds a minimal subgraph that preserves the model's prediction
     by encoding the GNN forward pass as MILP constraints.
@@ -478,14 +478,14 @@ class MIPExplainer:
         self._last_solution = None
 
     def _extract_weights(self) -> Union[
-        VanillaNodeGnnWeights,
-        VanillaNodeGnnWeights4L,
-        VanillaNodeGnnWeights2L,
-        VanillaGraphGnnWeights,
-        VanillaGraphGnnWeights4L,
-        VanillaGraphGnnWeights2L,
+        GINNodeGnnWeights,
+        GINNodeGnnWeights4L,
+        GINNodeGnnWeights2L,
+        GINGraphGnnWeights,
+        GINGraphGnnWeights4L,
+        GINGraphGnnWeights2L,
     ]:
-        """Extract numpy weights from PyTorch model (Vanilla.py structure)."""
+        """Extract numpy weights from PyTorch model (GIN.py structure)."""
         model = self.model
         model.eval()
 
@@ -510,7 +510,7 @@ class MIPExplainer:
         if self.verbose:
             print(f"[MIPExplainer] Model parameters: {param_names}")
 
-        # Pattern for Vanilla.py: conv1.mlp.fc1.weight, conv1.mlp.fc2.weight, conv1.eps
+        # Pattern for GIN.py: conv1.mlp.fc1.weight, conv1.mlp.fc2.weight, conv1.eps
         try:
             # Layer 1: conv1.mlp.fc1, conv1.mlp.fc2, conv1.eps
             eps1 = get_param_optional("conv1.eps", np.array(0.0))
@@ -549,27 +549,27 @@ class MIPExplainer:
 
         if num_layers == 2:
             if self.task == "node":
-                return VanillaNodeGnnWeights2L(
+                return GINNodeGnnWeights2L(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     W_out=W_out, b_out=b_out, use_jk_concat=self.use_jk_concat,
                 )
             else:
-                return VanillaGraphGnnWeights2L(
+                return GINGraphGnnWeights2L(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     W_out=W_out, b_out=b_out,
                 )
         elif num_layers == 3:
             if self.task == "node":
-                return VanillaNodeGnnWeights(
+                return GINNodeGnnWeights(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     eps3=float(eps3), W3_1=W3_1, b3_1=b3_1, W3_2=W3_2, b3_2=b3_2,
                     W_out=W_out, b_out=b_out, use_jk_concat=self.use_jk_concat,
                 )
             else:
-                return VanillaGraphGnnWeights(
+                return GINGraphGnnWeights(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     eps3=float(eps3), W3_1=W3_1, b3_1=b3_1, W3_2=W3_2, b3_2=b3_2,
@@ -577,7 +577,7 @@ class MIPExplainer:
                 )
         elif num_layers == 4:
             if self.task == "node":
-                return VanillaNodeGnnWeights4L(
+                return GINNodeGnnWeights4L(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     eps3=float(eps3), W3_1=W3_1, b3_1=b3_1, W3_2=W3_2, b3_2=b3_2,
@@ -585,7 +585,7 @@ class MIPExplainer:
                     W_out=W_out, b_out=b_out, use_jk_concat=self.use_jk_concat,
                 )
             # Graph 4-layer extraction kept for future graph-4L MILP support.
-            return VanillaGraphGnnWeights4L(
+            return GINGraphGnnWeights4L(
                 eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                 eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                 eps3=float(eps3), W3_1=W3_1, b3_1=b3_1, W3_2=W3_2, b3_2=b3_2,
@@ -794,9 +794,9 @@ class MIPExplainer:
         # Build MILP - select appropriate builder based on weights type
         # Preprocessing/build/OBBT do not consume the final solver time limit.
         start_time = time.time()
-        if isinstance(self.weights, VanillaNodeGnnWeights2L):
+        if isinstance(self.weights, GINNodeGnnWeights2L):
             # Use 2-layer builder
-            build = build_vanilla_nodegnn_milp_2l(
+            build = build_gin_nodegnn_milp_2l(
                 X=working_x,
                 undirected_edges=milp_edge_sequence,
                 v_star=working_node_idx,
@@ -840,8 +840,8 @@ class MIPExplainer:
             )
         else:
             # Use 3-layer or 4-layer builder
-            if isinstance(self.weights, VanillaNodeGnnWeights4L):
-                build = build_vanilla_nodegnn_milp_4l(
+            if isinstance(self.weights, GINNodeGnnWeights4L):
+                build = build_gin_nodegnn_milp_4l(
                     X=working_x,
                     undirected_edges=milp_edge_sequence,
                     v_star=working_node_idx,
@@ -884,7 +884,7 @@ class MIPExplainer:
                     terminal_log_file=terminal_log_file,
                 )
             else:
-                build = build_vanilla_nodegnn_milp(
+                build = build_gin_nodegnn_milp(
                     X=working_x,
                     undirected_edges=milp_edge_sequence,
                     v_star=working_node_idx,
@@ -1215,19 +1215,19 @@ class MIPExplainer:
 
         # Preprocessing/build/OBBT do not consume the final solver time limit.
         start_time = time.time()
-        if isinstance(self.weights, VanillaGraphGnnWeights2L):
-            graph_builder = build_vanilla_graphgnn_milp_2l
+        if isinstance(self.weights, GINGraphGnnWeights2L):
+            graph_builder = build_gin_graphgnn_milp_2l
             graph_obbt_layers = (1, 2)
             graph_obbt_prefix = "[MIP-Graph-2L]"
-        elif isinstance(self.weights, VanillaGraphGnnWeights4L):
-            graph_builder = build_vanilla_graphgnn_milp_4l
+        elif isinstance(self.weights, GINGraphGnnWeights4L):
+            graph_builder = build_gin_graphgnn_milp_4l
             graph_obbt_layers = (1, 2, 3, 4)
             graph_obbt_prefix = "[MIP-Graph-4L]"
         else:
-            graph_builder = build_vanilla_graphgnn_milp
+            graph_builder = build_gin_graphgnn_milp
             graph_obbt_layers = (1, 2, 3)
             graph_obbt_prefix = "[MIP-Graph]"
-        if degree_table_layer1 and graph_builder is not build_vanilla_graphgnn_milp:
+        if degree_table_layer1 and graph_builder is not build_gin_graphgnn_milp:
             raise ValueError("degree_table_layer1 is implemented for the 3-layer graph MILP only.")
         degree_table_kwargs = {"use_degree_table_layer1": True} if degree_table_layer1 else {}
 
@@ -1436,7 +1436,7 @@ class MIPExplainer:
         # with the given edge budget. We still verify that rho_actual matches rho_optimal.
 
         if self.task == "node":
-            from Main.solvers.mip_gnn_vanilla import verify_node_solution
+            from Main.solvers.mip_gin import verify_node_solution
             return verify_node_solution(
                 X=self._last_working_x,
                 selected_edges=sol.selected_edges,
@@ -1450,7 +1450,7 @@ class MIPExplainer:
                 verbose=verbose,
             )
         else:
-            from Main.solvers.mip_gnn_vanilla import verify_graph_solution
+            from Main.solvers.mip_gin import verify_graph_solution
             return verify_graph_solution(
                 X=self._last_working_x,
                 selected_edges=sol.selected_edges,

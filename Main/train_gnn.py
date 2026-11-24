@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Systematic GIN/GCN training with seeded, architecture-specific checkpoints."""
+"""Systematic GIN training with seeded checkpoints."""
 
 import os
 import sys
@@ -146,8 +146,8 @@ def load_dataset_config(dataset, config_dir):
     path_name = get_path_name(dataset)
 
     candidate_files = [
-        os.path.join(config_dir, f"model_vanilla_{canonical_name}.json"),
-        os.path.join(config_dir, f"model_vanilla_{path_name}.json"),
+        os.path.join(config_dir, f"model_gin_{canonical_name}.json"),
+        os.path.join(config_dir, f"model_gin_{path_name}.json"),
     ]
 
     from Main.data.pyg_infection_seed_registry import seeded_infection_names
@@ -155,7 +155,7 @@ def load_dataset_config(dataset, config_dir):
     if canonical_name in seeded_names:
         family = "ER" if "-ER-" in canonical_name else "BA"
         candidate_files.append(
-            os.path.join(config_dir, f"model_vanilla_PyG-Infection-{family}-L3-Split43.json")
+            os.path.join(config_dir, f"model_gin_PyG-Infection-{family}-L3-Split43.json")
         )
 
     # Preserve order while removing duplicates.
@@ -380,14 +380,8 @@ def exact_model_directories(
 
 def main():
     # Parse arguments
-    parser = argparse.ArgumentParser(description="Train GIN or GCN models for selected datasets")
+    parser = argparse.ArgumentParser(description="Train GIN models for selected datasets")
     parser.add_argument("--config_dir", type=str, default=TRAINING_CONFIG_DIR, help="Directory containing config files")
-    parser.add_argument(
-        "--architecture",
-        choices=("gin", "gcn"),
-        default="gin",
-        help="Model family. 'gin' preserves the existing Vanilla checkpoint namespace.",
-    )
     parser.add_argument(
         "--dataset",
         type=str,
@@ -429,7 +423,8 @@ def main():
     datasets = parse_datasets_arg(args.dataset)
     hidden_dims = parse_hidden_dims_arg(args.hidden_dim)
     nn_seeds = parse_nn_seeds_arg(args.nn_seed)
-    paper = {'gin': 'Vanilla', 'gcn': 'GCN'}[args.architecture]
+    args.architecture = "gin"  # Only GIN checkpoints are trained.
+    paper = 'GIN'
     num_layers = 2 if datasets == ["PubMed"] else 3
     use_batchnorm =args.use_batchnorm
     normalize_features = not args.disable_feature_normalization

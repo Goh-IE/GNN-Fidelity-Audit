@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import torch
 
-from Main.models.vanilla_pyg_compat import (
-    _CompatGNNLayer, build_pyg_compatible_from_vanilla,
+from Main.models.gin_pyg_compat import (
+    _CompatGNNLayer, build_pyg_compatible_from_gin,
 )
 
 
@@ -41,7 +41,7 @@ class DIGLayer(_CompatGNNLayer):
 
 
 def compatible_model(original, task):
-    clone = build_pyg_compatible_from_vanilla(original, task)
+    clone = build_pyg_compatible_from_gin(original, task)
     for idx in range(1, clone.num_layers + 1):
         old = getattr(clone, f"conv{idx}")
         layer = DIGLayer(old.mlp.fc1.in_features, old.mlp.fc2.out_features,

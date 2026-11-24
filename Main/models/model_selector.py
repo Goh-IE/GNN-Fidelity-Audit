@@ -2,10 +2,8 @@ import torch
 import os
 from typing import Optional
 
-from Main.models.Vanilla import NodeGNN as Vanilla_NodeGNN
-from Main.models.Vanilla import GraphGNN as Vanilla_GraphGNN
-from Main.models.GCN import NodeGCN
-from Main.models.GCN import GraphGCN
+from Main.models.GIN import NodeGNN as GIN_NodeGNN
+from Main.models.GIN import GraphGNN as GIN_GraphGNN
 
 
 # ============================================================================
@@ -374,11 +372,11 @@ def string_to_model(paper, dataset, num_layers=3, hidden_dim=20, use_batchnorm=F
     Given a paper and a dataset return the cooresponding neural model needed for training.
     :param paper: the paper who's classification model we want to use.
     :param dataset: the dataset on which we wish to train. Supports both friendly and internal names.
-    :param num_layers: number of GNN layers (2 or 3). Only used for Vanilla models.
-    :param hidden_dim: hidden dimension for Vanilla models.
-    :param use_batchnorm: whether to use batch normalization. Only used for Vanilla models.
+    :param num_layers: number of GNN layers (2 or 3). Only used for GIN models.
+    :param hidden_dim: hidden dimension for GIN models.
+    :param use_batchnorm: whether to use batch normalization. Only used for GIN models.
     :param use_jk_concat: whether to use JK-concat (concatenate all layer outputs). 
-                          If False, uses only the last layer. Only used for Vanilla models.
+                          If False, uses only the last layer. Only used for GIN models.
     :returns: torch.nn.module models
     """
     # Normalize dataset name to canonical format
@@ -390,23 +388,13 @@ def string_to_model(paper, dataset, num_layers=3, hidden_dim=20, use_batchnorm=F
     except ValueError:
         raise NotImplementedError(f"Dataset '{dataset}' is not supported. Available: {ALL_DATASETS}")
     
-    if paper == "Vanilla":
-        # Vanilla GNN: MILP-friendly, with optional batch normalization and JK-concat
+    if paper == "GIN":
+        # GIN: MILP-friendly, with optional batch normalization and JK-concat
         if task_type == 'node':
-            return Vanilla_NodeGNN(num_features, num_classes, num_layers=num_layers, hidden_dim=hidden_dim, use_batchnorm=use_batchnorm, use_jk_concat=use_jk_concat)
+            return GIN_NodeGNN(num_features, num_classes, num_layers=num_layers, hidden_dim=hidden_dim, use_batchnorm=use_batchnorm, use_jk_concat=use_jk_concat)
         else:  # graph classification
-            return Vanilla_GraphGNN(num_features, num_classes, num_layers=num_layers, hidden_dim=hidden_dim, use_batchnorm=use_batchnorm, use_jk_concat=use_jk_concat)
-    if paper == "GCN":
-        model_cls = NodeGCN if task_type == 'node' else GraphGCN
-        return model_cls(
-            num_features,
-            num_classes,
-            num_layers=num_layers,
-            hidden_dim=hidden_dim,
-            use_batchnorm=use_batchnorm,
-            use_jk_concat=use_jk_concat,
-        )
-    raise NotImplementedError(f"Paper '{paper}' is not supported. Use 'Vanilla' (GIN) or 'GCN'.")
+            return GIN_GraphGNN(num_features, num_classes, num_layers=num_layers, hidden_dim=hidden_dim, use_batchnorm=use_batchnorm, use_jk_concat=use_jk_concat)
+    raise NotImplementedError(f"Paper '{paper}' is not supported. Use 'GIN'.")
 
 
 def get_pretrained_path(
@@ -423,10 +411,10 @@ def get_pretrained_path(
     Given a paper and dataset loads the pre-trained model.
     :param paper: the paper who's classification model we want to use.
     :param dataset: the dataset on which we wish to train. This ensures that the model in- and output are correct.
-    :param num_layers: number of GNN layers (2 or 3). Only used for Vanilla models.
-    :param hidden_dim: hidden dimension for Vanilla models.
-    :param use_batchnorm: whether batch normalization is used. Only for Vanilla models.
-    :param use_jk_concat: whether JK-concat is used. Only for Vanilla models.
+    :param num_layers: number of GNN layers (2 or 3). Only used for GIN models.
+    :param hidden_dim: hidden dimension for GIN models.
+    :param use_batchnorm: whether batch normalization is used. Only for GIN models.
+    :param use_jk_concat: whether JK-concat is used. Only for GIN models.
     :param nn_seed: neural network seed used in checkpoint directory naming.
         If None, only legacy (unseeded) naming is considered.
     :returns: str; the path to the pre-trined model parameters.
@@ -447,7 +435,7 @@ def get_pretrained_path(
     bn_suffix = "_BN" if use_batchnorm else ""
     jk_suffix = "_JK" if use_jk_concat else ""
     
-    if paper in {"Vanilla", "GCN"}:
+    if paper == "GIN":
         # Search canonical/legacy folders, including pre-rename aliases.
         candidate_prefixes = [canonical_name]
         if canonical_name != 'BA-House':
@@ -474,8 +462,8 @@ def get_pretrained_path(
                 f"{dir_path}/pretrained/{paper}/{prefix}_{num_layers}L_{hidden_dim}H{bn_suffix}{jk_suffix}{feat_suffix}/best_model"
             )
 
-        # Legacy Vanilla compatibility: older folders omitted the JK suffix.
-        if paper == "Vanilla":
+        # Legacy GIN compatibility: older folders omitted the JK suffix.
+        if paper == "GIN":
             if seed_suffix:
                 for prefix in candidate_prefixes:
                     candidate_paths.append(
@@ -531,11 +519,11 @@ def model_selector(
     :param dataset: the dataset on which we wish to train. This ensures that the model in- and output are correct.
     :param pretrained: whter to return a pre-trained model or not.
     :param return_checkpoint: wheter to return the dict contining the models parameters or not.
-    :param num_layers: number of GNN layers (2 or 3). Only used for Vanilla models.
-    :param hidden_dim: hidden dimension for Vanilla models.
-    :param use_batchnorm: whether to use batch normalization. Only used for Vanilla models.
+    :param num_layers: number of GNN layers (2 or 3). Only used for GIN models.
+    :param hidden_dim: hidden dimension for GIN models.
+    :param use_batchnorm: whether to use batch normalization. Only used for GIN models.
         If pretrained=True, this is auto-detected from checkpoint and the argument is ignored.
-    :param use_jk_concat: whether to use JK-concat. Only used for Vanilla models.
+    :param use_jk_concat: whether to use JK-concat. Only used for GIN models.
         If pretrained=True, this is auto-detected from checkpoint.
     :param nn_seed: neural network seed used in checkpoint directory naming.
         Only used when pretrained=True.
@@ -554,8 +542,8 @@ def model_selector(
             nn_seed=nn_seed,
         )
         
-        # If path doesn't exist and we're using Vanilla, try the other BatchNorm setting
-        if not os.path.exists(path) and paper in {"Vanilla", "GCN"}:
+        # If path doesn't exist and we're using GIN, try the other BatchNorm setting
+        if not os.path.exists(path) and paper == "GIN":
             alt_path = get_pretrained_path(
                 paper,
                 dataset,
@@ -609,7 +597,7 @@ def model_selector(
         state_dict = checkpoint["model_state_dict"]
         
         # Auto-detect BatchNorm and JK-concat from supported checkpoints as a safety check.
-        if paper in {"Vanilla", "GCN"}:
+        if paper == "GIN":
             detected_bn = _detect_batchnorm_from_state_dict(state_dict)
             if detected_bn != use_batchnorm:
                 print(f"Warning: Checkpoint BatchNorm mismatch. Detected={detected_bn}, Expected={use_batchnorm}. Using detected.")
@@ -622,18 +610,7 @@ def model_selector(
         
         model = string_to_model(paper, dataset, num_layers=num_layers, hidden_dim=hidden_dim, use_batchnorm=use_batchnorm, use_jk_concat=use_jk_concat)
         
-        try:
-            model.load_state_dict(state_dict)
-        except RuntimeError:
-            # Compatibility: older PyG checkpoints used `conv*.weight` with shape (in, out),
-            # while newer `GCNConv` uses `conv*.lin.weight` with shape (out, in).
-            adapted = dict(state_dict)
-            for i in (1, 2, 3):
-                old_key = f"conv{i}.weight"
-                new_key = f"conv{i}.lin.weight"
-                if old_key in adapted and new_key not in adapted:
-                    adapted[new_key] = adapted.pop(old_key).T
-            model.load_state_dict(adapted, strict=True)
+        model.load_state_dict(state_dict)
         print(f"This model obtained: Train Acc: {checkpoint['train_acc']:.4f}, Val Acc: {checkpoint['val_acc']:.4f}, Test Acc: {checkpoint['test_acc']:.4f}.")
         if return_checkpoint:
             return model, checkpoint

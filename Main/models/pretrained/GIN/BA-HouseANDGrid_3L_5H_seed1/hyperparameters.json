@@ -1,0 +1,28 @@
+{
+    "model_config": {
+        "paper": "GIN",
+        "dataset": "BA-HouseANDGrid",
+        "num_layers": 3,
+        "hidden_dim": 5,
+        "use_batchnorm": false,
+        "use_jk_concat": false,
+        "normalize_features": true
+    },
+    "training_config": {
+        "lr": 0.003,
+        "epochs": 300,
+        "clip_max": 2.0,
+        "batch_size": 200,
+        "early_stopping": null,
+        "normalize_features": true,
+        "seed": 1,
+        "eval_enabled": true
+    },
+    "saved_at": "2026-06-12T17:41:35.681732",
+    "performance": {
+        "train_acc": 0.990375,
+        "val_acc": 0.992,
+        "test_acc": 0.992,
+        "best_epoch": 268
+    }
+}

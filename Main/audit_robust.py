@@ -44,7 +44,7 @@ if str(REPO_DIR) not in sys.path:
 
 from Main.data.dataset_loaders import load_dataset
 from Main.data.ground_truth_loaders import load_dataset_ground_truth
-from Main.solvers.mip_gnn_vanilla import (
+from Main.solvers.mip_gin import (
     MilpSolution,
     _configure_gurobi_logging,
     _optimize_gurobi_model,

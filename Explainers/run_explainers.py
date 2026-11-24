@@ -424,7 +424,7 @@ def prepare_run(args, method, dataset, source, source_config, env):
     code = [Path(__file__),
             ROOT / "methods/dig_loader.py", ROOT / "methods/model_adapter.py",
             ROOT / "methods/gnnexplainer.py", ROOT / "methods/pgexplainer.py",
-            MAIN / "models/vanilla_pyg_compat.py",
+            MAIN / "models/gin_pyg_compat.py",
             MAIN / "audit_standard.py", MAIN / "audit_robust.py"]
     from Explainers.methods.dig_loader import DIG_ROOT
     if DIG_ROOT is not None:
@@ -537,7 +537,7 @@ def run_dataset(args, source):
     if source_config.get("connectivity", "none") != "none":
         raise ValueError("This runner currently supports unrestricted source cohorts only")
     if source_config.get("architecture", "gin") != "gin":
-        raise ValueError("DIG adapter requires the audited Vanilla GIN")
+        raise ValueError("DIG adapter requires the audited GIN")
     runs = {method: prepare_run(args, method, dataset, source, source_config, environment()) for method in args.methods}
     manifests = {method: [] for method in args.methods}
     all_rows = {method: [] for method in args.methods}
@@ -573,7 +573,7 @@ def run_dataset(args, source):
             original.eval().requires_grad_(False)
             initial = {k: v.clone() for k, v in original.state_dict().items()}
             clone = compatible_model(original, data.task)
-            checkpoint = Path(get_pretrained_path("Vanilla", dataset, num_layers=original.num_layers,
+            checkpoint = Path(get_pretrained_path("GIN", dataset, num_layers=original.num_layers,
                               hidden_dim=original.hidden_dim, use_batchnorm=original.use_batchnorm,
                               use_jk_concat=original.use_jk_concat,
                               normalize_features=bool(source_config.get("normalize_features", True)), nn_seed=seed))

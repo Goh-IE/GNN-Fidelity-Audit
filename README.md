@@ -36,9 +36,10 @@ is optional for the accelerated enumeration helpers in `Main/enumeration/native/
 
 `Main/audit_standard.py` runs deterministic fidelity audits and
 `Main/audit_robust.py` runs robust SAA audits. `Main/train_gnn.py` trains the
-predictors. Shared dataset loaders and frozen inputs live in `Main/data/`,
-models and checkpoints in `Main/models/`, the MILP implementation in
-`Main/solvers/`, and training and configuration helpers in `Main/training/`.
+GIN predictors. Shared dataset loaders and frozen inputs live in
+`Main/data/`, the GIN model in `Main/models/GIN.py` and its checkpoints in
+`Main/models/pretrained/GIN/`, the MILP implementation in `Main/solvers/`, and
+training and configuration helpers in `Main/training/`.
 
 ```bash
 python Main/audit_standard.py --help
@@ -54,7 +55,7 @@ BA-HouseANDGrid, BA-HouseORGrid), as run for the manuscript. Use
 python Main/audit_standard.py \
   --datasets BA-House --nn_seeds 1,2,3,4,5 --instance_filter correct \
   --solver milp --stages gt_size --objective max_sufficiency \
-  --node_edge_budget_mode eq --architecture gin --num_layers 3 --hidden_dim 5 \
+  --node_edge_budget_mode eq --num_layers 3 --hidden_dim 5 \
   --connectivity none --exclude_gt --no-incumbent --max_instances 30 \
   --time_limit 1200 --gurobi_method 1 --gurobi_threads 1 \
   --use_incident_cap_tightening --use_gurobi_symmetry_detection \
@@ -219,13 +220,14 @@ Paths written inside saved artifacts use the original workspace layout and run
 names. The execution readers map them to this layout through the two
 `run_index.csv` files. Other external tools must account for them.
 
-After the runs were produced, the saved files were edited in one way only. The
-names of four MILP options (`use_incident_cap_tightening`,
-`use_gurobi_symmetry_detection`, `use_star_constraints` and
-`use_connectivity_lower_bound`) and their labels in the logs were changed to the
-names the current code uses. No value changed. SHA-256 values recorded inside
-saved artifacts refer to the files as first produced, so they do not match the
-renamed CSV headers, configs and logs. For the same reason,
+After the runs were produced, names in the saved files were edited to match
+the current code. No value changed. The names of four MILP options
+(`use_incident_cap_tightening`, `use_gurobi_symmetry_detection`,
+`use_star_constraints` and `use_connectivity_lower_bound`) and their log labels
+were renamed, and the model namespace, its checkpoint paths and its source file
+names now say GIN. The checkpoint files keep their bytes. SHA-256 values
+recorded inside saved artifacts refer to the files as first produced, so they
+do not match the renamed CSV headers, configs and logs. For the same reason,
 `--reuse_successful_run_name` does not accept the saved explainer runs as
 reuse sources.
 

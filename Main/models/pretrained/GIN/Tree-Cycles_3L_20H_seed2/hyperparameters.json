@@ -1,0 +1,28 @@
+{
+    "model_config": {
+        "paper": "GIN",
+        "dataset": "Tree-Cycles",
+        "num_layers": 3,
+        "hidden_dim": 20,
+        "use_batchnorm": false,
+        "use_jk_concat": false,
+        "normalize_features": true
+    },
+    "training_config": {
+        "lr": 0.003,
+        "epochs": 3000,
+        "clip_max": 2.0,
+        "batch_size": 32,
+        "early_stopping": null,
+        "normalize_features": true,
+        "seed": 2,
+        "eval_enabled": true
+    },
+    "saved_at": "2026-09-04T02:28:38.517470",
+    "performance": {
+        "train_acc": 0.9554597701149425,
+        "val_acc": 1.0,
+        "test_acc": 0.9318181818181818,
+        "best_epoch": 150
+    }
+}

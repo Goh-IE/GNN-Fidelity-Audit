@@ -2,7 +2,7 @@
 """Run certified standard-fidelity GT-size and budget experiments.
 
 Main is self-contained:
-- datasets, pretrained Vanilla models, and MILP builders live under Main
+- datasets, pretrained GIN models, and MILP builders live under Main
 - this script owns the search policy, filtering, metrics, and output tables
 
 The public objective choices cover maximum/minimum sufficiency and necessity.
@@ -52,7 +52,7 @@ if str(REPO_DIR) not in sys.path:
 from Main.data.dataset_loaders import load_dataset
 from Main.data.ground_truth_loaders import load_dataset_ground_truth
 from Main.solvers.MIPExplainer import MIPExplainer
-from Main.solvers.mip_gnn_vanilla import CurrentGurobiSolveInterrupted
+from Main.solvers.mip_gin import CurrentGurobiSolveInterrupted
 from Main.models.model_selector import (
     ALL_DATASETS,
     get_dataset_config,
@@ -118,7 +118,7 @@ NECESSITY_SCORING_OBJECTIVES = NECESSITY_OBJECTIVES | {RANK_NECESSITY_OBJECTIVE}
 DEFAULT_ENUMERATION_BATCH_SIZE = 1024
 ENUMERATION_CACHE_VERSION = 2
 DEFAULT_ENUMERATION_CACHE_DIR = MAIN_DIR / "standard_enumeration_cache"
-MODEL_PAPERS = {"gin": "Vanilla", "gcn": "GCN"}
+MODEL_PAPERS = {"gin": "GIN"}
 _EDGE_MASK_PATTERN_CACHE: Dict[int, List[Tuple[Tuple[int, int], ...]]] = {}
 _ROOTED_TOPOLOGY_PATTERN_CACHE: Dict[Tuple[int, ...], List[nx.Graph]] = {}
 ENUMERATION_TIMING_FIELDS = [
@@ -7682,11 +7682,7 @@ def build_config(args: argparse.Namespace) -> RunConfig:
     )
     plain_milp = bool(args.plain_milp)
     acceleration_profile = "plain" if plain_milp else "accelerated"
-    architecture = str(args.architecture).lower()
-    if architecture not in MODEL_PAPERS:
-        raise ValueError(f"Unknown architecture {architecture!r}.")
-    if architecture != "gin" and args.gt_size_solver != "enumeration":
-        raise ValueError("GCN is supported by the generic enumeration backend only, not the Vanilla MILP encoder.")
+    architecture = "gin"  # The runner audits GIN checkpoints only.
     return RunConfig(
         preset=args.preset,
         datasets=datasets,
@@ -7820,12 +7816,6 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
             "Optional Markdown plan copied to experiment.md in every dataset run "
             "directory before evaluation starts. Dataset and run metadata are appended."
         ),
-    )
-    parser.add_argument(
-        "--architecture",
-        choices=sorted(MODEL_PAPERS),
-        default="gin",
-        help="Checkpoint architecture. GCN is available only with --solver enumeration.",
     )
     parser.add_argument("--num_layers", type=int, default=3)
     parser.add_argument(
