@@ -1,6 +1,6 @@
 {
   "source_runs": [
-    "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_enumerations/Tree-Cycles/20260811_051355_enumeration_Fid^-_standard_paper_gt_size_3L5H_obj-max_sufficiency_gtsize-enumeration_nodebudget-eq_exclude-gt_tl10800s"
+    "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_enumerations/Tree-Cycles/hidden5_sufficiency"
   ],
   "methods": [
     "random",
@@ -27,7 +27,7 @@
   "tau": 0.0001,
   "method": "gnnexplainer",
   "dataset": "Tree-Cycles",
-  "source_run": "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_enumerations/Tree-Cycles/20260811_051355_enumeration_Fid^-_standard_paper_gt_size_3L5H_obj-max_sufficiency_gtsize-enumeration_nodebudget-eq_exclude-gt_tl10800s",
+  "source_run": "/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_enumerations/Tree-Cycles/hidden5_sufficiency",
   "source_config": {
     "preset": "paper",
     "datasets": [
@@ -116,7 +116,7 @@
     "device": "cpu",
     "torch_threads": 1
   },
-  "command": "conda run --no-capture-output -n 26GNN python Version5/run_baseline_experiment.py --source-runs '/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_enumerations/Tree-Cycles/20260811_051355_enumeration_Fid^-_standard_paper_gt_size_3L5H_obj-max_sufficiency_gtsize-enumeration_nodebudget-eq_exclude-gt_tl10800s' --nn-seeds 1 2 3 4 5 --phase formal --run-name 20260917_020550_formal_dig_baselines_3L5H_seed1to5 --gnn-epochs 100 --pg-epochs 20 --eval-samples 1000 --explainer-seed 0 --evaluation-seed 1729 --tau 0.0001",
+  "command": "conda run --no-capture-output -n 26GNN python Version5/run_baseline_experiment.py --source-runs '/home/wsgoh2/code/26GNNExplainer/Version5/standard_fidelity_enumerations/Tree-Cycles/hidden5_sufficiency' --nn-seeds 1 2 3 4 5 --phase formal --run-name 20260917_020550_formal_dig_baselines_3L5H_seed1to5 --gnn-epochs 100 --pg-epochs 20 --eval-samples 1000 --explainer-seed 0 --evaluation-seed 1729 --tau 0.0001",
   "cwd": "/home/wsgoh2/code/26GNNExplainer",
   "git_commit": "de90a28780f361746d00bf2e31270db03cf7d654",
   "dirty_before_run": " M Version5/260700-acceleration.md\n M Version5/260700-cli.md\n M Version5/ExplanationEvaluation/explainers/MIPExplainer.py\n M Version5/ExplanationEvaluation/explainers/mip_gin.py\n D Version5/build_paper_tables.py\n D Version5/make_paper_figures.py\n M Version5/run_standard_fidelity_experiment.py\n?? Version5/260700-datasets.md\n?? Version5/260815-dataset-selection.md\n?? Version5/ExplanationEvaluation/__init__.py\n?? Version5/ExplanationEvaluation/__pycache__/\n?? Version5/ExplanationEvaluation/configs/\n?? Version5/ExplanationEvaluation/datasets/\n?? Version5/ExplanationEvaluation/evaluation/\n?? Version5/ExplanationEvaluation/explainers/BaseExplainer.py\n?? Version5/ExplanationEvaluation/explainers/MIPNodeExplainer.py\n?? Version5/ExplanationEvaluation/explainers/__init__.py\n?? Version5/ExplanationEvaluation/explainers/__pycache__/\n?? Version5/ExplanationEvaluation/explainers/mip_node_gin.py\n?? Version5/ExplanationEvaluation/models/\n?? Version5/ExplanationEvaluation/tasks/\n?? Version5/ExplanationEvaluation/utils/\n?? Version5/README.md\n?? Version5/TrialData/\n?? Version5/__pycache__/\n?? Version5/_archive/\n?? Version5/baseline_dig.py\n?? Version5/baseline_figures.py\n?? Version5/connected_enumeration_robust_plan_20260907.md\n?? Version5/connected_enumeration_smoke_plan_20260907.md\n?? Version5/connected_enumeration_standard_plan_20260907.md\n?? Version5/cpp/\n?? Version5/paper_reporting/\n?? Version5/preflight_baseline_cohorts.py\n?? Version5/robust_enumeration_cache/\n?? Version5/robust_fidelity_enumerations/\n?? Version5/run_baseline_experiment.py\n?? Version5/run_baseline_suite.py\n?? Version5/run_robust_fidelity_experiment.py\n?? Version5/standard_enumeration_cache/\n?? Version5/standard_fidelity_enumerations/\n?? Version5/summarize_baseline_suite.py\n?? Version5/systematic_mip_experiment.py\n?? Version5/systematic_training.py\n?? Version5/tests/\n?? Version5/validate_baseline_artifacts.py\n",

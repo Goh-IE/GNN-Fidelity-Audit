@@ -425,39 +425,6 @@ def format_duration(seconds: float) -> str:
     return f"{minutes}m{sec:02d}s"
 
 
-_RUN_NAME_ALIASES: Optional[Dict[Tuple[str, str, str], str]] = None
-
-
-def run_name_aliases() -> Dict[Tuple[str, str, str], str]:
-    """Map (group, family/dataset, original run name) to the published run directory name."""
-    global _RUN_NAME_ALIASES
-    if _RUN_NAME_ALIASES is None:
-        aliases: Dict[Tuple[str, str, str], str] = {}
-        for group in ("Main", "Explainers"):
-            index = REPO_DIR / group / "results" / "run_index.csv"
-            if index.is_file():
-                with index.open(newline="") as handle:
-                    for row in csv.DictReader(handle):
-                        parent, name = row["path"].rsplit("/", 1)
-                        aliases[(group, parent, row["original_run_name"])] = name
-        _RUN_NAME_ALIASES = aliases
-    return _RUN_NAME_ALIASES
-
-
-def published_run_path(path: Path) -> Path:
-    """Replace an original run directory name with its published name."""
-    parts = path.parts
-    for group in ("Main", "Explainers"):
-        if group in parts:
-            tail = parts[parts.index(group) + 1:]
-            if len(tail) >= 4 and tail[0] == "results":
-                key = (group, f"{tail[1]}/{tail[2]}", tail[3])
-                name = run_name_aliases().get(key)
-                if name is not None:
-                    return Path(*parts[: parts.index(group) + 1], "results", tail[1], tail[2], name, *tail[4:])
-    return path
-
-
 def resolve_repo_path(value: str) -> Path:
     """Resolve current paths and preserve reads of original artifact paths."""
     path = Path(str(value))
@@ -497,13 +464,13 @@ def resolve_repo_path(value: str) -> Path:
         if group in path.parts:
             tail = path.parts[path.parts.index(group) + 1:]
             if tail and tail[0] in aliases:
-                return published_run_path(REPO_DIR / group / "results" / aliases[tail[0]] / Path(*tail[1:]))
+                return REPO_DIR / group / "results" / aliases[tail[0]] / Path(*tail[1:])
     names = {"run_standard_fidelity_experiment.py": "audit_standard.py",
              "run_robust_fidelity_experiment.py": "audit_robust.py",
              "systematic_training.py": "train_gnn.py"}
     if path.parent.name == "Main" and path.name in names:
         path = path.with_name(names[path.name])
-    return published_run_path(path if path.is_absolute() else REPO_DIR / path)
+    return path if path.is_absolute() else REPO_DIR / path
 
 
 def output_path_string(path: Path) -> str:

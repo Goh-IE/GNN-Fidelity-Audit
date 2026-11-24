@@ -18,15 +18,15 @@
     5
   ],
   "expected_records_per_method": 500,
-  "source_manifest": "/home/wsgoh2/code/26GNNExplainer/Version5/flowx_suf_experiments/BA-2Motifs/20260917_152207_formal_flowx_explicit_loop_completion/comparison_manifest.json",
+  "source_manifest": "/home/wsgoh2/code/26GNNExplainer/Version5/flowx_suf_experiments/BA-2Motifs/hidden5/comparison_manifest.json",
   "source_manifest_sha256": "7e82420201ceb20073e121a87459a2607a358477c0360e4b2ebe43206ee2206a",
   "source_runs": {
-    "random": "/home/wsgoh2/code/26GNNExplainer/Version5/random_experiments/BA-2Motifs/20260917_020550_formal_dig_baselines_3L5H_seed1to5",
+    "random": "/home/wsgoh2/code/26GNNExplainer/Version5/random_experiments/BA-2Motifs/hidden5",
     "gradcam": "/home/wsgoh2/code/26GNNExplainer/Version5/gradcam_experiments/BA-2Motifs/20260917_020550_formal_dig_baselines_3L5H_seed1to5",
-    "gnnexplainer": "/home/wsgoh2/code/26GNNExplainer/Version5/gnnexplainer_experiments/BA-2Motifs/20260917_020550_formal_dig_baselines_3L5H_seed1to5",
-    "pgexplainer": "/home/wsgoh2/code/26GNNExplainer/Version5/pgexplainer_experiments/BA-2Motifs/20260917_020550_formal_dig_baselines_3L5H_seed1to5",
-    "flowx_suf": "/home/wsgoh2/code/26GNNExplainer/Version5/flowx_suf_experiments/BA-2Motifs/20260917_152207_formal_flowx_explicit_loop_completion",
-    "flowx_nec": "/home/wsgoh2/code/26GNNExplainer/Version5/flowx_nec_experiments/BA-2Motifs/20260917_152207_formal_flowx_explicit_loop_completion"
+    "gnnexplainer": "/home/wsgoh2/code/26GNNExplainer/Version5/gnnexplainer_experiments/BA-2Motifs/hidden5",
+    "pgexplainer": "/home/wsgoh2/code/26GNNExplainer/Version5/pgexplainer_experiments/BA-2Motifs/hidden5",
+    "flowx_suf": "/home/wsgoh2/code/26GNNExplainer/Version5/flowx_suf_experiments/BA-2Motifs/hidden5",
+    "flowx_nec": "/home/wsgoh2/code/26GNNExplainer/Version5/flowx_nec_experiments/BA-2Motifs/hidden5"
   },
   "audit_runs": {
     "robust_sufficiency": "/home/wsgoh2/code/26GNNExplainer/Version5/robust_fidelity_enumerations/BA-2Motifs/20260811_225644_enumeration_Fid^-_alpha0.9_opt50_eval1000",
@@ -133,7 +133,7 @@
   "dirty_state": " M Version5/260700-acceleration.md\n M Version5/260700-cli.md\n M Version5/ExplanationEvaluation/explainers/MIPExplainer.py\n M Version5/ExplanationEvaluation/explainers/mip_gin.py\n D Version5/build_paper_tables.py\n D Version5/make_paper_figures.py\n M Version5/run_standard_fidelity_experiment.py\n?? Version5/260700-datasets.md\n?? Version5/260815-dataset-selection.md\n?? Version5/ExplanationEvaluation/__init__.py\n?? Version5/ExplanationEvaluation/__pycache__/\n?? Version5/ExplanationEvaluation/configs/\n?? Version5/ExplanationEvaluation/datasets/\n?? Version5/ExplanationEvaluation/evaluation/\n?? Version5/ExplanationEvaluation/explainers/BaseExplainer.py\n?? Version5/ExplanationEvaluation/explainers/MIPNodeExplainer.py\n?? Version5/ExplanationEvaluation/explainers/__init__.py\n?? Version5/ExplanationEvaluation/explainers/__pycache__/\n?? Version5/ExplanationEvaluation/explainers/mip_node_gin.py\n?? Version5/ExplanationEvaluation/models/\n?? Version5/ExplanationEvaluation/tasks/\n?? Version5/ExplanationEvaluation/utils/\n?? Version5/README.md\n?? Version5/TrialData/\n?? Version5/__pycache__/\n?? Version5/_archive/\n?? Version5/baseline_dig.py\n?? Version5/baseline_figures.py\n?? Version5/baseline_flowx.py\n?? Version5/baseline_robust_reevaluations/\n?? Version5/connected_enumeration_robust_plan_20260907.md\n?? Version5/connected_enumeration_smoke_plan_20260907.md\n?? Version5/connected_enumeration_standard_plan_20260907.md\n?? Version5/cpp/\n?? Version5/paper_reporting/\n?? Version5/preflight_baseline_cohorts.py\n?? Version5/prepare_flowx_suite.py\n?? Version5/reevaluate_baselines_on_audit.py\n?? Version5/robust_enumeration_cache/\n?? Version5/robust_fidelity_enumerations/\n?? Version5/run_audit_scenario_reevaluation_suite.py\n?? Version5/run_baseline_experiment.py\n?? Version5/run_baseline_suite.py\n?? Version5/run_flowx_batch.py\n?? Version5/run_robust_fidelity_experiment.py\n?? Version5/standard_enumeration_cache/\n?? Version5/standard_fidelity_enumerations/\n?? Version5/summarize_baseline_suite.py\n?? Version5/systematic_mip_experiment.py\n?? Version5/systematic_training.py\n?? Version5/tests/\n?? Version5/third_party/\n?? Version5/validate_audit_scenario_reevaluation.py\n?? Version5/validate_baseline_artifacts.py\n",
   "command": [
     "/home/wsgoh2/code/26GNNExplainer/Version5/reevaluate_baselines_on_audit.py",
-    "Version5/flowx_suf_experiments/BA-2Motifs/20260917_152207_formal_flowx_explicit_loop_completion/comparison_manifest.json",
+    "Version5/flowx_suf_experiments/BA-2Motifs/hidden5/comparison_manifest.json",
     "--dataset",
     "BA-2Motifs",
     "--run-name",

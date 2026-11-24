@@ -89,7 +89,7 @@ python Main/audit_robust.py \
 
 Use `--metric necessity --alphas 0.1` for robust necessity. Some runs also
 pass `--direct_row_numbering pool`, which numbers rows by their position in the
-instance pool (the `row_numbering` column of `Main/results/run_index.csv`).
+instance pool (`direct_row_numbering` in the run's `config.json`).
 Row IDs enter the scenario seeds, so runs are compared only under the same
 numbering. Larger models use `--hidden_dim 20` or `--hidden_dim 80`. The
 connectivity ablation uses `--connectivity cut --use_star_constraints
@@ -126,10 +126,9 @@ Main/results/<family>/<dataset>/
     seed1/ ... seed5/
 ```
 
-`Main/results/run_index.csv` lists every run with its original run name,
-search method, hidden dimension, connectivity, time limit, alpha and row
-numbering. The original name is also the `run_name` inside each `config.json`.
-Standard runs at hidden dimension 20 and 80 cover the three enumeration
+Each run's `config.json` records its settings (hidden dimension,
+connectivity, time limit, alpha, row numbering) and keeps the original run name
+in `run_name`. Standard runs at hidden dimension 20 and 80 cover the three enumeration
 benchmarks only. BA-HouseANDGrid has no connectivity ablation because its
 references are disconnected. The BA-2Motifs model with hidden dimension 80 and
 seed 4 failed to learn the task (test accuracy 44.0%). Its rows are kept in the
@@ -192,9 +191,8 @@ python Explainers/run_explainers.py \
   --output-root /tmp/gnn-explainer-example --run-name example_random
 ```
 
-Saved explainer runs are in `Explainers/results/<method>/<dataset>/hidden5/`,
-and `Explainers/results/run_index.csv` gives their original run names. New
-formal runs go to `Explainers/results/<method>/<dataset>/<run-name>/`, and
+Saved explainer runs are in `Explainers/results/<method>/<dataset>/hidden5/`.
+New formal runs go to `Explainers/results/<method>/<dataset>/<run-name>/`, and
 existing runs are never overwritten. FlowX uses the pinned upstream sampling
 and refinement with an undirected edge projection and fixed GIN self terms
 during final evaluation. On BA-2Motifs the FlowX results come from an
@@ -214,18 +212,20 @@ the manuscript does not report.
 
 Each run keeps its original `config.json`, per-seed `instance_fid.csv`,
 selected and GT edge masks, solver records and available machine-readable
-provenance. Rendered figures and per-run Markdown notes are omitted. Run
-directories were renamed, and option names were edited as described below.
-Paths written inside saved artifacts use the original workspace layout and run
-names. The execution readers map them to this layout through the two
-`run_index.csv` files. Other external tools must account for them.
+provenance. Rendered figures and per-run Markdown notes are omitted. Paths
+written inside saved artifacts use the original workspace layout (for example
+`Version5/standard_fidelity_enumerations/...`) with the published run directory
+names. The execution readers map them to this layout. Other external tools must
+account for them.
 
 After the runs were produced, names in the saved files were edited to match
 the current code. No value changed. The names of four MILP options
 (`use_incident_cap_tightening`, `use_gurobi_symmetry_detection`,
 `use_star_constraints` and `use_connectivity_lower_bound`) and their log labels
 were renamed, and the model namespace, its checkpoint paths and its source file
-names now say GIN. The checkpoint files keep their bytes. SHA-256 values
+names now say GIN. Paths inside saved files use the published run directory
+names, while `run_name` keeps the original name. The checkpoint files keep their
+bytes. SHA-256 values
 recorded inside saved artifacts refer to the files as first produced, so they
 do not match the renamed CSV headers, configs and logs. For the same reason,
 `--reuse_successful_run_name` does not accept the saved explainer runs as
