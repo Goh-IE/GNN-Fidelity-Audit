@@ -6,25 +6,25 @@
     node_necessity_milp=kept_edge_budget=24 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=1.3482
-[MIPExplainer] Extracted 3-hop subgraph: 19 nodes, 30 edges
-[MIPExplainer] Explaining node 336 (working: 15)
-[MIPExplainer] Working graph: 19 nodes, 30 edges
+[StandardMILP] Original full-graph reference: class=1, margin=1.3482
+[StandardMILP] Extracted 3-hop subgraph: 19 nodes, 30 edges
+[StandardMILP] Solving node 336 (working: 15)
+[StandardMILP] Working graph: 19 nodes, 30 edges
 [MIP] Working-graph full prediction: class=1, margin=1.3482
 [MIP] Reference prediction (original full graph): class=1, margin=1.3482
 [MIP] Graph: 19 nodes, 30 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 14]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 24
-[MIPExplainer] Enforcing exact removal budget: #removed_edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 24
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 24
+[StandardMILP] Enforcing exact removal budget: #removed_edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 24
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut] added nodecnt=0 tag=relu2_15_4 violation=7.205631e-03 y=8.620296e-02 rhs=7.899733e-02
 [AndersonCut] added nodecnt=0 tag=relu3_15_0 violation=2.715330e-01 y=6.220944e-01 rhs=3.505614e-01
 [AndersonCut] summary round=1 nodecnt=0 cuts_added=2
-[MIPExplainer] Build time: 0.11s, Opt time: 1.34s
-[MIPExplainer] Status: optimal, Edges: 24
+[StandardMILP] Build time: 0.11s, Opt time: 1.34s
+[StandardMILP] Status: optimal, Edges: 24
     GT baseline: removal_rho=0.4795, kept_margin_raw=0.646452, necessity_raw=0.701707, Fid+=0.137618, objective_value=0.520493
     Status: optimal, Edges: 6
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

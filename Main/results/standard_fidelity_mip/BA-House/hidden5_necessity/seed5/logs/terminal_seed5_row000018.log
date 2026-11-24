@@ -6,22 +6,22 @@
     node_necessity_milp=kept_edge_budget=1 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=0.5805
-[MIPExplainer] Extracted 3-hop subgraph: 6 nodes, 7 edges
-[MIPExplainer] Explaining node 497 (working: 3)
-[MIPExplainer] Working graph: 6 nodes, 7 edges
+[StandardMILP] Original full-graph reference: class=1, margin=0.5805
+[StandardMILP] Extracted 3-hop subgraph: 6 nodes, 7 edges
+[StandardMILP] Solving node 497 (working: 3)
+[StandardMILP] Working graph: 6 nodes, 7 edges
 [MIP] Working-graph full prediction: class=1, margin=0.5805
 [MIP] Reference prediction (original full graph): class=1, margin=0.5805
 [MIP] Graph: 6 nodes, 7 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 1]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 1
-[MIPExplainer] Enforcing exact removal budget: #removed_edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 1
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
-[MIPExplainer] Build time: 0.02s, Opt time: 0.02s
-[MIPExplainer] Status: optimal, Edges: 1
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 1
+[StandardMILP] Enforcing exact removal budget: #removed_edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 1
+[StandardMILP] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Build time: 0.02s, Opt time: 0.02s
+[StandardMILP] Status: optimal, Edges: 1
     GT baseline: removal_rho=0.8732, kept_margin_raw=0.506939, necessity_raw=0.073610, Fid+=0.017105, objective_value=0.126793
     Status: optimal, Edges: 6
     D=0.833, H=0.000, Precision=0.833, Recall=0.833, F1=0.833

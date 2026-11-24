@@ -6,22 +6,22 @@
     graph_necessity_milp=kept_edge_budget=37 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 29 nodes, 49 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 29 nodes, 49 edges
 [MIP-Graph] Full graph: class=1, margin=14.2216
 [MIP-Graph] Graph: 29 nodes, 49 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [2, 9]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 37
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 37
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 37
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 37
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_0 violation=3.921307e-02 y=1.219799e+00 rhs=1.180586e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_1 violation=6.003977e-02 y=1.181547e+00 rhs=1.121507e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_5_1 violation=1.172848e-02 y=8.300634e-01 rhs=8.183349e-01
 [AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=3
-[MIPExplainer] Build time: 0.09s, Opt time: 1200.58s
-[MIPExplainer] Status: time_limit, Edges: 37
+[StandardMILP] Build time: 0.09s, Opt time: 1200.58s
+[StandardMILP] Status: time_limit, Edges: 37
     GT baseline: removal_rho=-4.9533, kept_margin_raw=-70.444304, necessity_raw=84.665930, Fid+=0.999999, objective_value=5.953323
     Status: time_limit, Edges: 12
     D=0.750, H=0.000, Precision=0.750, Recall=0.750, F1=0.750

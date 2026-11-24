@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=10 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 19 nodes, 22 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 19 nodes, 22 edges
 [MIP-Graph] Full graph: class=1, margin=0.6987
 [MIP-Graph] Graph: 19 nodes, 22 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 8]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 10
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 10
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 10
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 10
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_1 violation=1.114306e-01 y=1.497856e+00 rhs=1.386425e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_2 violation=4.188672e-03 y=2.005597e-01 rhs=1.963710e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_3 violation=6.486759e-02 y=9.802603e-01 rhs=9.153927e-01
@@ -43,8 +43,8 @@
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_17_3 violation=4.994885e-02 y=2.890771e-01 rhs=2.391283e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_18_1 violation=3.744660e-02 y=6.386407e-01 rhs=6.011941e-01
 [AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=26
-[MIPExplainer] Build time: 0.05s, Opt time: 1200.00s
-[MIPExplainer] Status: time_limit, Edges: 10
+[StandardMILP] Build time: 0.05s, Opt time: 1200.00s
+[StandardMILP] Status: time_limit, Edges: 10
     GT baseline: removal_rho=-5.2956, kept_margin_raw=-3.700230, necessity_raw=4.398964, Fid+=0.643786, objective_value=6.295616
     Status: time_limit, Edges: 12
     D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500

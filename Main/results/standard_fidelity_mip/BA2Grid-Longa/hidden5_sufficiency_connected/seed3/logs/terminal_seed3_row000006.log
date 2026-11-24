@@ -4,16 +4,16 @@
     candidate_edges=25, gt_edges=12, context_edges=13, connectivity=cut, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 22 nodes, 25 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 22 nodes, 25 edges
 [MIP-Graph] Full graph: class=1, margin=5.4724
 [MIP-Graph] Graph: 22 nodes, 25 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 8]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 12
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 12
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 12
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_2_1 violation=1.354378e-02 y=1.738019e+00 rhs=1.724475e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_13_1 violation=1.716004e-02 y=7.822232e-01 rhs=7.650631e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_19_1 violation=8.249740e-03 y=7.667518e-01 rhs=7.585020e-01
@@ -33,8 +33,8 @@
 [ConnectivityCut-Graph] added component_size=3 representative=2
 [ConnectivityCut-Graph] added component_size=2 representative=2
 [ConnectivityCut-Graph] added component_size=10 representative=9
-[MIPExplainer] Build time: 0.05s, Opt time: 1093.96s
-[MIPExplainer] Status: optimal, Edges: 12
+[StandardMILP] Build time: 0.05s, Opt time: 1093.96s
+[StandardMILP] Status: optimal, Edges: 12
     GT baseline: rho=0.9712, sufficiency_raw=5.314567, Fid-=0.000712, objective_value=0.971165
     Status: optimal, Edges: 12
     D=0.917, H=0.000, Precision=0.917, Recall=0.917, F1=0.917

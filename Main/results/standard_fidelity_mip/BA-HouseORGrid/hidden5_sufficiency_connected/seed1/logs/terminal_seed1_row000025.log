@@ -4,16 +4,16 @@
     candidate_edges=26, gt_edges=6, context_edges=20, connectivity=cut, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 25 nodes, 26 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 25 nodes, 26 edges
 [MIP-Graph] Full graph: class=1, margin=3.9592
 [MIP-Graph] Graph: 25 nodes, 26 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 6
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_6_2 violation=3.022966e-01 y=3.500057e-01 rhs=4.770913e-02
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_20_2 violation=5.880156e-02 y=3.774272e-01 rhs=3.186256e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_21_2 violation=1.055192e-01 y=2.536096e-01 rhs=1.480904e-01
@@ -49,8 +49,8 @@
 [ConnectivityCut-Graph] added component_size=6 representative=0
 [ConnectivityCut-Graph] added component_size=6 representative=0
 [ConnectivityCut-Graph] added component_size=6 representative=0
-[MIPExplainer] Build time: 0.24s, Opt time: 34.17s
-[MIPExplainer] Status: optimal, Edges: 6
+[StandardMILP] Build time: 0.24s, Opt time: 34.17s
+[StandardMILP] Status: optimal, Edges: 6
     GT baseline: rho=-7.3719, sufficiency_raw=-29.186850, Fid-=0.981278, objective_value=-7.371941
     Status: optimal, Edges: 6
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

@@ -4,23 +4,23 @@
     candidate_edges=22, gt_edges=6, context_edges=16, connectivity=none, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=1.4785
-[MIPExplainer] Extracted 3-hop subgraph: 18 nodes, 22 edges
-[MIPExplainer] Explaining node 466 (working: 14)
-[MIPExplainer] Working graph: 18 nodes, 22 edges
+[StandardMILP] Original full-graph reference: class=1, margin=1.4785
+[StandardMILP] Extracted 3-hop subgraph: 18 nodes, 22 edges
+[StandardMILP] Solving node 466 (working: 14)
+[StandardMILP] Working graph: 18 nodes, 22 edges
 [MIP] Working-graph full prediction: class=1, margin=1.4785
 [MIP] Reference prediction (original full graph): class=1, margin=1.4785
 [MIP] Graph: 18 nodes, 22 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 6
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut] added nodecnt=0 tag=relu3_14_2 violation=2.177436e-02 y=1.147372e+00 rhs=1.125598e+00
 [AndersonCut] summary round=1 nodecnt=0 cuts_added=1
-[MIPExplainer] Build time: 0.09s, Opt time: 1.12s
-[MIPExplainer] Status: optimal, Edges: 6
+[StandardMILP] Build time: 0.09s, Opt time: 1.12s
+[StandardMILP] Status: optimal, Edges: 6
     GT baseline: rho=1.0207, sufficiency_raw=1.509064, Fid-=-0.004578, objective_value=1.020681
     Status: optimal, Edges: 6
     D=0.833, H=0.000, Precision=0.833, Recall=0.833, F1=0.833

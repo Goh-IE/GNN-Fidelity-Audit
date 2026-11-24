@@ -4,18 +4,18 @@
     candidate_edges=43, gt_edges=6, context_edges=37, connectivity=none, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 25 nodes, 43 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 25 nodes, 43 edges
 [MIP-Graph] Full graph: class=1, margin=5.8670
 [MIP-Graph] Graph: 25 nodes, 43 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
-[MIPExplainer] Build time: 0.24s, Opt time: 1200.24s
-[MIPExplainer] Status: time_limit, Edges: 6
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 6
+[StandardMILP] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Build time: 0.24s, Opt time: 1200.24s
+[StandardMILP] Status: time_limit, Edges: 6
     GT baseline: rho=2.8042, sufficiency_raw=16.452263, Fid-=-0.002823, objective_value=2.804216
     Status: time_limit, Edges: 6
     D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000

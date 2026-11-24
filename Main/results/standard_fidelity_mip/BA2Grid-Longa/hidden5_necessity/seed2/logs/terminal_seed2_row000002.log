@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=12 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 21 nodes, 24 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 21 nodes, 24 edges
 [MIP-Graph] Full graph: class=1, margin=8.3545
 [MIP-Graph] Graph: 21 nodes, 24 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 12
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 12
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 12
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_2 violation=1.629741e-01 y=1.066313e+00 rhs=9.033390e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_0 violation=4.957716e-03 y=3.777307e-01 rhs=3.727730e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_2 violation=1.386528e-01 y=2.207693e+00 rhs=2.069041e+00
@@ -32,8 +32,8 @@
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_19_2 violation=1.099753e-01 y=1.396224e+00 rhs=1.286249e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_20_2 violation=4.990682e-02 y=1.121994e+00 rhs=1.072087e+00
 [AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=15
-[MIPExplainer] Build time: 0.13s, Opt time: 514.20s
-[MIPExplainer] Status: optimal, Edges: 12
+[StandardMILP] Build time: 0.13s, Opt time: 514.20s
+[StandardMILP] Status: optimal, Edges: 12
     GT baseline: removal_rho=-3.4125, kept_margin_raw=-28.509680, necessity_raw=36.864148, Fid+=0.999765, objective_value=4.412507
     Status: optimal, Edges: 12
     D=0.583, H=0.000, Precision=0.583, Recall=0.583, F1=0.583

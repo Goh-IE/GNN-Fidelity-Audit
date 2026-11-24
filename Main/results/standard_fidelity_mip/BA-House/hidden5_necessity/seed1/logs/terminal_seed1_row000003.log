@@ -6,26 +6,26 @@
     node_necessity_milp=kept_edge_budget=57 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=1.3044
-[MIPExplainer] Extracted 3-hop subgraph: 36 nodes, 63 edges
-[MIPExplainer] Explaining node 321 (working: 32)
-[MIPExplainer] Working graph: 36 nodes, 63 edges
+[StandardMILP] Original full-graph reference: class=1, margin=1.3044
+[StandardMILP] Extracted 3-hop subgraph: 36 nodes, 63 edges
+[StandardMILP] Solving node 321 (working: 32)
+[StandardMILP] Working graph: 36 nodes, 63 edges
 [MIP] Working-graph full prediction: class=1, margin=1.3044
 [MIP] Reference prediction (original full graph): class=1, margin=1.3044
 [MIP] Graph: 36 nodes, 63 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 31]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 57
-[MIPExplainer] Enforcing exact removal budget: #removed_edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 57
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 57
+[StandardMILP] Enforcing exact removal budget: #removed_edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 57
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut] added nodecnt=0 tag=relu2_32_4 violation=6.840685e-03 y=8.810555e-02 rhs=8.126487e-02
 [AndersonCut] added nodecnt=0 tag=relu3_32_0 violation=2.447870e-01 y=7.335741e-01 rhs=4.887871e-01
 [AndersonCut] added nodecnt=0 tag=relu3_32_4 violation=1.309625e-01 y=6.076296e-01 rhs=4.766671e-01
 [AndersonCut] summary round=1 nodecnt=0 cuts_added=3
-[MIPExplainer] Build time: 0.20s, Opt time: 4.94s
-[MIPExplainer] Status: optimal, Edges: 57
+[StandardMILP] Build time: 0.20s, Opt time: 4.94s
+[StandardMILP] Status: optimal, Edges: 57
     GT baseline: removal_rho=0.4956, kept_margin_raw=0.646452, necessity_raw=0.657958, Fid+=0.130366, objective_value=0.504411
     Status: optimal, Edges: 6
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

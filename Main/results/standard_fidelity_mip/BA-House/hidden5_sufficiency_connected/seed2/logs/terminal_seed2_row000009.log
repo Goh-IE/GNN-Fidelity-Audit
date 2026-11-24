@@ -4,26 +4,26 @@
     candidate_edges=47, gt_edges=6, context_edges=41, connectivity=cut, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=1.2519
-[MIPExplainer] Extracted 3-hop subgraph: 32 nodes, 47 edges
-[MIPExplainer] Explaining node 369 (working: 31)
-[MIPExplainer] Working graph: 32 nodes, 47 edges
+[StandardMILP] Original full-graph reference: class=1, margin=1.2519
+[StandardMILP] Extracted 3-hop subgraph: 32 nodes, 47 edges
+[StandardMILP] Solving node 369 (working: 31)
+[StandardMILP] Working graph: 32 nodes, 47 edges
 [MIP] Working-graph full prediction: class=1, margin=1.2519
 [MIP] Reference prediction (original full graph): class=1, margin=1.2519
 [MIP] Graph: 32 nodes, 47 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 6
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut] added nodecnt=0 tag=relu2_1_3 violation=2.038814e-01 y=3.094818e-01 rhs=1.056004e-01
 [AndersonCut] added nodecnt=0 tag=relu2_5_3 violation=2.156899e-01 y=5.596764e-01 rhs=3.439865e-01
 [AndersonCut] added nodecnt=0 tag=relu3_31_2 violation=3.489927e-02 y=9.545318e-01 rhs=9.196326e-01
 [AndersonCut] added nodecnt=0 tag=relu3_31_4 violation=3.504008e-02 y=7.951852e-01 rhs=7.601452e-01
 [AndersonCut] summary round=1 nodecnt=0 cuts_added=4
-[MIPExplainer] Build time: 0.22s, Opt time: 5.23s
-[MIPExplainer] Status: optimal, Edges: 6
+[StandardMILP] Build time: 0.22s, Opt time: 5.23s
+[StandardMILP] Status: optimal, Edges: 6
     GT baseline: rho=1.0816, sufficiency_raw=1.354063, Fid-=-0.017171, objective_value=1.081638
     Status: optimal, Edges: 6
     D=0.833, H=0.000, Precision=0.833, Recall=0.833, F1=0.833

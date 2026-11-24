@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=7 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 16 nodes, 19 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 16 nodes, 19 edges
 [MIP-Graph] Full graph: class=1, margin=6.6918
 [MIP-Graph] Graph: 16 nodes, 19 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 5]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 7
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 7
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 7
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 7
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_2_4 violation=1.689942e-02 y=1.418784e-01 rhs=1.249790e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_4_4 violation=1.689426e-02 y=1.418784e-01 rhs=1.249841e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_7_4 violation=2.477963e-02 y=1.275928e-01 rhs=1.028132e-01
@@ -35,8 +35,8 @@
 [ConnectivityCut-Graph] added component_size=7 representative=1
 [ConnectivityCut-Graph] added component_size=6 representative=10
 [ConnectivityCut-Graph] added component_size=7 representative=0
-[MIPExplainer] Build time: 0.04s, Opt time: 39.50s
-[MIPExplainer] Status: optimal, Edges: 7
+[StandardMILP] Build time: 0.04s, Opt time: 39.50s
+[StandardMILP] Status: optimal, Edges: 7
     GT baseline: removal_rho=-1.9503, kept_margin_raw=-13.051293, necessity_raw=19.743094, Fid+=0.998758, objective_value=2.950341
     Status: optimal, Edges: 12
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

@@ -57,7 +57,7 @@ def _require_gurobi():
         from gurobipy import GRB
     except ModuleNotFoundError as e:
         raise ModuleNotFoundError(
-            "gurobipy is required for MIPExplainer. "
+            "gurobipy is required for StandardFidelityMILP. "
             "Install Gurobi + gurobipy and ensure you have a valid license."
         ) from e
     return gp, GRB
@@ -496,7 +496,7 @@ def _set_time_limit_from_deadline(
 # =============================================================================
 
 @dataclass(frozen=True)
-class GINNodeGnnWeights:
+class GINNodeWeights:
     """
     Weights for 3-layer GIN NodeGNN (node classification).
 
@@ -555,7 +555,7 @@ class GINNodeGnnWeights:
 
 
 @dataclass(frozen=True)
-class GINNodeGnnWeights4L:
+class GINNodeWeights4L:
     """Weights for 4-layer GIN NodeGNN (node classification)."""
     eps1: float
     W1_1: np.ndarray
@@ -616,7 +616,7 @@ class GINNodeGnnWeights4L:
 
 
 @dataclass(frozen=True)
-class GINNodeGnnWeights2L:
+class GINNodeWeights2L:
     """Weights for 2-layer GIN NodeGNN (node classification)."""
     eps1: float
     W1_1: np.ndarray
@@ -657,7 +657,7 @@ class GINNodeGnnWeights2L:
 
 
 @dataclass(frozen=True)
-class GINGraphGnnWeights:
+class GINGraphWeights:
     """
     Weights for 3-layer GIN GraphGNN (graph classification).
     Uses global pooling on h3 only (not JK-concat).
@@ -709,7 +709,7 @@ class GINGraphGnnWeights:
 
 
 @dataclass(frozen=True)
-class GINGraphGnnWeights4L:
+class GINGraphWeights4L:
     """Weights for 4-layer GIN GraphGNN (graph classification)."""
     eps1: float
     W1_1: np.ndarray
@@ -768,7 +768,7 @@ class GINGraphGnnWeights4L:
 
 
 @dataclass(frozen=True)
-class GINGraphGnnWeights2L:
+class GINGraphWeights2L:
     """Weights for 2-layer GIN GraphGNN (graph classification)."""
     eps1: float
     W1_1: np.ndarray
@@ -938,7 +938,7 @@ def _neighbor_sum_selected(
 def forward_gin_nodegnn_with_mask(
     X: np.ndarray,
     selected_edges: List[Tuple[int, int]],
-    weights: Union[GINNodeGnnWeights2L, GINNodeGnnWeights, GINNodeGnnWeights4L],
+    weights: Union[GINNodeWeights2L, GINNodeWeights, GINNodeWeights4L],
     v_star: int,
     self_loop_counts: Optional[Union[np.ndarray, Sequence[float]]] = None,
 ) -> np.ndarray:
@@ -1015,7 +1015,7 @@ def forward_gin_nodegnn_with_mask(
 def forward_gin_graphgnn_with_mask(
     X: np.ndarray,
     selected_edges: List[Tuple[int, int]],
-    weights: Union[GINGraphGnnWeights2L, GINGraphGnnWeights, GINGraphGnnWeights4L],
+    weights: Union[GINGraphWeights2L, GINGraphWeights, GINGraphWeights4L],
     readout: str = "sum",
     self_loop_counts: Optional[Union[np.ndarray, Sequence[float]]] = None,
 ) -> np.ndarray:
@@ -1082,7 +1082,7 @@ def forward_gin_graphgnn_with_mask(
 def verify_node_solution(
     X: np.ndarray,
     selected_edges: List[Tuple[int, int]],
-    weights: Union[GINNodeGnnWeights2L, GINNodeGnnWeights, GINNodeGnnWeights4L],
+    weights: Union[GINNodeWeights2L, GINNodeWeights, GINNodeWeights4L],
     v_star: int,
     c_star: int,
     bar_m: float,
@@ -1142,7 +1142,7 @@ def verify_node_solution(
 def verify_graph_solution(
     X: np.ndarray,
     selected_edges: List[Tuple[int, int]],
-    weights: Union[GINGraphGnnWeights2L, GINGraphGnnWeights, GINGraphGnnWeights4L],
+    weights: Union[GINGraphWeights2L, GINGraphWeights, GINGraphWeights4L],
     c_star: int,
     bar_m: float,
     rho: float = 0.0,
@@ -1188,7 +1188,7 @@ def verify_graph_solution(
 def forward_gin_nodegnn_full(
     X: np.ndarray,
     adj: Adjacency,
-    weights: GINNodeGnnWeights,
+    weights: GINNodeWeights,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Forward pass with all edges selected. Returns (h1, h2, h3)."""
     alpha1 = _node_self_coefficients(adj, 1.0 + float(weights.eps1))
@@ -1218,7 +1218,7 @@ def forward_gin_nodegnn_full(
 def forward_gin_nodegnn_full_4l(
     X: np.ndarray,
     adj: Adjacency,
-    weights: GINNodeGnnWeights4L,
+    weights: GINNodeWeights4L,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Forward pass for 4-layer NodeGNN. Returns (h1, h2, h3, h4)."""
     h1, h2, h3 = forward_gin_nodegnn_full(X, adj, weights)
@@ -1235,7 +1235,7 @@ def forward_gin_nodegnn_full_4l(
 def forward_gin_nodegnn_full_2l(
     X: np.ndarray,
     adj: Adjacency,
-    weights: GINNodeGnnWeights2L,
+    weights: GINNodeWeights2L,
 ) -> Tuple[np.ndarray, np.ndarray]:
     """Forward pass for 2-layer NodeGNN. Returns (h1, h2)."""
     alpha1 = _node_self_coefficients(adj, 1.0 + float(weights.eps1))
@@ -1258,7 +1258,7 @@ def forward_gin_nodegnn_full_2l(
 def forward_gin_graphgnn_full(
     X: np.ndarray,
     adj: Adjacency,
-    weights: GINGraphGnnWeights,
+    weights: GINGraphWeights,
     readout: str = "sum",
 ) -> np.ndarray:
     """Forward pass for graph classification. Returns logits Z."""
@@ -1274,7 +1274,7 @@ def forward_gin_graphgnn_full(
 def forward_gin_graphgnn_full_4l(
     X: np.ndarray,
     adj: Adjacency,
-    weights: GINGraphGnnWeights4L,
+    weights: GINGraphWeights4L,
     readout: str = "sum",
 ) -> np.ndarray:
     """Forward pass for 4-layer graph classification."""
@@ -1290,7 +1290,7 @@ def forward_gin_graphgnn_full_4l(
 def forward_gin_graphgnn_full_2l(
     X: np.ndarray,
     adj: Adjacency,
-    weights: GINGraphGnnWeights2L,
+    weights: GINGraphWeights2L,
     readout: str = "sum",
 ) -> np.ndarray:
     """Forward pass for 2-layer graph classification."""
@@ -3231,7 +3231,7 @@ def build_gin_nodegnn_milp(
     undirected_edges: Sequence[Tuple[int, int]],
     *,
     v_star: int,
-    weights: GINNodeGnnWeights,
+    weights: GINNodeWeights,
     reference_c_star: Optional[int] = None,
     reference_bar_m: Optional[float] = None,
     rho: float = 0.0,
@@ -4007,7 +4007,7 @@ def build_gin_nodegnn_milp_4l(
     undirected_edges: Sequence[Tuple[int, int]],
     *,
     v_star: int,
-    weights: GINNodeGnnWeights4L,
+    weights: GINNodeWeights4L,
     reference_c_star: Optional[int] = None,
     reference_bar_m: Optional[float] = None,
     rho: float = 0.0,
@@ -4703,7 +4703,7 @@ def build_gin_nodegnn_milp_2l(
     undirected_edges: Sequence[Tuple[int, int]],
     *,
     v_star: int,
-    weights: GINNodeGnnWeights2L,
+    weights: GINNodeWeights2L,
     reference_c_star: Optional[int] = None,
     reference_bar_m: Optional[float] = None,
     rho: float = 0.0,
@@ -6199,7 +6199,7 @@ def optimize_and_extract(
 def build_gin_graphgnn_milp_2l(
     X: np.ndarray,
     undirected_edges: Sequence[Tuple[int, int]],
-    weights: GINGraphGnnWeights2L,
+    weights: GINGraphWeights2L,
     *,
     readout: str = "sum",
     rho: float = 0.0,
@@ -6741,7 +6741,7 @@ def build_gin_graphgnn_milp_2l(
 def _degree_table_layer1(
     X: np.ndarray,
     adj: Adjacency,
-    weights: GINGraphGnnWeights,
+    weights: GINGraphWeights,
     *,
     num_edges: int,
     edge_budget: Optional[int],
@@ -6810,7 +6810,7 @@ def _degree_table_layer1(
 def build_gin_graphgnn_milp(
     X: np.ndarray,
     undirected_edges: Sequence[Tuple[int, int]],
-    weights: GINGraphGnnWeights,
+    weights: GINGraphWeights,
     *,
     readout: str = "sum",
     rho: float = 0.0,
@@ -7535,7 +7535,7 @@ def build_gin_graphgnn_milp(
 def build_gin_graphgnn_milp_4l(
     X: np.ndarray,
     undirected_edges: Sequence[Tuple[int, int]],
-    weights: GINGraphGnnWeights4L,
+    weights: GINGraphWeights4L,
     *,
     readout: str = "sum",
     rho: float = 0.0,

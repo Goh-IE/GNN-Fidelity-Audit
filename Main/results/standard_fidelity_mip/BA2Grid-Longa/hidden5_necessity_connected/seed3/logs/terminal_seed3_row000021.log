@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=17 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 26 nodes, 29 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 26 nodes, 29 edges
 [MIP-Graph] Full graph: class=1, margin=5.4917
 [MIP-Graph] Graph: 26 nodes, 29 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 17
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 17
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 17
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 17
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [ConnectivityCut-Graph] added component_size=7 representative=18
 [ConnectivityCut-Graph] added component_size=2 representative=1
 [ConnectivityCut-Graph] added component_size=9 representative=15
@@ -99,8 +99,8 @@
 [ConnectivityCut-Graph] added component_size=7 representative=1
 [ConnectivityCut-Graph] added component_size=7 representative=1
 [ConnectivityCut-Graph] added component_size=8 representative=5
-[MIPExplainer] Build time: 0.06s, Opt time: 617.73s
-[MIPExplainer] Status: optimal, Edges: 17
+[StandardMILP] Build time: 0.06s, Opt time: 617.73s
+[StandardMILP] Status: optimal, Edges: 17
     GT baseline: removal_rho=-1.2571, kept_margin_raw=-6.903815, necessity_raw=12.395497, Fid+=0.994893, objective_value=2.257140
     Status: optimal, Edges: 12
     D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500

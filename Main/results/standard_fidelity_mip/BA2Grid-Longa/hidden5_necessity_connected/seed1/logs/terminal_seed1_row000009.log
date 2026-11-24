@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=15 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 24 nodes, 27 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 24 nodes, 27 edges
 [MIP-Graph] Full graph: class=1, margin=4.9718
 [MIP-Graph] Graph: 24 nodes, 27 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 15
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 15
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 15
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 15
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [ConnectivityCut-Graph] added component_size=4 representative=5
 [ConnectivityCut-Graph] added component_size=4 representative=5
 [ConnectivityCut-Graph] added component_size=9 representative=0
@@ -32,8 +32,8 @@
 [ConnectivityCut-Graph] added component_size=3 representative=15
 [ConnectivityCut-Graph] added component_size=9 representative=15
 [ConnectivityCut-Graph] added component_size=10 representative=0
-[MIPExplainer] Build time: 0.09s, Opt time: 721.90s
-[MIPExplainer] Status: optimal, Edges: 15
+[StandardMILP] Build time: 0.09s, Opt time: 721.90s
+[StandardMILP] Status: optimal, Edges: 15
     GT baseline: removal_rho=-2.7926, kept_margin_raw=-13.884268, necessity_raw=18.856102, Fid+=0.993116, objective_value=3.792585
     Status: optimal, Edges: 12
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

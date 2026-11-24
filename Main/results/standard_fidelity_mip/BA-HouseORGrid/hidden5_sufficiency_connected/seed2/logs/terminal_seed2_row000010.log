@@ -4,16 +4,16 @@
     candidate_edges=26, gt_edges=6, context_edges=20, connectivity=cut, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 25 nodes, 26 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 25 nodes, 26 edges
 [MIP-Graph] Full graph: class=1, margin=3.0604
 [MIP-Graph] Graph: 25 nodes, 26 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 6
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_1 violation=3.978069e-02 y=7.456880e-02 rhs=3.478811e-02
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_1 violation=6.951661e-02 y=2.711624e-01 rhs=2.016458e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_1_2 violation=1.227524e-01 y=4.107974e-01 rhs=2.880450e-01
@@ -34,8 +34,8 @@
 [ConnectivityCut-Graph] added component_size=4 representative=1
 [ConnectivityCut-Graph] added component_size=4 representative=2
 [ConnectivityCut-Graph] added component_size=4 representative=2
-[MIPExplainer] Build time: 0.05s, Opt time: 2.49s
-[MIPExplainer] Status: optimal, Edges: 6
+[StandardMILP] Build time: 0.05s, Opt time: 2.49s
+[StandardMILP] Status: optimal, Edges: 6
     GT baseline: rho=-2.2650, sufficiency_raw=-6.931819, Fid-=0.954253, objective_value=-2.265021
     Status: optimal, Edges: 6
     D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000

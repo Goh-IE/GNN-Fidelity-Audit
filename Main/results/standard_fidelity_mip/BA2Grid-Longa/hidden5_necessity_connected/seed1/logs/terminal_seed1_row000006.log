@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=13 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 22 nodes, 25 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 22 nodes, 25 edges
 [MIP-Graph] Full graph: class=1, margin=3.9747
 [MIP-Graph] Graph: 22 nodes, 25 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 8]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 13
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 13
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 13
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 13
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [ConnectivityCut-Graph] added component_size=8 representative=0
 [ConnectivityCut-Graph] added component_size=10 representative=2
 [ConnectivityCut-Graph] added component_size=8 representative=9
@@ -26,8 +26,8 @@
 [ConnectivityCut-Graph] added component_size=8 representative=13
 [ConnectivityCut-Graph] added component_size=8 representative=14
 [ConnectivityCut-Graph] added component_size=8 representative=13
-[MIPExplainer] Build time: 0.07s, Opt time: 413.18s
-[MIPExplainer] Status: optimal, Edges: 13
+[StandardMILP] Build time: 0.07s, Opt time: 413.18s
+[StandardMILP] Status: optimal, Edges: 13
     GT baseline: removal_rho=-3.7085, kept_margin_raw=-14.740324, necessity_raw=18.715023, Fid+=0.981561, objective_value=4.708538
     Status: optimal, Edges: 12
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

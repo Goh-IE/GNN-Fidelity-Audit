@@ -64,7 +64,7 @@ def create_data_list(graphs, features, labels, mask):
 def evaluate(out, labels):
     """
     Calculates the accuracy between the prediction and the ground truth.
-    :param out: predicted outputs of the explainer
+    :param out: predicted outputs of the model
     :param labels: ground truth of the data
     :returns: int accuracy
     """
@@ -237,9 +237,9 @@ def load_best_model(
 
 def train_node(_dataset, _paper, config, num_layers=3, hidden_dim=20, use_batchnorm=False, use_jk_concat=True):
     """
-    Train a explainer to explain node classifications
+    Train a GIN for node classification.
     :param _dataset: the dataset we wish to use for training
-    :param _paper: the paper we whish to follow, chose from "GNN" or "PG"
+    :param _paper: checkpoint namespace of the model, "GIN"
     :param config: training configuration object
     :param num_layers: number of GNN layers (2 or 3). Only used for GIN models.
     :param hidden_dim: hidden dimension for GIN models.
@@ -386,9 +386,9 @@ def train_node(_dataset, _paper, config, num_layers=3, hidden_dim=20, use_batchn
 
 def train_graph(_dataset, _paper, config, num_layers=3, hidden_dim=20, use_batchnorm=False, use_jk_concat=True):
     """
-    Train a explainer to explain graph classifications
+    Train a GIN for graph classification.
     :param _dataset: the dataset we wish to use for training
-    :param _paper: the paper we whish to follow, chose from "GNN" or "PG"
+    :param _paper: checkpoint namespace of the model, "GIN"
     :param config: training configuration object
     :param num_layers: number of GNN layers (2 or 3). Only used for GIN models.
     :param hidden_dim: hidden dimension for GIN models.

@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=37 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 29 nodes, 49 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 29 nodes, 49 edges
 [MIP-Graph] Full graph: class=1, margin=14.6395
 [MIP-Graph] Graph: 29 nodes, 49 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [2, 11]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 37
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 37
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 37
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 37
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [ConnectivityCut-Graph] added component_size=7 representative=0
 [ConnectivityCut-Graph] added component_size=4 representative=24
 [ConnectivityCut-Graph] added component_size=7 representative=0
@@ -29,8 +29,8 @@
 [ConnectivityCut-Graph] added component_size=2 representative=4
 [ConnectivityCut-Graph] added component_size=7 representative=22
 [ConnectivityCut-Graph] added component_size=10 representative=0
-[MIPExplainer] Build time: 0.08s, Opt time: 1200.00s
-[MIPExplainer] Status: time_limit, Edges: 37
+[StandardMILP] Build time: 0.08s, Opt time: 1200.00s
+[StandardMILP] Status: time_limit, Edges: 37
     GT baseline: removal_rho=-0.3591, kept_margin_raw=-5.256689, necessity_raw=19.896174, Fid+=0.994814, objective_value=1.359076
     Status: time_limit, Edges: 12
     D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000

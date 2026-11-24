@@ -6,22 +6,22 @@
     graph_necessity_milp=kept_edge_budget=37 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 29 nodes, 49 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 29 nodes, 49 edges
 [MIP-Graph] Full graph: class=1, margin=14.5517
 [MIP-Graph] Graph: 29 nodes, 49 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [2, 13]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 37
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 37
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 37
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 37
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_0 violation=1.121801e-01 y=1.634327e+00 rhs=1.522147e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_1 violation=1.479458e-01 y=1.974897e+00 rhs=1.826951e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_2 violation=9.844462e-03 y=1.121510e+00 rhs=1.111665e+00
 [AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=3
-[MIPExplainer] Build time: 0.22s, Opt time: 1200.00s
-[MIPExplainer] Status: time_limit, Edges: 37
+[StandardMILP] Build time: 0.22s, Opt time: 1200.00s
+[StandardMILP] Status: time_limit, Edges: 37
     GT baseline: removal_rho=-4.7057, kept_margin_raw=-68.475479, necessity_raw=83.027206, Fid+=1.000000, objective_value=5.705660
     Status: time_limit, Edges: 12
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

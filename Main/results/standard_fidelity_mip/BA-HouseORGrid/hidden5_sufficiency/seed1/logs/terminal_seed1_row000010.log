@@ -4,16 +4,16 @@
     candidate_edges=26, gt_edges=6, context_edges=20, connectivity=none, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 25 nodes, 26 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 25 nodes, 26 edges
 [MIP-Graph] Full graph: class=1, margin=4.3471
 [MIP-Graph] Graph: 25 nodes, 26 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 6
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_20_2 violation=1.148396e-01 y=3.064793e-01 rhs=1.916397e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_2 violation=2.294940e-01 y=2.132885e+00 rhs=1.903391e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_1_3 violation=2.954294e-01 y=2.307004e+00 rhs=2.011574e+00
@@ -30,8 +30,8 @@
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_23_3 violation=6.050795e-02 y=3.432790e-01 rhs=2.827711e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_24_3 violation=3.289670e-02 y=4.533036e-01 rhs=4.204069e-01
 [AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=15
-[MIPExplainer] Build time: 0.26s, Opt time: 38.67s
-[MIPExplainer] Status: optimal, Edges: 6
+[StandardMILP] Build time: 0.26s, Opt time: 38.67s
+[StandardMILP] Status: optimal, Edges: 6
     GT baseline: rho=-6.7141, sufficiency_raw=-29.186850, Fid-=0.987221, objective_value=-6.714135
     Status: optimal, Edges: 6
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

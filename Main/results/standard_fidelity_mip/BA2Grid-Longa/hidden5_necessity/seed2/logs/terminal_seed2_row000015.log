@@ -6,22 +6,22 @@
     graph_necessity_milp=kept_edge_budget=19 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 28 nodes, 31 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 28 nodes, 31 edges
 [MIP-Graph] Full graph: class=1, margin=7.4498
 [MIP-Graph] Graph: 28 nodes, 31 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 7]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 19
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 19
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 19
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 19
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_20_2 violation=5.280070e-02 y=1.434515e+00 rhs=1.381714e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_22_2 violation=2.628150e-02 y=1.423048e+00 rhs=1.396767e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_23_2 violation=3.435047e-01 y=1.769630e+00 rhs=1.426125e+00
 [AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=3
-[MIPExplainer] Build time: 0.07s, Opt time: 1200.00s
-[MIPExplainer] Status: time_limit, Edges: 19
+[StandardMILP] Build time: 0.07s, Opt time: 1200.00s
+[StandardMILP] Status: time_limit, Edges: 19
     GT baseline: removal_rho=-3.9014, kept_margin_raw=-29.064614, necessity_raw=36.514384, Fid+=0.999419, objective_value=4.901411
     Status: time_limit, Edges: 12
     D=0.417, H=0.000, Precision=0.417, Recall=0.417, F1=0.417

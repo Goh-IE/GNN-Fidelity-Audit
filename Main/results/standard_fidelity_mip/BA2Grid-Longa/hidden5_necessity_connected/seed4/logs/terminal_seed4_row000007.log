@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=16 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 25 nodes, 28 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 25 nodes, 28 edges
 [MIP-Graph] Full graph: class=1, margin=0.4947
 [MIP-Graph] Graph: 25 nodes, 28 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 7]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 16
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 16
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 16
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 16
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [ConnectivityCut-Graph] added component_size=2 representative=9
 [ConnectivityCut-Graph] added component_size=8 representative=17
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_1 violation=9.819509e-03 y=6.870288e-01 rhs=6.772093e-01
@@ -59,8 +59,8 @@
 [ConnectivityCut-Graph] added component_size=12 representative=3
 [ConnectivityCut-Graph] added component_size=11 representative=3
 [ConnectivityCut-Graph] added component_size=4 representative=1
-[MIPExplainer] Build time: 0.06s, Opt time: 794.37s
-[MIPExplainer] Status: optimal, Edges: 16
+[StandardMILP] Build time: 0.06s, Opt time: 794.37s
+[StandardMILP] Status: optimal, Edges: 16
     GT baseline: removal_rho=-7.8534, kept_margin_raw=-3.884938, necessity_raw=4.379622, Fid+=0.601074, objective_value=8.853386
     Status: optimal, Edges: 12
     D=0.750, H=0.000, Precision=0.750, Recall=0.750, F1=0.750

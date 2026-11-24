@@ -1,19 +1,19 @@
 """
-MILP-based Explainer for GIN (GIN-style).
+Standard-fidelity MILP search for a trained GIN.
 
-This module provides a high-level interface for explaining GNN predictions
-using Mixed Integer Linear Programming (MILP).
+The search encodes the GIN forward pass as MILP constraints (gin_milp.py) and
+selects an exact-K edge mask that optimizes standard sufficiency or necessity,
+optionally excluding the reference mask with a no-good cut.
 
 Usage:
-    from Main.solvers.MIPExplainer import MIPExplainer
+    from Main.solvers.standard_milp import StandardFidelityMILP
 
-    explainer = MIPExplainer(model, dataset_name)
-    edge_mask, result = explainer.explain_node(node_idx, data)
+    milp_search = StandardFidelityMILP(model, dataset_name)
+    edge_mask, result = milp_search.solve_node(node_idx, data)
 """
 
 from __future__ import annotations
 
-import json
 import os
 import time
 from collections import deque
@@ -24,13 +24,13 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from .mip_gin import (
-    GINNodeGnnWeights,
-    GINNodeGnnWeights4L,
-    GINNodeGnnWeights2L,
-    GINGraphGnnWeights,
-    GINGraphGnnWeights4L,
-    GINGraphGnnWeights2L,
+from .gin_milp import (
+    GINNodeWeights,
+    GINNodeWeights4L,
+    GINNodeWeights2L,
+    GINGraphWeights,
+    GINGraphWeights4L,
+    GINGraphWeights2L,
     build_gin_nodegnn_milp,
     build_gin_nodegnn_milp_4l,
     build_gin_nodegnn_milp_2l,
@@ -75,17 +75,17 @@ def _compute_original_node_reference_prediction(
     x: np.ndarray,
     edge_index: np.ndarray,
     node_idx: int,
-    weights: Union[GINNodeGnnWeights2L, GINNodeGnnWeights, GINNodeGnnWeights4L],
+    weights: Union[GINNodeWeights2L, GINNodeWeights, GINNodeWeights4L],
 ) -> Tuple[int, float]:
     """Return (c_star, bar_m) from the original full graph before any k-hop truncation."""
     full_edge_sequence, _ = _edge_sequence_with_self_loops(edge_index, int(x.shape[0]))
     full_adj = compute_adjacency(int(x.shape[0]), full_edge_sequence)
     use_jk_concat = getattr(weights, "use_jk_concat", True)
 
-    if isinstance(weights, GINNodeGnnWeights2L):
+    if isinstance(weights, GINNodeWeights2L):
         h1_full, h2_full = forward_gin_nodegnn_full_2l(x, full_adj, weights)
         v_embed = np.concatenate([h1_full[node_idx], h2_full[node_idx]], axis=0) if use_jk_concat else h2_full[node_idx]
-    elif isinstance(weights, GINNodeGnnWeights4L):
+    elif isinstance(weights, GINNodeWeights4L):
         h1_full, h2_full, h3_full, h4_full = forward_gin_nodegnn_full_4l(x, full_adj, weights)
         v_embed = (
             np.concatenate([h1_full[node_idx], h2_full[node_idx], h3_full[node_idx], h4_full[node_idx]], axis=0)
@@ -218,7 +218,7 @@ def _apply_gurobi_param_overrides(
         applied.append(f"{name}={value}")
     if applied:
         _print_and_log(
-            "[MIPExplainer] Gurobi parameter overrides: " + ", ".join(applied),
+            "[StandardMILP] Gurobi parameter overrides: " + ", ".join(applied),
             verbose=verbose,
             terminal_log_file=terminal_log_file,
         )
@@ -255,7 +255,7 @@ def _maybe_relax_edge_mask_variables(
     model.update()
 
     _print_and_log(
-        "[MIPExplainer] Relaxed edge-mask variables z to CONTINUOUS in [0, 1]",
+        "[StandardMILP] Relaxed edge-mask variables z to CONTINUOUS in [0, 1]",
         verbose=verbose,
         terminal_log_file=terminal_log_file,
     )
@@ -285,7 +285,7 @@ def _maybe_enforce_edge_budget_equality(
             name="edge_budget_eq_lb",
         )
         _print_and_log(
-            f"[MIPExplainer] Enforcing exact edge budget: #edges == {int(edge_budget)}",
+            f"[StandardMILP] Enforcing exact edge budget: #edges == {int(edge_budget)}",
             verbose=verbose,
             terminal_log_file=terminal_log_file,
         )
@@ -312,7 +312,7 @@ def _maybe_enforce_node_budget(
         name="node_budget",
     )
     _print_and_log(
-        f"[MIPExplainer] Enforcing node budget: #nodes <= {effective_budget}",
+        f"[StandardMILP] Enforcing node budget: #nodes <= {effective_budget}",
         verbose=verbose,
         terminal_log_file=terminal_log_file,
     )
@@ -343,7 +343,7 @@ def _maybe_enforce_node_induced(
         model.addConstr(zij >= y_vars[i] + y_vars[j] - 1.0, name=f"node_induced_{i}_{j}")
         count += 1
     _print_and_log(
-        f"[MIPExplainer] Enforcing node-induced subgraph: {count} constraints (z_ij >= y_i + y_j - 1)",
+        f"[StandardMILP] Enforcing node-induced subgraph: {count} constraints (z_ij >= y_i + y_j - 1)",
         verbose=verbose,
         terminal_log_file=terminal_log_file,
     )
@@ -419,24 +419,24 @@ def _maybe_add_no_good_edge_solution_cuts(
         model.addConstr(lhs >= rhs, name=f"nogood_edge_solution_{sol_idx}")
         added += 1
         _print_and_log(
-            f"[MIPExplainer] Added no-good cut #{sol_idx + 1}: exclude exact edge set of size {len(forbidden_set)}",
+            f"[StandardMILP] Added no-good cut #{sol_idx + 1}: exclude exact edge set of size {len(forbidden_set)}",
             verbose=verbose,
             terminal_log_file=terminal_log_file,
         )
     if added > 0:
         _print_and_log(
-            f"[MIPExplainer] Added {added} no-good edge-solution cut(s)",
+            f"[StandardMILP] Added {added} no-good edge-solution cut(s)",
             verbose=verbose,
             terminal_log_file=terminal_log_file,
         )
 
 
-class MIPExplainer:
+class StandardFidelityMILP:
     """
-    MILP-based Explainer for GIN models.
+    Standard-fidelity MILP search for GIN models.
 
-    Finds a minimal subgraph that preserves the model's prediction
-    by encoding the GNN forward pass as MILP constraints.
+    Encodes the GIN forward pass as MILP constraints and selects the edge mask
+    that optimizes the requested standard-fidelity objective.
 
     Attributes:
         model: Trained PyTorch GNN model (NodeGNN or GraphGNN)
@@ -453,7 +453,7 @@ class MIPExplainer:
         verbose: bool = False,
     ):
         """
-        Initialize MIPExplainer.
+        Initialize StandardFidelityMILP.
 
         Args:
             model: Trained PyTorch GNN model
@@ -471,19 +471,19 @@ class MIPExplainer:
         # Extract weights from model
         self.weights = self._extract_weights()
 
-        # Verification context (set after explain_node/explain_graph)
+        # Verification context (set after solve_node/solve_graph)
         self._last_working_x = None
         self._last_working_edges = None
         self._last_self_loop_counts = None
         self._last_solution = None
 
     def _extract_weights(self) -> Union[
-        GINNodeGnnWeights,
-        GINNodeGnnWeights4L,
-        GINNodeGnnWeights2L,
-        GINGraphGnnWeights,
-        GINGraphGnnWeights4L,
-        GINGraphGnnWeights2L,
+        GINNodeWeights,
+        GINNodeWeights4L,
+        GINNodeWeights2L,
+        GINGraphWeights,
+        GINGraphWeights4L,
+        GINGraphWeights2L,
     ]:
         """Extract numpy weights from PyTorch model (GIN.py structure)."""
         model = self.model
@@ -508,7 +508,7 @@ class MIPExplainer:
 
         param_names = [n for n, _ in model.named_parameters()]
         if self.verbose:
-            print(f"[MIPExplainer] Model parameters: {param_names}")
+            print(f"[StandardMILP] Model parameters: {param_names}")
 
         # Pattern for GIN.py: conv1.mlp.fc1.weight, conv1.mlp.fc2.weight, conv1.eps
         try:
@@ -549,27 +549,27 @@ class MIPExplainer:
 
         if num_layers == 2:
             if self.task == "node":
-                return GINNodeGnnWeights2L(
+                return GINNodeWeights2L(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     W_out=W_out, b_out=b_out, use_jk_concat=self.use_jk_concat,
                 )
             else:
-                return GINGraphGnnWeights2L(
+                return GINGraphWeights2L(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     W_out=W_out, b_out=b_out,
                 )
         elif num_layers == 3:
             if self.task == "node":
-                return GINNodeGnnWeights(
+                return GINNodeWeights(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     eps3=float(eps3), W3_1=W3_1, b3_1=b3_1, W3_2=W3_2, b3_2=b3_2,
                     W_out=W_out, b_out=b_out, use_jk_concat=self.use_jk_concat,
                 )
             else:
-                return GINGraphGnnWeights(
+                return GINGraphWeights(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     eps3=float(eps3), W3_1=W3_1, b3_1=b3_1, W3_2=W3_2, b3_2=b3_2,
@@ -577,7 +577,7 @@ class MIPExplainer:
                 )
         elif num_layers == 4:
             if self.task == "node":
-                return GINNodeGnnWeights4L(
+                return GINNodeWeights4L(
                     eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                     eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                     eps3=float(eps3), W3_1=W3_1, b3_1=b3_1, W3_2=W3_2, b3_2=b3_2,
@@ -585,7 +585,7 @@ class MIPExplainer:
                     W_out=W_out, b_out=b_out, use_jk_concat=self.use_jk_concat,
                 )
             # Graph 4-layer extraction kept for future graph-4L MILP support.
-            return GINGraphGnnWeights4L(
+            return GINGraphWeights4L(
                 eps1=float(eps1), W1_1=W1_1, b1_1=b1_1, W1_2=W1_2, b1_2=b1_2,
                 eps2=float(eps2), W2_1=W2_1, b2_1=b2_1, W2_2=W2_2, b2_2=b2_2,
                 eps3=float(eps3), W3_1=W3_1, b3_1=b3_1, W3_2=W3_2, b3_2=b3_2,
@@ -595,7 +595,7 @@ class MIPExplainer:
         else:
             raise ValueError(f"Unsupported num_layers={num_layers}; expected 2, 3, or 4.")
 
-    def explain_node(
+    def solve_node(
         self,
         node_idx: int,
         x: np.ndarray,
@@ -694,7 +694,7 @@ class MIPExplainer:
             solution: MilpSolution with detailed results (edges in original indices)
         """
         if self.task != "node":
-            raise ValueError("explain_node requires task='node'")
+            raise ValueError("solve_node requires task='node'")
         if node_budget is not None and connectivity == "none":
             raise ValueError("node_budget requires connectivity in {'flow', 'cut'}.")
         if node_budget is not None and edge_budget is not None:
@@ -725,7 +725,7 @@ class MIPExplainer:
             weights=self.weights,
         )
         _print_and_log(
-            f"[MIPExplainer] Original full-graph reference: class={reference_c_star}, margin={reference_bar_m:.4f}",
+            f"[StandardMILP] Original full-graph reference: class={reference_c_star}, margin={reference_bar_m:.4f}",
             verbose=self.verbose,
             terminal_log_file=terminal_log_file,
         )
@@ -744,7 +744,7 @@ class MIPExplainer:
             sub_x = x[sub_nodes]
 
             _print_and_log(
-                f"[MIPExplainer] Extracted {k_hop}-hop subgraph: {len(sub_nodes)} nodes, {sub_edge_index.shape[1]//2} edges",
+                f"[StandardMILP] Extracted {k_hop}-hop subgraph: {len(sub_nodes)} nodes, {sub_edge_index.shape[1]//2} edges",
                 verbose=self.verbose,
                 terminal_log_file=terminal_log_file,
             )
@@ -781,12 +781,12 @@ class MIPExplainer:
                 edge_to_idx[(a, b)].append(k)
 
         _print_and_log(
-            f"[MIPExplainer] Explaining node {node_idx} (working: {working_node_idx})",
+            f"[StandardMILP] Solving node {node_idx} (working: {working_node_idx})",
             verbose=self.verbose,
             terminal_log_file=terminal_log_file,
         )
         _print_and_log(
-            f"[MIPExplainer] Working graph: {working_x.shape[0]} nodes, {len(undirected_edges)} edges",
+            f"[StandardMILP] Working graph: {working_x.shape[0]} nodes, {len(undirected_edges)} edges",
             verbose=self.verbose,
             terminal_log_file=terminal_log_file,
         )
@@ -794,7 +794,7 @@ class MIPExplainer:
         # Build MILP - select appropriate builder based on weights type
         # Preprocessing/build/OBBT do not consume the final solver time limit.
         start_time = time.time()
-        if isinstance(self.weights, GINNodeGnnWeights2L):
+        if isinstance(self.weights, GINNodeWeights2L):
             # Use 2-layer builder
             build = build_gin_nodegnn_milp_2l(
                 X=working_x,
@@ -840,7 +840,7 @@ class MIPExplainer:
             )
         else:
             # Use 3-layer or 4-layer builder
-            if isinstance(self.weights, GINNodeGnnWeights4L):
+            if isinstance(self.weights, GINNodeWeights4L):
                 build = build_gin_nodegnn_milp_4l(
                     X=working_x,
                     undirected_edges=milp_edge_sequence,
@@ -955,7 +955,7 @@ class MIPExplainer:
                 name="removal_edge_budget_eq",
             )
             _print_and_log(
-                f"[MIPExplainer] Enforcing exact removal budget: #removed_edges == {removal_budget}",
+                f"[StandardMILP] Enforcing exact removal budget: #removed_edges == {removal_budget}",
                 verbose=self.verbose,
                 terminal_log_file=terminal_log_file,
             )
@@ -1010,12 +1010,12 @@ class MIPExplainer:
         self._last_solution = solution  # This has subgraph indices
 
         _print_and_log(
-            f"[MIPExplainer] Build time: {build_time:.2f}s, Opt time: {opt_time:.2f}s",
+            f"[StandardMILP] Build time: {build_time:.2f}s, Opt time: {opt_time:.2f}s",
             verbose=self.verbose,
             terminal_log_file=terminal_log_file,
         )
         _print_and_log(
-            f"[MIPExplainer] Status: {solution.status}, Edges: {len(solution.selected_edges)}",
+            f"[StandardMILP] Status: {solution.status}, Edges: {len(solution.selected_edges)}",
             verbose=self.verbose,
             terminal_log_file=terminal_log_file,
         )
@@ -1074,7 +1074,7 @@ class MIPExplainer:
 
         return edge_mask, solution
 
-    def explain_graph(
+    def solve_graph(
         self,
         x: np.ndarray,
         edge_index: np.ndarray,
@@ -1162,7 +1162,7 @@ class MIPExplainer:
             solution: MilpSolution with detailed results
         """
         if self.task != "graph":
-            raise ValueError("explain_graph requires task='graph'")
+            raise ValueError("solve_graph requires task='graph'")
         if connectivity not in ("none", "flow", "cut"):
             raise ValueError(
                 f"Unsupported connectivity for graph explanation: {connectivity}. "
@@ -1203,23 +1203,23 @@ class MIPExplainer:
         x = np.asarray(x, dtype=float)
 
         _print_and_log(
-            "[MIPExplainer] Explaining graph",
+            "[StandardMILP] Solving graph",
             verbose=self.verbose,
             terminal_log_file=terminal_log_file,
         )
         _print_and_log(
-            f"[MIPExplainer] Graph: {x.shape[0]} nodes, {len(undirected_edges)} edges",
+            f"[StandardMILP] Graph: {x.shape[0]} nodes, {len(undirected_edges)} edges",
             verbose=self.verbose,
             terminal_log_file=terminal_log_file,
         )
 
         # Preprocessing/build/OBBT do not consume the final solver time limit.
         start_time = time.time()
-        if isinstance(self.weights, GINGraphGnnWeights2L):
+        if isinstance(self.weights, GINGraphWeights2L):
             graph_builder = build_gin_graphgnn_milp_2l
             graph_obbt_layers = (1, 2)
             graph_obbt_prefix = "[MIP-Graph-2L]"
-        elif isinstance(self.weights, GINGraphGnnWeights4L):
+        elif isinstance(self.weights, GINGraphWeights4L):
             graph_builder = build_gin_graphgnn_milp_4l
             graph_obbt_layers = (1, 2, 3, 4)
             graph_obbt_prefix = "[MIP-Graph-4L]"
@@ -1380,12 +1380,12 @@ class MIPExplainer:
         self._last_solution = solution
 
         _print_and_log(
-            f"[MIPExplainer] Build time: {build_time:.2f}s, Opt time: {opt_time:.2f}s",
+            f"[StandardMILP] Build time: {build_time:.2f}s, Opt time: {opt_time:.2f}s",
             verbose=self.verbose,
             terminal_log_file=terminal_log_file,
         )
         _print_and_log(
-            f"[MIPExplainer] Status: {solution.status}, Edges: {len(solution.selected_edges)}",
+            f"[StandardMILP] Status: {solution.status}, Edges: {len(solution.selected_edges)}",
             verbose=self.verbose,
             terminal_log_file=terminal_log_file,
         )
@@ -1421,7 +1421,7 @@ class MIPExplainer:
             (is_valid, message): Tuple of validity flag and message
         """
         if self._last_solution is None:
-            return False, "No solution to verify (run explain_node/explain_graph first)"
+            return False, "No solution to verify (run solve_node/solve_graph first)"
 
         sol = self._last_solution
 
@@ -1436,7 +1436,7 @@ class MIPExplainer:
         # with the given edge budget. We still verify that rho_actual matches rho_optimal.
 
         if self.task == "node":
-            from Main.solvers.mip_gin import verify_node_solution
+            from Main.solvers.gin_milp import verify_node_solution
             return verify_node_solution(
                 X=self._last_working_x,
                 selected_edges=sol.selected_edges,
@@ -1450,7 +1450,7 @@ class MIPExplainer:
                 verbose=verbose,
             )
         else:
-            from Main.solvers.mip_gin import verify_graph_solution
+            from Main.solvers.gin_milp import verify_graph_solution
             return verify_graph_solution(
                 X=self._last_working_x,
                 selected_edges=sol.selected_edges,
@@ -1464,60 +1464,3 @@ class MIPExplainer:
                 verbose=verbose,
             )
 
-
-def save_explanation_result(
-    result_dir: str,
-    dataset_name: str,
-    node_idx: int,
-    solution: MilpSolution,
-    edge_mask: np.ndarray,
-    metadata: Optional[Dict] = None,
-):
-    """
-    Save MIP explanation results to file.
-
-    Args:
-        result_dir: Directory to save results
-        dataset_name: Name of the dataset
-        node_idx: Index of explained node (or graph index)
-        solution: MilpSolution object
-        edge_mask: Binary edge mask
-        metadata: Additional metadata to save
-    """
-    os.makedirs(result_dir, exist_ok=True)
-
-    result = {
-        "dataset": dataset_name,
-        "node_idx": node_idx,
-        "status": solution.status,
-        "objective_value": solution.objective_value,
-        "num_selected_edges": len(solution.selected_edges),
-        "selected_edges": solution.selected_edges,
-        "rho_optimal": solution.rho_optimal,
-    }
-
-    if metadata:
-        result.update(metadata)
-
-    # Save JSON
-    json_path = os.path.join(result_dir, f"node_{node_idx}.json")
-    with open(json_path, "w") as f:
-        json.dump(result, f, indent=2)
-
-    # Save edge mask
-    mask_path = os.path.join(result_dir, f"node_{node_idx}_mask.npy")
-    np.save(mask_path, edge_mask)
-
-    return json_path
-
-
-def load_explanation_result(result_dir: str, node_idx: int) -> Tuple[Dict, np.ndarray]:
-    """Load saved explanation results."""
-    json_path = os.path.join(result_dir, f"node_{node_idx}.json")
-    mask_path = os.path.join(result_dir, f"node_{node_idx}_mask.npy")
-
-    with open(json_path, "r") as f:
-        result = json.load(f)
-
-    edge_mask = np.load(mask_path)
-    return result, edge_mask

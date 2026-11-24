@@ -6,22 +6,22 @@
     node_necessity_milp=kept_edge_budget=41 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=0.5847
-[MIPExplainer] Extracted 3-hop subgraph: 32 nodes, 47 edges
-[MIPExplainer] Explaining node 369 (working: 31)
-[MIPExplainer] Working graph: 32 nodes, 47 edges
+[StandardMILP] Original full-graph reference: class=1, margin=0.5847
+[StandardMILP] Extracted 3-hop subgraph: 32 nodes, 47 edges
+[StandardMILP] Solving node 369 (working: 31)
+[StandardMILP] Working graph: 32 nodes, 47 edges
 [MIP] Working-graph full prediction: class=1, margin=0.5847
 [MIP] Reference prediction (original full graph): class=1, margin=0.5847
 [MIP] Graph: 32 nodes, 47 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 27]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 41
-[MIPExplainer] Enforcing exact removal budget: #removed_edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 41
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
-[MIPExplainer] Build time: 0.09s, Opt time: 3.94s
-[MIPExplainer] Status: optimal, Edges: 41
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 41
+[StandardMILP] Enforcing exact removal budget: #removed_edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 41
+[StandardMILP] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Build time: 0.09s, Opt time: 3.94s
+[StandardMILP] Status: optimal, Edges: 41
     GT baseline: removal_rho=0.8670, kept_margin_raw=0.506939, necessity_raw=0.077780, Fid+=0.018064, objective_value=0.133021
     Status: optimal, Edges: 6
     D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333

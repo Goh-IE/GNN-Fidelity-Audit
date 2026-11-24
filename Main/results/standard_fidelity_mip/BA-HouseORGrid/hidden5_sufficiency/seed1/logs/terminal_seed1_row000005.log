@@ -4,16 +4,16 @@
     candidate_edges=43, gt_edges=6, context_edges=37, connectivity=none, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 25 nodes, 43 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 25 nodes, 43 edges
 [MIP-Graph] Full graph: class=1, margin=3.6084
 [MIP-Graph] Graph: 25 nodes, 43 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [2, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 6
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_1 violation=3.457027e-02 y=2.554326e-01 rhs=2.208624e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_2 violation=5.181798e-01 y=1.062067e+00 rhs=5.438870e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu2_0_4 violation=1.816554e-01 y=1.451564e+00 rhs=1.269908e+00
@@ -85,8 +85,8 @@
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_24_3 violation=1.021267e-01 y=2.659302e-01 rhs=1.638035e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_24_4 violation=2.671639e-03 y=1.313927e-01 rhs=1.287210e-01
 [AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=70
-[MIPExplainer] Build time: 0.11s, Opt time: 1200.01s
-[MIPExplainer] Status: time_limit, Edges: 6
+[StandardMILP] Build time: 0.11s, Opt time: 1200.01s
+[StandardMILP] Status: time_limit, Edges: 6
     GT baseline: rho=-8.0885, sufficiency_raw=-29.186850, Fid-=0.973621, objective_value=-8.088486
     Status: time_limit, Edges: 6
     D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000

@@ -38,8 +38,18 @@ is optional for the accelerated enumeration helpers in `Main/enumeration/native/
 `Main/audit_robust.py` runs robust SAA audits. `Main/train_gnn.py` trains the
 GIN predictors. Shared dataset loaders and frozen inputs live in
 `Main/data/`, the GIN model in `Main/models/GIN.py` and its checkpoints in
-`Main/models/pretrained/GIN/`, the MILP implementation in `Main/solvers/`, and
-training and configuration helpers in `Main/training/`.
+`Main/models/pretrained/GIN/`, and training and configuration helpers in
+`Main/training/`. The MILP searches are in `Main/solvers/`:
+
+```text
+Main/solvers/
+  standard_milp.py   # standard-fidelity search over exact-K edge masks
+  gin_milp.py        # MILP encoding of the trained GIN, used by standard_milp.py
+  robust_milp.py     # scenario-table SAA-MILP for robust fidelity
+```
+
+`Main/robust_common.py` holds the evaluation helpers that the robust runner and
+`robust_milp.py` share.
 
 ```bash
 python Main/audit_standard.py --help

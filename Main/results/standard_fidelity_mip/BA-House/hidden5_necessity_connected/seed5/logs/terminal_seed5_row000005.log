@@ -6,27 +6,27 @@
     node_necessity_milp=kept_edge_budget=24 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=0.5856
-[MIPExplainer] Extracted 3-hop subgraph: 19 nodes, 30 edges
-[MIPExplainer] Explaining node 336 (working: 15)
-[MIPExplainer] Working graph: 19 nodes, 30 edges
+[StandardMILP] Original full-graph reference: class=1, margin=0.5856
+[StandardMILP] Extracted 3-hop subgraph: 19 nodes, 30 edges
+[StandardMILP] Solving node 336 (working: 15)
+[StandardMILP] Working graph: 19 nodes, 30 edges
 [MIP] Working-graph full prediction: class=1, margin=0.5856
 [MIP] Reference prediction (original full graph): class=1, margin=0.5856
 [MIP] Graph: 19 nodes, 30 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 14]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 24
-[MIPExplainer] Enforcing exact removal budget: #removed_edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 24
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 24
+[StandardMILP] Enforcing exact removal budget: #removed_edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 24
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut] added nodecnt=0 tag=relu2_14_3 violation=1.948314e-01 y=4.561756e-01 rhs=2.613443e-01
 [AndersonCut] added nodecnt=0 tag=relu2_15_0 violation=9.691078e-02 y=1.663251e-01 rhs=6.941429e-02
 [AndersonCut] added nodecnt=0 tag=relu2_15_1 violation=3.805176e-02 y=2.812419e-01 rhs=2.431902e-01
 [AndersonCut] added nodecnt=0 tag=relu2_15_3 violation=6.422228e-02 y=2.214833e-01 rhs=1.572610e-01
 [AndersonCut] summary round=1 nodecnt=0 cuts_added=4
-[MIPExplainer] Build time: 0.05s, Opt time: 2.73s
-[MIPExplainer] Status: optimal, Edges: 24
+[StandardMILP] Build time: 0.05s, Opt time: 2.73s
+[StandardMILP] Status: optimal, Edges: 24
     GT baseline: removal_rho=0.8657, kept_margin_raw=0.506939, necessity_raw=0.078660, Fid+=0.018266, objective_value=0.134324
     Status: optimal, Edges: 6
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

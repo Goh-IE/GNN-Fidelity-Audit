@@ -4,21 +4,21 @@
     candidate_edges=20, gt_edges=12, context_edges=8, connectivity=none, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 17 nodes, 20 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 17 nodes, 20 edges
 [MIP-Graph] Full graph: class=1, margin=7.1872
 [MIP-Graph] Graph: 17 nodes, 20 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 4]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 12
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 12
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 12
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 12
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_8_1 violation=8.541688e-03 y=7.760310e-01 rhs=7.674893e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_14_1 violation=7.577389e-03 y=7.751110e-01 rhs=7.675336e-01
 [AndersonCut-Graph] summary round=1 nodecnt=0 cuts_added=2
-[MIPExplainer] Build time: 0.05s, Opt time: 360.80s
-[MIPExplainer] Status: optimal, Edges: 12
+[StandardMILP] Build time: 0.05s, Opt time: 360.80s
+[StandardMILP] Status: optimal, Edges: 12
     GT baseline: rho=0.9142, sufficiency_raw=6.570166, Fid-=0.000644, objective_value=0.914151
     Status: optimal, Edges: 12
     D=0.917, H=0.000, Precision=0.917, Recall=0.917, F1=0.917

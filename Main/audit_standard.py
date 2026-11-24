@@ -51,8 +51,8 @@ if str(REPO_DIR) not in sys.path:
 
 from Main.data.dataset_loaders import load_dataset
 from Main.data.ground_truth_loaders import load_dataset_ground_truth
-from Main.solvers.MIPExplainer import MIPExplainer
-from Main.solvers.mip_gin import CurrentGurobiSolveInterrupted
+from Main.solvers.standard_milp import StandardFidelityMILP
+from Main.solvers.gin_milp import CurrentGurobiSolveInterrupted
 from Main.models.model_selector import (
     ALL_DATASETS,
     get_dataset_config,
@@ -6104,7 +6104,7 @@ def run_or_skip_row(
     row: Dict[str, Any],
     config: RunConfig,
     output_dir: Path,
-    explainer: MIPExplainer,
+    milp_search: StandardFidelityMILP,
     x: np.ndarray,
     edge_index: np.ndarray,
     gt_edges: Sequence[Tuple[int, int]],
@@ -6219,7 +6219,7 @@ def run_or_skip_row(
         if use_enumeration:
             solution = run_gt_size_enumeration(
                 row=row,
-                model=explainer.model,
+                model=milp_search.model,
                 x=x,
                 edge_index=edge_index,
                 candidate_edges=candidate_edges,
@@ -6295,7 +6295,7 @@ def run_or_skip_row(
             mip_excluded_solutions = (
                 [gt_internal_solution] if config.exclude_gt_solution else None
             )
-            _, solution = explainer.explain_node(
+            _, solution = milp_search.solve_node(
                 node_idx=int(row["instance_id"]),
                 x=x,
                 edge_index=edge_index,
@@ -6344,7 +6344,7 @@ def run_or_skip_row(
             mip_excluded_solutions = (
                 [gt_internal_solution] if config.exclude_gt_solution else None
             )
-            _, solution = explainer.explain_graph(
+            _, solution = milp_search.solve_graph(
                 x=x,
                 edge_index=edge_index,
                 readout=config.readout,
@@ -6399,7 +6399,7 @@ def run_or_skip_row(
             if row.get("rho_optimal") is not None:
                 row["objective_value"] = 1.0 - float(row["rho_optimal"])
         fidelity_metrics = standard_fidelity_components(
-            model=explainer.model,
+            model=milp_search.model,
             task=str(row["task"]),
             x=x,
             edge_index=edge_index,
@@ -6429,7 +6429,7 @@ def run_or_skip_row(
                 row[field] = fidelity_metrics[field]
         populate_gt_baseline_row(
             row=row,
-            model=explainer.model,
+            model=milp_search.model,
             x=x,
             edge_index=edge_index,
             candidate_edges=candidate_edges,
@@ -7030,10 +7030,10 @@ def run_node_dataset_seed(
     )
     model.eval()
     detected_jk = bool(getattr(model, "use_jk_concat", config.use_jk_concat))
-    explainer = (
+    milp_search = (
         SimpleNamespace(model=model)
         if config.gt_size_solver == "enumeration"
-        else MIPExplainer(model=model, dataset_name=dataset, task="node", use_jk_concat=detected_jk, verbose=config.verbose)
+        else StandardFidelityMILP(model=model, dataset_name=dataset, task="node", use_jk_concat=detected_jk, verbose=config.verbose)
     )
 
     filter_text_parts: List[str] = []
@@ -7097,7 +7097,7 @@ def run_node_dataset_seed(
                     row=row,
                     config=config,
                     output_dir=output_dir,
-                    explainer=explainer,
+                    milp_search=milp_search,
                     x=x,
                     edge_index=edge_index,
                     gt_edges=gt_edges,
@@ -7473,10 +7473,10 @@ def run_graph_dataset_seed(
     )
     model.eval()
     detected_jk = bool(getattr(model, "use_jk_concat", config.use_jk_concat))
-    explainer = (
+    milp_search = (
         SimpleNamespace(model=model)
         if config.gt_size_solver == "enumeration"
-        else MIPExplainer(model=model, dataset_name=dataset, task="graph", use_jk_concat=detected_jk, verbose=config.verbose)
+        else StandardFidelityMILP(model=model, dataset_name=dataset, task="graph", use_jk_concat=detected_jk, verbose=config.verbose)
     )
 
     print_and_log(f"[Main] {dataset} seed={nn_seed}: {len(graph_indices)} graph instances", run_log_file)
@@ -7522,7 +7522,7 @@ def run_graph_dataset_seed(
                     row=row,
                     config=config,
                     output_dir=output_dir,
-                    explainer=explainer,
+                    milp_search=milp_search,
                     x=x,
                     edge_index=edge_index,
                     gt_edges=gt_edges,
@@ -8023,7 +8023,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
             "Connectivity cut scope. In lazy_only component mode, the callback processes "
             "all components disconnected from the root at each MIPSOL and adds one "
             "cut for every such component. Its representative is the minimum node v "
-            "with y_sol[v] > 0.5. The explainer's max_cuts_per_round default does not apply."
+            "with y_sol[v] > 0.5. The MILP search's max_cuts_per_round default does not apply."
         ),
     )
     parser.add_argument("--padding_seed", type=int, default=0)

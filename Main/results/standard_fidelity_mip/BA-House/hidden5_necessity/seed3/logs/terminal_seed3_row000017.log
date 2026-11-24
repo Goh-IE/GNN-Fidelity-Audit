@@ -6,22 +6,22 @@
     node_necessity_milp=kept_edge_budget=8 (candidate_edges - removal_budget), removal_edge_budget=6, connectivity=none, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=0.0568
-[MIPExplainer] Extracted 3-hop subgraph: 11 nodes, 14 edges
-[MIPExplainer] Explaining node 471 (working: 7)
-[MIPExplainer] Working graph: 11 nodes, 14 edges
+[StandardMILP] Original full-graph reference: class=1, margin=0.0568
+[StandardMILP] Extracted 3-hop subgraph: 11 nodes, 14 edges
+[StandardMILP] Solving node 471 (working: 7)
+[StandardMILP] Working graph: 11 nodes, 14 edges
 [MIP] Working-graph full prediction: class=1, margin=0.0568
 [MIP] Reference prediction (original full graph): class=1, margin=0.0568
 [MIP] Graph: 11 nodes, 14 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 8
-[MIPExplainer] Enforcing exact removal budget: #removed_edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 8
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
-[MIPExplainer] Build time: 0.08s, Opt time: 1.76s
-[MIPExplainer] Status: optimal, Edges: 8
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 8
+[StandardMILP] Enforcing exact removal budget: #removed_edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 8
+[StandardMILP] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Build time: 0.08s, Opt time: 1.76s
+[StandardMILP] Status: optimal, Edges: 8
     GT baseline: removal_rho=4.3685, kept_margin_raw=0.248095, necessity_raw=-0.191303, Fid+=-0.047513, objective_value=-3.368498
     Status: optimal, Edges: 6
     D=0.500, H=0.000, Precision=0.500, Recall=0.500, F1=0.500

@@ -4,25 +4,25 @@
     candidate_edges=553, gt_edges=6, context_edges=547, connectivity=none, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=1.2160
-[MIPExplainer] Extracted 3-hop subgraph: 146 nodes, 553 edges
-[MIPExplainer] Explaining node 515 (working: 140)
-[MIPExplainer] Working graph: 146 nodes, 553 edges
+[StandardMILP] Original full-graph reference: class=1, margin=1.2160
+[StandardMILP] Extracted 3-hop subgraph: 146 nodes, 553 edges
+[StandardMILP] Solving node 515 (working: 140)
+[StandardMILP] Working graph: 146 nodes, 553 edges
 [MIP] Working-graph full prediction: class=1, margin=1.2160
 [MIP] Reference prediction (original full graph): class=1, margin=1.2160
 [MIP] Graph: 146 nodes, 553 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 6
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut] added nodecnt=0 tag=relu2_77_1 violation=2.292331e-01 y=6.868705e-01 rhs=4.576374e-01
 [AndersonCut] added nodecnt=0 tag=relu2_77_2 violation=3.122703e-01 y=6.164260e-01 rhs=3.041556e-01
 [AndersonCut] added nodecnt=0 tag=relu2_77_4 violation=1.255730e-02 y=2.081917e-01 rhs=1.956344e-01
 [AndersonCut] summary round=1 nodecnt=0 cuts_added=3
-[MIPExplainer] Build time: 1.46s, Opt time: 20.70s
-[MIPExplainer] Status: optimal, Edges: 6
+[StandardMILP] Build time: 1.46s, Opt time: 20.70s
+[StandardMILP] Status: optimal, Edges: 6
     GT baseline: rho=1.1156, sufficiency_raw=1.356466, Fid-=-0.023834, objective_value=1.115555
     Status: optimal, Edges: 6
     D=0.667, H=0.000, Precision=0.667, Recall=0.667, F1=0.667

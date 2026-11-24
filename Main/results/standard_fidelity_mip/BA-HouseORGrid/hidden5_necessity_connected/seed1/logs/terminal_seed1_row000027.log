@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=37 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 29 nodes, 49 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 29 nodes, 49 edges
 [MIP-Graph] Full graph: class=1, margin=9.2583
 [MIP-Graph] Graph: 29 nodes, 49 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [2, 9]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 37
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 37
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 37
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 37
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [ConnectivityCut-Graph] added component_size=2 representative=24
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_0 violation=5.882394e-02 y=3.114087e+00 rhs=3.055263e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_1 violation=1.063559e+00 y=5.106193e+00 rhs=4.042634e+00
@@ -55,8 +55,8 @@
 [ConnectivityCut-Graph] added component_size=9 representative=2
 [ConnectivityCut-Graph] added component_size=10 representative=0
 [ConnectivityCut-Graph] added component_size=2 representative=2
-[MIPExplainer] Build time: 0.09s, Opt time: 1200.00s
-[MIPExplainer] Status: time_limit, Edges: 37
+[StandardMILP] Build time: 0.09s, Opt time: 1200.00s
+[StandardMILP] Status: time_limit, Edges: 37
     GT baseline: removal_rho=-1.4661, kept_margin_raw=-13.573743, necessity_raw=22.832057, Fid+=0.999903, objective_value=2.466114
     Status: time_limit, Edges: 12
     D=0.917, H=0.000, Precision=0.917, Recall=0.917, F1=0.917

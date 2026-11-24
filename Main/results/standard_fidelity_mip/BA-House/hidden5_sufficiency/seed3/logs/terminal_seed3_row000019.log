@@ -4,24 +4,24 @@
     candidate_edges=28, gt_edges=6, context_edges=22, connectivity=none, edge_budget_mode=eq
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Original full-graph reference: class=1, margin=0.0621
-[MIPExplainer] Extracted 3-hop subgraph: 24 nodes, 28 edges
-[MIPExplainer] Explaining node 508 (working: 17)
-[MIPExplainer] Working graph: 24 nodes, 28 edges
+[StandardMILP] Original full-graph reference: class=1, margin=0.0621
+[StandardMILP] Extracted 3-hop subgraph: 24 nodes, 28 edges
+[StandardMILP] Solving node 508 (working: 17)
+[StandardMILP] Working graph: 24 nodes, 28 edges
 [MIP] Working-graph full prediction: class=1, margin=0.0621
 [MIP] Reference prediction (original full graph): class=1, margin=0.0621
 [MIP] Graph: 24 nodes, 28 edges
 [MIP] Top-κ tightening enabled, cap_mode=global
 [MIP] kappa range: [1, 6]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 6
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 6
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 6
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 6
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut] added nodecnt=0 tag=relu2_17_4 violation=1.725219e-02 y=1.653363e-01 rhs=1.480841e-01
 [AndersonCut] added nodecnt=0 tag=relu3_17_1 violation=7.644608e-02 y=1.042447e+00 rhs=9.660009e-01
 [AndersonCut] summary round=1 nodecnt=0 cuts_added=2
-[MIPExplainer] Build time: 0.07s, Opt time: 1.90s
-[MIPExplainer] Status: optimal, Edges: 6
+[StandardMILP] Build time: 0.07s, Opt time: 1.90s
+[StandardMILP] Status: optimal, Edges: 6
     GT baseline: rho=1.8577, sufficiency_raw=0.115446, Fid-=-0.013298, objective_value=1.857713
     Status: optimal, Edges: 6
     D=0.333, H=0.000, Precision=0.333, Recall=0.333, F1=0.333

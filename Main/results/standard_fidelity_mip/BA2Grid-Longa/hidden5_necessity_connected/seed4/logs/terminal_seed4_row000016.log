@@ -6,16 +6,16 @@
     graph_necessity_milp=kept_edge_budget=15 (candidate_edges - removal_budget), removal_edge_budget=12, connectivity=cut, connectivity_scope=removal_edges, edge_budget_mode=eq, cap_mode=global
     Solver backend: milp
     GT incumbent=False, exclude_GT=True, GT_representable=True, GT_no_good_cut_added=True
-[MIPExplainer] Explaining graph
-[MIPExplainer] Graph: 24 nodes, 27 edges
+[StandardMILP] Solving graph
+[StandardMILP] Graph: 24 nodes, 27 edges
 [MIP-Graph] Full graph: class=1, margin=0.6190
 [MIP-Graph] Graph: 24 nodes, 27 edges, readout=sum
 [MIP-Graph] Top-κ tightening enabled, cap_mode=global
 [MIP-Graph] kappa range: [1, 7]
-[MIPExplainer] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
-[MIPExplainer] Enforcing exact edge budget: #edges == 15
-[MIPExplainer] Added no-good cut #1: exclude exact edge set of size 15
-[MIPExplainer] Added 1 no-good edge-solution cut(s)
+[StandardMILP] Gurobi parameter overrides: Method=1, Threads=1, NoRelHeurWork=0.0, Symmetry=2
+[StandardMILP] Enforcing exact edge budget: #edges == 15
+[StandardMILP] Added no-good cut #1: exclude exact edge set of size 15
+[StandardMILP] Added 1 no-good edge-solution cut(s)
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_1 violation=1.311646e-01 y=1.385029e+00 rhs=1.253864e+00
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_2 violation=2.486372e-02 y=1.953362e-01 rhs=1.704725e-01
 [AndersonCut-Graph] added nodecnt=0 tag=graph3l_relu3_0_3 violation=9.689203e-02 y=8.990215e-01 rhs=8.021295e-01
@@ -64,8 +64,8 @@
 [ConnectivityCut-Graph] added component_size=6 representative=1
 [ConnectivityCut-Graph] added component_size=6 representative=1
 [ConnectivityCut-Graph] added component_size=6 representative=1
-[MIPExplainer] Build time: 0.10s, Opt time: 1200.00s
-[MIPExplainer] Status: time_limit, Edges: 15
+[StandardMILP] Build time: 0.10s, Opt time: 1200.00s
+[StandardMILP] Status: time_limit, Edges: 15
     GT baseline: removal_rho=-6.1071, kept_margin_raw=-3.780011, necessity_raw=4.398964, Fid+=0.627667, objective_value=7.107100
     Status: time_limit, Edges: 12
     D=0.000, H=0.000, Precision=0.000, Recall=0.000, F1=0.000
